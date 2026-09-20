@@ -182,4 +182,365 @@ body {
     padding: 50px 0;
 }
 
-/* 모바일
+/* 모바일 */
+@media (max-width: 600px) {
+
+    .site {
+        width: calc(100% - 20px);
+
+        padding:
+            55px
+            30px
+            70px;
+
+        border-width: 3px;
+    }
+
+    .logo {
+        width: 190px;
+        margin-bottom: 55px;
+    }
+
+    .menu {
+        gap: 25px 28px;
+        margin-bottom: 55px;
+    }
+
+    .menu button {
+        font-size: 22px;
+    }
+
+    .latest-image {
+        max-height: none;
+    }
+
+    .post-title {
+        font-size: 28px;
+    }
+
+    .post-date {
+        font-size: 20px;
+    }
+
+    .previous-title {
+        font-size: 25px;
+    }
+
+    .previous-post-title {
+        font-size: 21px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="site">
+
+    <!-- =========================
+         로고
+    ========================== -->
+
+    <img
+        src="images/logo.png"
+        alt="CENTIBOY"
+        class="logo"
+    >
+
+
+    <!-- =========================
+         카테고리 메뉴
+    ========================== -->
+
+    <nav class="menu">
+
+        <button
+            onclick="showCategory('diary')"
+            id="menu-diary">
+            diary
+        </button>
+
+        <button
+            onclick="showCategory('memoir')"
+            id="menu-memoir">
+            My Memoir
+        </button>
+
+        <button
+            onclick="showCategory('politics')"
+            id="menu-politics">
+            politics
+        </button>
+
+        <button
+            onclick="showCategory('travel')"
+            id="menu-travel">
+            travel
+        </button>
+
+        <button
+            onclick="showCategory('sdd')"
+            id="menu-sdd">
+            SDD
+        </button>
+
+    </nav>
+
+
+    <!-- =========================
+         글이 표시되는 곳
+    ========================== -->
+
+    <main class="posts" id="posts"></main>
+
+</div>
+
+
+
+<script>
+
+/*
+==================================================
+여기만 수정하면 새로운 글을 추가할 수 있습니다.
+==================================================
+
+category:
+
+diary
+memoir
+politics
+travel
+sdd
+
+최신 글이 위에 오도록 작성하세요.
+*/
+
+
+const posts = [
+
+    {
+        category: "travel",
+        title: "설악산 신선대",
+        date: "December 30, 2025",
+        image: "images/seoraksan.jpg"
+    },
+
+
+    {
+        category: "travel",
+        title: "제주도 여행",
+        date: "December 20, 2025",
+        image: "images/jeju.jpg"
+    },
+
+
+    {
+        category: "travel",
+        title: "강릉 여행",
+        date: "December 10, 2025",
+        image: "images/gangneung.jpg"
+    },
+
+
+    {
+        category: "diary",
+        title: "오늘의 일기",
+        date: "December 5, 2025",
+        image: "images/diary.jpg"
+    },
+
+
+    {
+        category: "memoir",
+        title: "나의 기억",
+        date: "November 30, 2025",
+        image: "images/memoir.jpg"
+    },
+
+
+    {
+        category: "sdd",
+        title: "SDD 기록",
+        date: "November 20, 2025",
+        image: "images/sdd.jpg"
+    }
+
+];
+
+
+
+/*
+==================================================
+카테고리 표시
+==================================================
+*/
+
+function showCategory(category) {
+
+    const container = document.getElementById("posts");
+
+    container.innerHTML = "";
+
+
+    /*
+    메뉴 색상 초기화
+    */
+
+    document
+        .querySelectorAll(".menu button")
+        .forEach(button => {
+
+            button.classList.remove("active");
+
+        });
+
+
+    /*
+    선택된 메뉴 색상
+    */
+
+    const selectedMenu =
+        document.getElementById("menu-" + category);
+
+    if (selectedMenu) {
+        selectedMenu.classList.add("active");
+    }
+
+
+    /*
+    해당 카테고리 글만 가져오기
+    */
+
+    const categoryPosts =
+        posts.filter(post => post.category === category);
+
+
+    /*
+    글이 없으면
+    */
+
+    if (categoryPosts.length === 0) {
+
+        container.innerHTML = `
+            <div class="no-post">
+                아직 작성된 글이 없습니다.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    /*
+    첫 번째 글 = 최신 글
+    */
+
+    const latest = categoryPosts[0];
+
+
+    /*
+    최신 글
+    */
+
+    const latestHTML = `
+
+        <article class="latest-post">
+
+            <img
+                src="${latest.image}"
+                alt="${latest.title}"
+                class="latest-image"
+            >
+
+            <h1 class="post-title">
+                ${latest.title}
+            </h1>
+
+            <p class="post-date">
+                ${latest.date}
+            </p>
+
+        </article>
+
+    `;
+
+
+    container.innerHTML = latestHTML;
+
+
+    /*
+    이전 글
+    */
+
+    const previousPosts =
+        categoryPosts.slice(1, 4);
+
+
+    if (previousPosts.length > 0) {
+
+        const line = document.createElement("div");
+
+        line.className = "line";
+
+        container.appendChild(line);
+
+
+        const previousTitle =
+            document.createElement("h2");
+
+        previousTitle.className =
+            "previous-title";
+
+        previousTitle.textContent =
+            "Previous";
+
+        container.appendChild(previousTitle);
+
+
+        previousPosts.forEach(post => {
+
+            const article =
+                document.createElement("a");
+
+            article.className =
+                "previous-post";
+
+            article.href = "#";
+
+            article.innerHTML = `
+
+                <div class="previous-post-title">
+                    ${post.title}
+                </div>
+
+                <div class="previous-post-date">
+                    ${post.date}
+                </div>
+
+            `;
+
+            container.appendChild(article);
+
+        });
+
+    }
+
+}
+
+
+
+/*
+==================================================
+처음 사이트를 열었을 때
+==================================================
+*/
+
+showCategory("travel");
+
+</script>
+
+</body>
+</html>
