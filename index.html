@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,7 @@
 <title>CENTIBOY</title>
 
 <style>
+
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
 
 * {
@@ -46,17 +47,12 @@ body::before {
     padding: 55px 0 100px;
 }
 
-/* CENTIBOY 이미지 */
+/* CENTIBOY 로고 */
 .home-logo {
     display: block;
     width: min(520px, 85%);
     margin: 0 auto 45px;
     cursor: pointer;
-    transition: transform 0.25s ease;
-}
-
-.home-logo:hover {
-    transform: scale(1.02);
 }
 
 /* 메뉴 */
@@ -66,24 +62,20 @@ nav {
     align-items: center;
     flex-wrap: wrap;
     gap: 12px 30px;
-    margin-bottom: 90px;
+    margin-bottom: 70px;
 }
 
 nav a {
     color: #7020a0;
     text-decoration: none;
     font-size: 16px;
-    transition: 0.25s ease;
 }
 
 nav a:hover {
     color: #ff1493;
-    text-shadow:
-        0 0 5px #ff1493,
-        0 0 12px #ff1493;
 }
 
-/* 페이지 내용 */
+/* 페이지 */
 .page {
     display: none;
 }
@@ -92,17 +84,100 @@ nav a:hover {
     display: block;
 }
 
-.page-title {
-    font-size: 25px;
-    margin-bottom: 25px;
+
+/* =========================
+   최신 글
+========================= */
+
+.latest-post {
+    width: 100%;
+    margin-bottom: 70px;
 }
 
-.page-text {
-    font-size: 15px;
-    line-height: 2;
+/* 대표 사진 */
+.latest-image {
+    display: block;
+    width: 100%;
+    max-height: 620px;
+    object-fit: cover;
+    margin-bottom: 28px;
 }
 
-/* 모바일 */
+/* 최신 글 제목 */
+.latest-title {
+    margin: 0 0 8px;
+    font-size: 30px;
+    line-height: 1.5;
+    color: #7020a0;
+}
+
+.latest-date {
+    margin: 0;
+    font-size: 14px;
+    color: #777;
+}
+
+
+/* =========================
+   이전 글
+========================= */
+
+.previous-posts {
+    border-top: 1px solid rgba(112, 32, 160, 0.25);
+    padding-top: 35px;
+}
+
+.previous-title {
+    font-size: 20px;
+    margin: 0 0 30px;
+}
+
+.post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.post-item {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.post-item:hover {
+    opacity: 0.65;
+}
+
+.post-image {
+    width: 150px;
+    height: 110px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.post-info {
+    flex: 1;
+}
+
+.post-title {
+    margin: 0 0 8px;
+    font-size: 19px;
+    line-height: 1.5;
+}
+
+.post-date {
+    margin: 0;
+    font-size: 13px;
+    color: #777;
+}
+
+
+/* =========================
+   모바일
+========================= */
+
 @media (max-width: 600px) {
 
     body::before {
@@ -121,104 +196,261 @@ nav a:hover {
 
     nav {
         gap: 12px 18px;
-        margin-bottom: 65px;
+        margin-bottom: 55px;
     }
 
     nav a {
         font-size: 14px;
     }
 
-    .page-title {
-        font-size: 21px;
+    .latest-image {
+        max-height: 400px;
+    }
+
+    .latest-title {
+        font-size: 23px;
+    }
+
+    .previous-title {
+        font-size: 18px;
+    }
+
+    .post-item {
+        gap: 15px;
+    }
+
+    .post-image {
+        width: 105px;
+        height: 80px;
+    }
+
+    .post-title {
+        font-size: 15px;
+    }
+
+    .post-date {
+        font-size: 11px;
     }
 }
+
 </style>
 </head>
+
 
 <body>
 
 <div class="container">
 
-    <!-- 클릭하면 메인 화면으로 돌아가는 CENTIBOY 이미지 -->
+    <!-- CENTIBOY 로고 -->
+
     <a href="#" onclick="showPage('home'); return false;">
+
         <img
             src="centiboy.png"
             alt="CENTIBOY"
             class="home-logo"
         >
+
     </a>
 
+
     <!-- 메뉴 -->
+
     <nav>
-        <a href="#" onclick="showPage('diary'); return false;">diary</a>
-        <a href="#" onclick="showPage('memoir'); return false;">My Memoir</a>
-        <a href="#" onclick="showPage('politics'); return false;">politics</a>
-        <a href="#" onclick="showPage('travel'); return false;">travel</a>
-        <a href="#" onclick="showPage('sdd'); return false;">SDD</a>
+
+        <a href="#" onclick="showPage('diary'); return false;">
+            diary
+        </a>
+
+        <a href="#" onclick="showPage('memoir'); return false;">
+            My Memoir
+        </a>
+
+        <a href="#" onclick="showPage('politics'); return false;">
+            politics
+        </a>
+
+        <a href="#" onclick="showPage('travel'); return false;">
+            travel
+        </a>
+
+        <a href="#" onclick="showPage('sdd'); return false;">
+            SDD
+        </a>
+
     </nav>
 
-    <!-- 메인 -->
+
     <main>
 
+
+        <!-- =========================
+             HOME
+        ========================== -->
+
         <section id="home" class="page active">
+
+
+            <!-- 최신 글 -->
+
+            <article class="latest-post">
+
+                <img
+                    src="file_000000003ad88206b1a20683e46c1497.png"
+                    alt="설악산 신선대"
+                    class="latest-image"
+                >
+
+                <h1 class="latest-title">
+                    설악산 신선대
+                </h1>
+
+                <p class="latest-date">
+                    December 30, 2025
+                </p>
+
+            </article>
+
+
+            <!-- =========================
+                 이전 글
+            ========================== -->
+
+            <section class="previous-posts">
+
+                <h2 class="previous-title">
+                    Previous
+                </h2>
+
+
+                <div class="post-list">
+
+
+                    <!-- 이전 글 1 -->
+
+                    <a
+                        href="sub/daily.html"
+                        class="post-item"
+                    >
+
+                        <img
+                            src="file_000000003ad88206b1a20683e46c1497.png"
+                            alt="설악산 천불동계곡"
+                            class="post-image"
+                        >
+
+                        <div class="post-info">
+
+                            <h3 class="post-title">
+                                설악산 (천불동계곡)
+                            </h3>
+
+                            <p class="post-date">
+                                October 30, 2025
+                            </p>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- 이전 글 2 -->
+
+                    <a
+                        href="sub/daily.html"
+                        class="post-item"
+                    >
+
+                        <img
+                            src="file_000000003ad88206b1a20683e46c1497.png"
+                            alt="설악산 한계령 대청봉 오색"
+                            class="post-image"
+                        >
+
+                        <div class="post-info">
+
+                            <h3 class="post-title">
+                                설악산 (한계령-대청봉-오색)
+                            </h3>
+
+                            <p class="post-date">
+                                June 21, 2025
+                            </p>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- 이전 글 3 -->
+
+                    <a
+                        href="sub/daily.html"
+                        class="post-item"
+                    >
+
+                        <img
+                            src="file_000000003ad88206b1a20683e46c1497.png"
+                            alt="여행 기록"
+                            class="post-image"
+                        >
+
+                        <div class="post-info">
+
+                            <h3 class="post-title">
+                                여행 기록
+                            </h3>
+
+                            <p class="post-date">
+                                May 10, 2025
+                            </p>
+
+                        </div>
+
+                    </a>
+
+
+                </div>
+
+            </section>
+
         </section>
+
+
+        <!-- diary -->
 
         <section id="diary" class="page">
-            <div class="page-title">diary</div>
-            <div class="page-text">
+
+            <h1>diary</h1>
+
+            <p>
                 My daily records.
-            </div>
+            </p>
+
         </section>
+
+
+        <!-- My Memoir -->
 
         <section id="memoir" class="page">
-            <div class="page-title">My Memoir</div>
-            <div class="page-text">
+
+            <h1>My Memoir</h1>
+
+            <p>
                 Personal memories and stories.
-            </div>
+            </p>
+
         </section>
+
+
+        <!-- politics -->
 
         <section id="politics" class="page">
-            <div class="page-title">politics</div>
-            <div class="page-text">
+
+            <h1>politics</h1>
+
+            <p>
                 Political thoughts and records.
-            </div>
-        </section>
+            </p>
 
-        <section id="travel" class="page">
-            <div class="page-title">travel</div>
-            <div class="page-text">
-                Travel records and photographs.
-            </div>
-        </section>
-
-        <section id="sdd" class="page">
-            <div class="page-title">SDD</div>
-            <div class="page-text">
-                SDD archive.
-            </div>
-        </section>
-
-    </main>
-
-</div>
-
-<script>
-function showPage(pageId) {
-
-    const pages = document.querySelectorAll(".page");
-
-    pages.forEach(function(page) {
-        page.classList.remove("active");
-    });
-
-    document.getElementById(pageId).classList.add("active");
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
-</script>
-
-</body>
-</html>
+        </section
