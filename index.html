@@ -187,25 +187,6 @@
 
 
         /* =========================
-           글 사진
-        ========================= */
-
-        .post-image {
-
-            display: block;
-
-            width: 100%;
-
-            max-height: 500px;
-
-            object-fit: cover;
-
-            margin:
-                0 auto 25px auto;
-        }
-
-
-        /* =========================
            카테고리
         ========================= */
 
@@ -225,7 +206,7 @@
 
         .post-title {
 
-            margin: 0 0 15px 0;
+            margin: 0;
 
             color: #65357d;
 
@@ -234,6 +215,38 @@
             font-weight: normal;
 
             line-height: 1.3;
+
+            cursor: pointer;
+
+            transition:
+                color 0.2s ease;
+        }
+
+
+        .post-title:hover {
+
+            color: #e51b91;
+        }
+
+
+        /* =========================
+           제목을 누르기 전에는
+           날짜 / 사진 / 본문 숨김
+        ========================= */
+
+        .post-details {
+
+            display: none;
+        }
+
+
+        /* =========================
+           제목을 눌렀을 때 표시
+        ========================= */
+
+        .post.open .post-details {
+
+            display: block;
         }
 
 
@@ -247,7 +260,28 @@
 
             font-size: 23px;
 
+            margin-top: 20px;
+
             margin-bottom: 25px;
+        }
+
+
+        /* =========================
+           사진
+        ========================= */
+
+        .post-image {
+
+            display: block;
+
+            width: 100%;
+
+            max-height: 500px;
+
+            object-fit: cover;
+
+            margin:
+                0 auto 25px auto;
         }
 
 
@@ -354,7 +388,6 @@
 
         }
 
-
     </style>
 
 </head>
@@ -446,17 +479,11 @@
 
 
 
-    <!-- =========================================
-         자바스크립트
-         ========================================= -->
-
     <script>
 
 
         /* ========================================
            글 데이터
-
-           여기서 글을 추가하면 됨.
         ======================================== */
 
 
@@ -549,7 +576,7 @@
 
                     date: "December 20, 2024",
 
-                    image: "시드니1.jpg 시드니2.jpg",
+                    image: "시드니1.jpg",
 
                     content:
                         "생일을 기념해서 놀러간 시드니."
@@ -603,6 +630,18 @@
 
 
         /* ========================================
+           글 열기 / 닫기
+        ======================================== */
+
+        function togglePost(article) {
+
+            article.classList.toggle("open");
+
+        }
+
+
+
+        /* ========================================
            카테고리 보여주기
         ======================================== */
 
@@ -618,7 +657,7 @@
             postList.innerHTML = "";
 
 
-            /* 모든 메뉴의 active 제거 */
+            /* 모든 메뉴 active 제거 */
 
             document
                 .querySelectorAll(".menu button")
@@ -706,8 +745,6 @@
 
                 article.innerHTML = `
 
-                    ${imageHTML}
-
                     <div class="post-category">
 
                         ${categoryNames[category]}
@@ -715,23 +752,32 @@
                     </div>
 
 
-                    <h2 class="post-title">
+                    <h2
+                        class="post-title"
+                        onclick="togglePost(this.parentElement)">
 
                         ${post.title}
 
                     </h2>
 
 
-                    <div class="post-date">
+                    <div class="post-details">
 
-                        ${post.date}
+                        <div class="post-date">
 
-                    </div>
+                            ${post.date}
+
+                        </div>
 
 
-                    <div class="post-content">
+                        ${imageHTML}
 
-                        ${post.content}
+
+                        <div class="post-content">
+
+                            ${post.content}
+
+                        </div>
 
                     </div>
 
@@ -760,4 +806,4 @@
 
 </body>
 
-</html>                
+</html>
