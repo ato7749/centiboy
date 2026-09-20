@@ -8,8 +8,6 @@
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
-
 * {
     box-sizing: border-box;
 }
@@ -21,436 +19,167 @@ html {
 body {
     margin: 0;
     background: white;
-    color: #7020a0;
-    font-family: "Libre Baskerville", Georgia, serif;
+    color: #5b287c;
+    font-family: Georgia, "Times New Roman", serif;
 }
 
-/* 네온 핑크 테두리 */
-body::before {
-    content: "";
-    position: fixed;
-    inset: 8px;
-    border: 2px solid #ff1493;
-    box-shadow:
-        0 0 6px #ff1493,
-        0 0 18px #ff1493,
-        0 0 35px rgba(255, 20, 147, 0.45);
-    pointer-events: none;
-    z-index: 999;
-}
-
-/* 전체 */
-.container {
-    width: 90%;
-    max-width: 1100px;
+/* 전체 사이트 */
+.site {
+    width: 100%;
+    max-width: 650px;
+    min-height: 100vh;
     margin: 0 auto;
-    padding: 55px 0 100px;
+    padding: 55px 35px 80px;
+
+    border: 4px solid #ff1493;
+
+    box-shadow:
+        0 0 10px #ff1493,
+        0 0 25px rgba(255, 20, 147, 0.55);
 }
 
-/* CENTIBOY 로고 */
-.home-logo {
+/* 로고 */
+.logo {
     display: block;
-    width: min(520px, 85%);
-    margin: 0 auto 45px;
-    cursor: pointer;
+    width: 210px;
+    max-width: 80%;
+    height: auto;
+    margin: 5px auto 55px;
 }
 
 /* 메뉴 */
-nav {
+.menu {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 12px 30px;
-    margin-bottom: 70px;
+    gap: 28px;
+
+    margin-bottom: 65px;
 }
 
-nav a {
-    color: #7020a0;
-    text-decoration: none;
-    font-size: 16px;
+.menu button {
+    border: none;
+    background: none;
+
+    color: #642b82;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 25px;
+
+    cursor: pointer;
+
+    padding: 0;
+
+    transition: 0.2s;
 }
 
-nav a:hover {
+.menu button:hover {
+    color: #ff1493;
+    transform: scale(1.05);
+}
+
+/* 현재 선택된 메뉴 */
+.menu button.active {
     color: #ff1493;
 }
 
-/* 페이지 */
-.page {
-    display: none;
-}
-
-.page.active {
-    display: block;
-}
-
-
-/* =========================
-   최신 글
-========================= */
-
-.latest-post {
+/* 글 영역 */
+.posts {
     width: 100%;
-    margin-bottom: 70px;
+}
+
+/* 최신 글 */
+.latest-post {
+    margin-bottom: 55px;
 }
 
 /* 대표 사진 */
 .latest-image {
-    display: block;
     width: 100%;
-    max-height: 620px;
+    display: block;
+
+    max-height: 600px;
     object-fit: cover;
-    margin-bottom: 28px;
+
+    margin-bottom: 35px;
 }
 
-/* 최신 글 제목 */
-.latest-title {
-    margin: 0 0 8px;
-    font-size: 30px;
-    line-height: 1.5;
-    color: #7020a0;
-}
-
-.latest-date {
-    margin: 0;
-    font-size: 14px;
-    color: #777;
-}
-
-
-/* =========================
-   이전 글
-========================= */
-
-.previous-posts {
-    border-top: 1px solid rgba(112, 32, 160, 0.25);
-    padding-top: 35px;
-}
-
-.previous-title {
-    font-size: 20px;
-    margin: 0 0 30px;
-}
-
-.post-list {
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-}
-
-.post-item {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-    text-decoration: none;
-    color: inherit;
-}
-
-.post-item:hover {
-    opacity: 0.65;
-}
-
-.post-image {
-    width: 150px;
-    height: 110px;
-    object-fit: cover;
-    flex-shrink: 0;
-}
-
-.post-info {
-    flex: 1;
-}
-
+/* 제목 */
 .post-title {
-    margin: 0 0 8px;
-    font-size: 19px;
-    line-height: 1.5;
+    margin: 0 0 12px;
+
+    font-size: 32px;
+    font-weight: normal;
+
+    line-height: 1.35;
+
+    color: #642b82;
 }
 
+/* 날짜 */
 .post-date {
     margin: 0;
-    font-size: 13px;
+
+    font-size: 23px;
     color: #777;
 }
 
+/* 구분선 */
+.line {
+    width: 100%;
+    height: 1px;
 
-/* =========================
-   모바일
-========================= */
+    background: #d8cbdc;
 
-@media (max-width: 600px) {
-
-    body::before {
-        inset: 6px;
-    }
-
-    .container {
-        width: 86%;
-        padding-top: 45px;
-    }
-
-    .home-logo {
-        width: 92%;
-        margin-bottom: 35px;
-    }
-
-    nav {
-        gap: 12px 18px;
-        margin-bottom: 55px;
-    }
-
-    nav a {
-        font-size: 14px;
-    }
-
-    .latest-image {
-        max-height: 400px;
-    }
-
-    .latest-title {
-        font-size: 23px;
-    }
-
-    .previous-title {
-        font-size: 18px;
-    }
-
-    .post-item {
-        gap: 15px;
-    }
-
-    .post-image {
-        width: 105px;
-        height: 80px;
-    }
-
-    .post-title {
-        font-size: 15px;
-    }
-
-    .post-date {
-        font-size: 11px;
-    }
+    margin: 65px 0 35px;
 }
 
-</style>
-</head>
+/* 이전 글 */
+.previous-title {
+    margin: 0 0 30px;
 
+    font-size: 27px;
+    font-weight: normal;
+}
 
-<body>
+/* 이전 글 하나 */
+.previous-post {
+    display: block;
 
-<div class="container">
+    text-decoration: none;
 
-    <!-- CENTIBOY 로고 -->
+    color: #642b82;
 
-    <a href="#" onclick="showPage('home'); return false;">
+    padding: 20px 0;
 
-        <img
-            src="centiboy.png"
-            alt="CENTIBOY"
-            class="home-logo"
-        >
+    border-bottom: 1px solid #e1d8e3;
 
-    </a>
+    transition: 0.2s;
+}
 
+.previous-post:hover {
+    color: #ff1493;
+}
 
-    <!-- 메뉴 -->
+.previous-post-title {
+    font-size: 23px;
+    margin-bottom: 8px;
+}
 
-    <nav>
+.previous-post-date {
+    font-size: 18px;
+    color: #888;
+}
 
-        <a href="#" onclick="showPage('diary'); return false;">
-            diary
-        </a>
+/* 글이 없을 때 */
+.no-post {
+    text-align: center;
 
-        <a href="#" onclick="showPage('memoir'); return false;">
-            My Memoir
-        </a>
+    font-size: 23px;
+    color: #888;
 
-        <a href="#" onclick="showPage('politics'); return false;">
-            politics
-        </a>
+    padding: 50px 0;
+}
 
-        <a href="#" onclick="showPage('travel'); return false;">
-            travel
-        </a>
-
-        <a href="#" onclick="showPage('sdd'); return false;">
-            SDD
-        </a>
-
-    </nav>
-
-
-    <main>
-
-
-        <!-- =========================
-             HOME
-        ========================== -->
-
-        <section id="home" class="page active">
-
-
-            <!-- 최신 글 -->
-
-            <article class="latest-post">
-
-                <img
-                    src="file_000000003ad88206b1a20683e46c1497.png"
-                    alt="설악산 신선대"
-                    class="latest-image"
-                >
-
-                <h1 class="latest-title">
-                    설악산 신선대
-                </h1>
-
-                <p class="latest-date">
-                    December 30, 2025
-                </p>
-
-            </article>
-
-
-            <!-- =========================
-                 이전 글
-            ========================== -->
-
-            <section class="previous-posts">
-
-                <h2 class="previous-title">
-                    Previous
-                </h2>
-
-
-                <div class="post-list">
-
-
-                    <!-- 이전 글 1 -->
-
-                    <a
-                        href="sub/daily.html"
-                        class="post-item"
-                    >
-
-                        <img
-                            src="file_000000003ad88206b1a20683e46c1497.png"
-                            alt="설악산 천불동계곡"
-                            class="post-image"
-                        >
-
-                        <div class="post-info">
-
-                            <h3 class="post-title">
-                                설악산 (천불동계곡)
-                            </h3>
-
-                            <p class="post-date">
-                                October 30, 2025
-                            </p>
-
-                        </div>
-
-                    </a>
-
-
-                    <!-- 이전 글 2 -->
-
-                    <a
-                        href="sub/daily.html"
-                        class="post-item"
-                    >
-
-                        <img
-                            src="file_000000003ad88206b1a20683e46c1497.png"
-                            alt="설악산 한계령 대청봉 오색"
-                            class="post-image"
-                        >
-
-                        <div class="post-info">
-
-                            <h3 class="post-title">
-                                설악산 (한계령-대청봉-오색)
-                            </h3>
-
-                            <p class="post-date">
-                                June 21, 2025
-                            </p>
-
-                        </div>
-
-                    </a>
-
-
-                    <!-- 이전 글 3 -->
-
-                    <a
-                        href="sub/daily.html"
-                        class="post-item"
-                    >
-
-                        <img
-                            src="file_000000003ad88206b1a20683e46c1497.png"
-                            alt="여행 기록"
-                            class="post-image"
-                        >
-
-                        <div class="post-info">
-
-                            <h3 class="post-title">
-                                여행 기록
-                            </h3>
-
-                            <p class="post-date">
-                                May 10, 2025
-                            </p>
-
-                        </div>
-
-                    </a>
-
-
-                </div>
-
-            </section>
-
-        </section>
-
-
-        <!-- diary -->
-
-        <section id="diary" class="page">
-
-            <h1>diary</h1>
-
-            <p>
-                My daily records.
-            </p>
-
-        </section>
-
-
-        <!-- My Memoir -->
-
-        <section id="memoir" class="page">
-
-            <h1>My Memoir</h1>
-
-            <p>
-                Personal memories and stories.
-            </p>
-
-        </section>
-
-
-        <!-- politics -->
-
-        <section id="politics" class="page">
-
-            <h1>politics</h1>
-
-            <p>
-                Political thoughts and records.
-            </p>
-
-        </section
+/* 모바일
