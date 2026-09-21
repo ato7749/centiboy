@@ -1,807 +1,1028 @@
-<!DOCTYPE html>
-<html lang="ko">
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
 
-<head>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>CENTIBOY</title>
+<title>CENTIBOY</title>
 
 
-    <style>
+<style>
 
-        /* =========================
-           기본 설정
-        ========================= */
+    /* =========================
+       기본 설정
+    ========================= */
 
-        * {
-            box-sizing: border-box;
-        }
+    * {
+        box-sizing: border-box;
+    }
 
-        html {
-            scroll-behavior: smooth;
-        }
+    html {
+        scroll-behavior: smooth;
+    }
 
-        body {
-            margin: 0;
-            padding: 0;
+    body {
+        margin: 0;
+        padding: 0;
 
-            background: white;
+        background: white;
 
-            color: #65357d;
+        color: #65357d;
 
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-        }
+        font-family:
+            Georgia,
+            "Times New Roman",
+            serif;
+    }
 
 
-        /* =========================
-           전체 페이지
-        ========================= */
+    /* =========================
+       전체 페이지
+    ========================= */
+
+    .page {
+
+        width: 94%;
+
+        max-width: 720px;
+
+        min-height: 100vh;
+
+        margin: 0 auto;
+
+        padding:
+            65px 28px 80px 28px;
+
+        background: white;
+
+        border: 4px solid #ff1493;
+
+        box-shadow:
+            0 0 18px #ff69b4;
+    }
+
+
+    /* =========================
+       로고
+    ========================= */
+
+    .logo-area {
+
+        width: 100%;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+        margin-bottom: 55px;
+    }
+
+
+    .logo {
+
+        display: block;
+
+        width: 300px;
+
+        max-width: 80%;
+
+        height: auto;
+    }
+
+
+    /* =========================
+       메뉴
+    ========================= */
+
+    .menu {
+
+        width: 100%;
+
+        display: flex;
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+        align-items: center;
+
+        gap:
+            28px 38px;
+
+        margin-bottom: 65px;
+    }
+
+
+    .menu button {
+
+        border: none;
+
+        outline: none;
+
+        background: transparent;
+
+        padding: 0;
+
+        color: #65357d;
+
+        font-family:
+            Georgia,
+            "Times New Roman",
+            serif;
+
+        font-size: 30px;
+
+        cursor: pointer;
+
+        transition:
+            color 0.2s ease,
+            transform 0.2s ease;
+    }
+
+
+    .menu button:hover {
+
+        color: #e51b91;
+
+        transform: scale(1.04);
+    }
+
+
+    .menu button.active {
+
+        color: #e51b91;
+    }
+
+
+    /* =========================
+       글 목록
+    ========================= */
+
+    #post-list {
+
+        width: 92%;
+
+        margin: 0 auto;
+    }
+
+
+    /* =========================
+       글 하나
+    ========================= */
+
+    .post {
+
+        margin-bottom: 65px;
+
+        padding-bottom: 45px;
+
+        border-bottom:
+            1px solid #ddd;
+    }
+
+
+    /* =========================
+       카테고리
+    ========================= */
+
+    .post-category {
+
+        color: #999;
+
+        font-size: 17px;
+
+        margin-bottom: 12px;
+    }
+
+
+    /* =========================
+       제목
+    ========================= */
+
+    .post-title {
+
+        margin: 0;
+
+        color: #65357d;
+
+        font-size: 38px;
+
+        font-weight: normal;
+
+        line-height: 1.3;
+
+        cursor: pointer;
+
+        transition:
+            color 0.2s ease;
+    }
+
+
+    .post-title:hover {
+
+        color: #e51b91;
+    }
+
+
+    /* =========================
+       제목을 누르기 전
+       날짜 / 사진 / 본문 숨김
+    ========================= */
+
+    .post-details {
+
+        display: none;
+    }
+
+
+    /* =========================
+       제목을 눌렀을 때 표시
+    ========================= */
+
+    .post.open .post-details {
+
+        display: block;
+    }
+
+
+    /* =========================
+       날짜
+    ========================= */
+
+    .post-date {
+
+        color: #777;
+
+        font-size: 23px;
+
+        margin-top: 20px;
+
+        margin-bottom: 25px;
+    }
+
+
+    /* =========================
+       사진
+    ========================= */
+
+    .post-image {
+
+        display: block;
+
+        width: 100%;
+
+        max-height: 500px;
+
+        object-fit: cover;
+
+        margin:
+            0 auto 25px auto;
+    }
+
+
+    /* =========================
+       본문
+    ========================= */
+
+    .post-content {
+
+        color: #555;
+
+        font-size: 20px;
+
+        line-height: 1.9;
+
+        white-space: pre-line;
+    }
+
+
+    /* =========================
+       글이 없을 때
+    ========================= */
+
+    .no-post {
+
+        text-align: center;
+
+        padding: 50px 10px;
+
+        color: #999;
+
+        font-size: 20px;
+    }
+
+
+    /* =========================
+       모바일
+    ========================= */
+
+    @media (max-width: 600px) {
 
         .page {
 
-            width: 94%;
-
-            max-width: 720px;
-
-            min-height: 100vh;
-
-            margin: 0 auto;
+            width: 96%;
 
             padding:
-                65px 28px 80px 28px;
-
-            background: white;
-
-            border: 4px solid #ff1493;
-
-            box-shadow:
-                0 0 18px #ff69b4;
+                55px 15px 70px 15px;
         }
 
-
-        /* =========================
-           로고
-        ========================= */
-
-        .logo-area {
-
-            width: 100%;
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            margin-bottom: 55px;
-        }
 
         .logo {
 
-            display: block;
+            width: 270px;
 
-            width: 300px;
-
-            max-width: 80%;
-
-            height: auto;
+            max-width: 82%;
         }
 
 
-        /* =========================
-           메뉴
-        ========================= */
+        .logo-area {
+
+            margin-bottom: 45px;
+        }
+
 
         .menu {
 
-            width: 100%;
-
-            display: flex;
-
-            flex-wrap: wrap;
-
-            justify-content: center;
-
-            align-items: center;
-
             gap:
-                28px 38px;
+                24px 30px;
 
-            margin-bottom: 65px;
+            margin-bottom: 60px;
         }
 
 
         .menu button {
 
-            border: none;
-
-            outline: none;
-
-            background: transparent;
-
-            padding: 0;
-
-            color: #65357d;
-
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
-            font-size: 30px;
-
-            cursor: pointer;
-
-            transition:
-                color 0.2s ease,
-                transform 0.2s ease;
+            font-size: 28px;
         }
 
-
-        .menu button:hover {
-
-            color: #e51b91;
-
-            transform: scale(1.04);
-        }
-
-
-        .menu button.active {
-
-            color: #e51b91;
-        }
-
-
-        /* =========================
-           글 목록
-        ========================= */
 
         #post-list {
 
-            width: 92%;
-
-            margin: 0 auto;
+            width: 90%;
         }
 
-
-        /* =========================
-           글 하나
-        ========================= */
-
-        .post {
-
-            margin-bottom: 65px;
-
-            padding-bottom: 45px;
-
-            border-bottom:
-                1px solid #ddd;
-        }
-
-
-        /* =========================
-           카테고리
-        ========================= */
-
-        .post-category {
-
-            color: #999;
-
-            font-size: 17px;
-
-            margin-bottom: 12px;
-        }
-
-
-        /* =========================
-           제목
-        ========================= */
 
         .post-title {
 
-            margin: 0;
-
-            color: #65357d;
-
-            font-size: 38px;
-
-            font-weight: normal;
-
-            line-height: 1.3;
-
-            cursor: pointer;
-
-            transition:
-                color 0.2s ease;
+            font-size: 32px;
         }
 
-
-        .post-title:hover {
-
-            color: #e51b91;
-        }
-
-
-        /* =========================
-           제목을 누르기 전에는
-           날짜 / 사진 / 본문 숨김
-        ========================= */
-
-        .post-details {
-
-            display: none;
-        }
-
-
-        /* =========================
-           제목을 눌렀을 때 표시
-        ========================= */
-
-        .post.open .post-details {
-
-            display: block;
-        }
-
-
-        /* =========================
-           날짜
-        ========================= */
 
         .post-date {
 
-            color: #777;
-
-            font-size: 23px;
-
-            margin-top: 20px;
-
-            margin-bottom: 25px;
+            font-size: 21px;
         }
 
-
-        /* =========================
-           사진
-        ========================= */
-
-        .post-image {
-
-            display: block;
-
-            width: 100%;
-
-            max-height: 500px;
-
-            object-fit: cover;
-
-            margin:
-                0 auto 25px auto;
-        }
-
-
-        /* =========================
-           본문
-        ========================= */
 
         .post-content {
 
-            color: #555;
+            font-size: 19px;
 
-            font-size: 20px;
-
-            line-height: 1.9;
-
-            white-space: pre-line;
+            line-height: 1.8;
         }
 
+    }
 
-        /* =========================
-           글이 없을 때
-        ========================= */
+</style>
 
-        .no-post {
+</head><body><div class="page">
 
-            text-align: center;
 
-            padding: 50px 10px;
+    <!-- =====================================
+         로고
+         ===================================== -->
 
-            color: #999;
+    <div class="logo-area">
 
-            font-size: 20px;
-        }
-
-
-        /* =========================
-           모바일
-        ========================= */
-
-        @media (max-width: 600px) {
-
-            .page {
-
-                width: 96%;
-
-                padding:
-                    55px 15px 70px 15px;
-            }
-
-
-            .logo {
-
-                width: 270px;
-
-                max-width: 82%;
-            }
-
-
-            .logo-area {
-
-                margin-bottom: 45px;
-            }
-
-
-            .menu {
-
-                gap:
-                    24px 30px;
-
-                margin-bottom: 60px;
-            }
-
-
-            .menu button {
-
-                font-size: 28px;
-            }
-
-
-            #post-list {
-
-                width: 90%;
-            }
-
-
-            .post-title {
-
-                font-size: 32px;
-            }
-
-
-            .post-date {
-
-                font-size: 21px;
-            }
-
-
-            .post-content {
-
-                font-size: 19px;
-
-                line-height: 1.8;
-            }
-
-        }
-
-    </style>
-
-</head>
-
-
-<body>
-
-
-    <div class="page">
-
-
-        <!-- =====================================
-             로고
-             ===================================== -->
-
-        <div class="logo-area">
-
-            <img
-                src="file_000000003ad88206b1a20683e46c1497.png"
-                class="logo"
-                alt="CENTIBOY">
-
-        </div>
-
-
-
-        <!-- =====================================
-             메뉴
-             ===================================== -->
-
-        <nav class="menu">
-
-            <button
-                id="button-diary"
-                onclick="showCategory('diary')">
-
-                diary
-
-            </button>
-
-
-            <button
-                id="button-memoir"
-                onclick="showCategory('memoir')">
-
-                My Memoir
-
-            </button>
-
-
-            <button
-                id="button-politics"
-                onclick="showCategory('politics')">
-
-                politics
-
-            </button>
-
-
-            <button
-                id="button-travel"
-                onclick="showCategory('travel')">
-
-                travel
-
-            </button>
-
-
-            <button
-                id="button-sdd"
-                onclick="showCategory('sdd')">
-
-                SDD
-
-            </button>
-
-        </nav>
-
-
-
-        <!-- =====================================
-             글이 표시되는 곳
-             ===================================== -->
-
-        <main id="post-list"></main>
-
+        <img
+            src="file_000000003ad88206b1a20683e46c1497.png"
+            class="logo"
+            alt="CENTIBOY">
 
     </div>
 
 
 
-    <script>
+    <!-- =====================================
+         메뉴
+         ===================================== -->
+
+    <nav class="menu">
+
+        <button
+            id="button-diary"
+            onclick="showCategory('diary')">
+
+            diary
+
+        </button>
 
 
-        /* ========================================
-           글 데이터
-        ======================================== */
+        <button
+            id="button-memoir"
+            onclick="showCategory('memoir')">
+
+            My Memoir
+
+        </button>
 
 
-        const posts = {
+        <button
+            id="button-politics"
+            onclick="showCategory('politics')">
+
+            politics
+
+        </button>
 
 
-            /* ------------------------------------
-               diary
-            ------------------------------------ */
+        <button
+            id="button-travel"
+            onclick="showCategory('travel')">
 
-            diary: [
+            travel
 
-                {
-                    title: "한탄",
-
-                    date: "December 5, 2025",
-
-                    image: "",
-
-                    content:
-                        "지나간 일들을 떠올리며 과거에 대해 한탄하고있다.    그럴걸 이라는 생각보다 그러지 말걸 이라는 생각이 더 많다.      찬란한 과거에 비해 지금은 많이 초라하다고 생각든다.     옛날을 좀 더 즐길걸그랬다.    너무나 후회되고 억울하다.    과거로 돌아갈 수 없기에 더욱 더 힘들다."
-                },
+        </button>
 
 
-                {
-                    title: "왜곡된 증오",
+        <button
+            id="button-sdd"
+            onclick="showCategory('sdd')">
 
-                    date: "December 25, 2024",
+            SDD
 
-                    image: "",
+        </button>
 
-                    content:
-                        "나는 다른사람들이 남들보다 우월하고 잘났다는 식의 생각을 가지며 살아가는줄 알았다.그렇기에 나는 모두를 이기적이고 자만심이 가득 한 혐오스런 나르시스트일줄알았다. 이제서야 깨닫는다. 내가 싫어하던 자만감 넘치는 사람은 친구도 가족도 아닌 나였다."
+    </nav>
+
+
+
+    <!-- =====================================
+         글이 표시되는 곳
+         ===================================== -->
+
+    <main id="post-list"></main>
+
+
+</div>
+
+
+
+<script>
+
+
+    /* ========================================
+       글 데이터
+
+       각 목차마다 최대 50개까지 작성 가능
+
+       title  = 제목
+       date   = 날짜
+       images = 사진 여러 장
+       content = 본문
+
+       제목이 비어 있으면
+       사이트에 표시되지 않습니다.
+    ======================================== */
+
+
+    const posts = {
+
+
+        /* ====================================
+           diary
+        ==================================== */
+
+        diary: [
+
+            {
+                title: "한탄",
+
+                date: "December 5, 2025",
+
+                images: [],
+
+                content:
+                    "지나간 일들을 떠올리며 과거에 대해 한탄하고있다.    그럴걸 이라는 생각보다 그러지 말걸 이라는 생각이 더 많다.      찬란한 과거에 비해 지금은 많이 초라하다고 생각든다.     옛날을 좀 더 즐길걸그랬다.    너무나 후회되고 억울하다.    과거로 돌아갈 수 없기에 더욱 더 힘들다."
+            },
+
+
+            {
+                title: "왜곡된 증오",
+
+                date: "December 25, 2024",
+
+                images: [],
+
+                content:
+                    "나는 다른사람들이 남들보다 우월하고 잘났다는 식의 생각을 가지며 살아가는줄 알았다.그렇기에 나는 모두를 이기적이고 자만심이 가득 한 혐오스런 나르시스트일줄알았다. 이제서야 깨닫는다. 내가 싫어하던 자만감 넘치는 사람은 친구도 가족도 아닌 나였다."
+            },
+
+
+            /* -------- diary 3 -------- */
+
+            {
+                title: "",
+                date: "",
+                images: [],
+                content: ""
+            },
+
+
+            /* -------- diary 4 -------- */
+
+            {
+                title: "",
+                date: "",
+                images: [],
+                content: ""
+            },
+
+
+            /* -------- diary 5 -------- */
+
+            {
+                title: "",
+                date: "",
+                images: [],
+                content: ""
+            },
+
+
+            /* -------- diary 6 -------- */
+
+            {
+                title: "",
+                date: "",
+                images: [],
+                content: ""
+            },
+
+
+            /* -------- diary 7 -------- */
+
+            {
+                title: "",
+                date: "",
+                images: [],
+                content: ""
+            },
+
+
+            /* -------- diary 8 -------- */
+
+            {
+                title: "",
+                date: "",
+                images: [],
+                content: ""
+            },
+
+
+            /* -------- diary 9 -------- */
+
+            {
+                title: "",
+                date: "",
+                images: [],
+                content: ""
+            },
+
+
+            /* -------- diary 10 -------- */
+
+            {
+                title: "",
+                date: "",
+                images: [],
+                content: ""
+            },
+
+
+            /* -------- diary 11~50 -------- */
+
+            ...Array.from(
+                { length: 40 },
+                function() {
+                    return {
+                        title: "",
+                        date: "",
+                        images: [],
+                        content: ""
+                    };
                 }
+            )
 
-            ],
+        ],
 
 
 
-            /* ------------------------------------
-               My Memoir
-            ------------------------------------ */
+        /* ====================================
+           My Memoir
+        ==================================== */
 
-            memoir: [
+        memoir: [
 
-                {
-                    title: "악행의 자서전",
+            {
+                title: "악행의 자서전",
 
-                    date: "January 10, 2022",
+                date: "January 10, 2022",
 
-                    image: "",
+                images: [],
 
-                    content:
-                        "애미씨팔."
+                content:
+                    "애미씨팔."
+            },
+
+
+            ...Array.from(
+                { length: 49 },
+                function() {
+                    return {
+                        title: "",
+                        date: "",
+                        images: [],
+                        content: ""
+                    };
                 }
+            )
 
-            ],
+        ],
 
 
 
-            /* ------------------------------------
-               politics
-            ------------------------------------ */
+        /* ====================================
+           politics
+        ==================================== */
 
-            politics: [
+        politics: [
 
-                {
-                    title: "하드위키",
+            {
+                title: "하드위키",
 
-                    date: "November 11, 2025",
+                date: "November 11, 2025",
 
-                    image: "하드위키.jpg",
+                images: [
+                    "하드위키.jpg"
+                ],
 
-                    content:
-                        "하드위키.       사기까지 정말 많은 노력이 필요했다.         좆도 아닌 벌레새끼때문에 뭐이리 고생했었는지.             미련할때였다."
+                content:
+                    "하드위키.       사기까지 정말 많은 노력이 필요했다.         좆도 아닌 벌레새끼때문에 뭐이리 고생했었는지.             미련할때였다."
+            },
+
+
+            ...Array.from(
+                { length: 49 },
+                function() {
+                    return {
+                        title: "",
+                        date: "",
+                        images: [],
+                        content: ""
+                    };
                 }
+            )
 
-            ],
+        ],
 
 
 
-            /* ------------------------------------
-               travel
-            ------------------------------------ */
+        /* ====================================
+           travel
+        ==================================== */
 
-            travel: [
+        travel: [
 
-                {
-                    title: "시드니",
+            {
+                title: "시드니",
 
-                    date: "December 20, 2024",
+                date: "December 20, 2024",
 
-                    image: "시드니1.jpg",
+                images: [
+                    "시드니1.jpg"
+                ],
 
-                    content:
-                        "생일을 기념해서 놀러간 시드니."
+                content:
+                    "생일을 기념해서 놀러간 시드니."
+            },
+
+
+            ...Array.from(
+                { length: 49 },
+                function() {
+                    return {
+                        title: "",
+                        date: "",
+                        images: [],
+                        content: ""
+                    };
                 }
+            )
 
-            ],
+        ],
 
-            /* ------------------------------------
-               SDD
-            ------------------------------------ */
 
-            sdd: [
 
-                {
-                    title: "SDD",
+        /* ====================================
+           SDD
+        ==================================== */
 
-                    date: "February 10, 2026",
+        sdd: [
 
-                    image: "",
+            {
+                title: "SDD",
 
-                    content:
-                        "SDD."
+                date: "February 10, 2026",
+
+                images: [],
+
+                content:
+                    "SDD."
+            },
+
+
+            ...Array.from(
+                { length: 49 },
+                function() {
+                    return {
+                        title: "",
+                        date: "",
+                        images: [],
+                        content: ""
+                    };
                 }
+            )
 
-            ]
+        ]
 
-        };
+    };
 
 
 
-        /* ========================================
-           카테고리 이름
-        ======================================== */
+    /* ========================================
+       카테고리 이름
+    ======================================== */
 
-        const categoryNames = {
+    const categoryNames = {
 
-            diary: "diary",
+        diary: "diary",
 
-            memoir: "My Memoir",
+        memoir: "My Memoir",
 
-            politics: "politics",
+        politics: "politics",
 
-            travel: "travel",
+        travel: "travel",
 
-            sdd: "SDD"
+        sdd: "SDD"
 
-        };
+    };
 
 
 
-        /* ========================================
-           글 열기 / 닫기
-        ======================================== */
+    /* ========================================
+       글 열기 / 닫기
+    ======================================== */
 
-        function togglePost(article) {
+    function togglePost(article) {
 
-            article.classList.toggle("open");
+        article.classList.toggle("open");
 
-        }
+    }
 
 
 
-        /* ========================================
-           카테고리 보여주기
-        ======================================== */
+    /* ========================================
+       카테고리 보여주기
+    ======================================== */
 
-        function showCategory(category) {
+    function showCategory(category) {
 
 
-            const postList =
-                document.getElementById("post-list");
+        const postList =
+            document.getElementById("post-list");
 
 
-            /* 기존 글 삭제 */
+        /* 기존 글 삭제 */
 
-            postList.innerHTML = "";
+        postList.innerHTML = "";
 
 
-            /* 모든 메뉴 active 제거 */
+        /* 모든 메뉴 active 제거 */
 
-            document
-                .querySelectorAll(".menu button")
-                .forEach(function(button) {
+        document
+            .querySelectorAll(".menu button")
+            .forEach(function(button) {
 
-                    button.classList.remove("active");
-
-                });
-
-
-            /* 현재 메뉴 active */
-
-            const activeButton =
-                document.getElementById(
-                    "button-" + category
-                );
-
-
-            if (activeButton) {
-
-                activeButton.classList.add("active");
-
-            }
-
-
-            /* 해당 카테고리 글 */
-
-            const categoryPosts =
-                posts[category] || [];
-
-
-            /* 글이 없을 경우 */
-
-            if (categoryPosts.length === 0) {
-
-                postList.innerHTML = `
-
-                    <div class="no-post">
-
-                        아직 등록된 글이 없습니다.
-
-                    </div>
-
-                `;
-
-                return;
-
-            }
-
-
-
-            /* 글 하나씩 만들기 */
-
-            categoryPosts.forEach(function(post) {
-
-
-                const article =
-                    document.createElement("article");
-
-
-                article.className = "post";
-
-
-                /* 사진 */
-
-                let imageHTML = "";
-
-
-                if (post.image &&
-                    post.image.trim() !== "") {
-
-                    imageHTML = `
-
-                        <img
-                            src="${post.image}"
-                            class="post-image"
-                            alt="${post.title}">
-
-                    `;
-
-                }
-
-
-                /* 글 */
-
-                article.innerHTML = `
-
-                    <div class="post-category">
-
-                        ${categoryNames[category]}
-
-                    </div>
-
-
-                    <h2
-                        class="post-title"
-                        onclick="togglePost(this.parentElement)">
-
-                        ${post.title}
-
-                    </h2>
-
-
-                    <div class="post-details">
-
-                        <div class="post-date">
-
-                            ${post.date}
-
-                        </div>
-
-
-                        ${imageHTML}
-
-
-                        <div class="post-content">
-
-                            ${post.content}
-
-                        </div>
-
-                    </div>
-
-                `;
-
-
-                postList.appendChild(article);
+                button.classList.remove("active");
 
             });
 
 
+        /* 현재 메뉴 active */
+
+        const activeButton =
+            document.getElementById(
+                "button-" + category
+            );
+
+
+        if (activeButton) {
+
+            activeButton.classList.add("active");
+
+        }
+
+
+        /* 해당 카테고리 글 */
+
+        const categoryPosts =
+            posts[category] || [];
+
+
+        /* ====================================
+           제목이 있는 글만 표시
+        ==================================== */
+
+        const visiblePosts =
+            categoryPosts.filter(function(post) {
+
+                return post.title &&
+                       post.title.trim() !== "";
+
+            });
+
+
+        /* 글이 없을 경우 */
+
+        if (visiblePosts.length === 0) {
+
+            postList.innerHTML = `
+
+                <div class="no-post">
+
+                    아직 등록된 글이 없습니다.
+
+                </div>
+
+            `;
+
+            return;
+
         }
 
 
 
-        /* ========================================
-           처음 사이트를 열었을 때
-           diary 표시
-        ======================================== */
+        /* ====================================
+           글 하나씩 만들기
+        ==================================== */
 
-        showCategory("diary");
-
-
-    </script>
+        visiblePosts.forEach(function(post) {
 
 
-</body>
+            const article =
+                document.createElement("article");
 
-</html>
+
+            article.className = "post";
+
+
+
+            /* =================================
+               여러 장의 사진 만들기
+            ================================= */
+
+            let imageHTML = "";
+
+
+            if (
+                Array.isArray(post.images) &&
+                post.images.length > 0
+            ) {
+
+                imageHTML =
+                    post.images.map(
+                        function(image) {
+
+                            return `
+
+                                <img
+                                    src="${image}"
+                                    class="post-image"
+                                    alt="${post.title}">
+
+                            `;
+
+                        }
+                    ).join("");
+
+            }
+
+
+
+            /* =================================
+               날짜 만들기
+            ================================= */
+
+            let dateHTML = "";
+
+
+            if (
+                post.date &&
+                post.date.trim() !== ""
+            ) {
+
+                dateHTML = `
+
+                    <div class="post-date">
+
+                        ${post.date}
+
+                    </div>
+
+                `;
+
+            }
+
+
+
+            /* =================================
+               본문 만들기
+            ================================= */
+
+            let contentHTML = "";
+
+
+            if (
+                post.content &&
+                post.content.trim() !== ""
+            ) {
+
+                contentHTML = `
+
+                    <div class="post-content">
+
+                        ${post.content}
+
+                    </div>
+
+                `;
+
+            }
+
+
+
+            /* =================================
+               최종 글 HTML
+            ================================= */
+
+            article.innerHTML = `
+
+                <div class="post-category">
+
+                    ${categoryNames[category]}
+
+                </div>
+
+
+                <h2
+                    class="post-title"
+                    onclick="togglePost(this.parentElement)">
+
+                    ${post.title}
+
+                </h2>
+
+
+                <div class="post-details">
+
+                    ${dateHTML}
+
+                    ${imageHTML}
+
+                    ${contentHTML}
+
+                </div>
+
+            `;
+
+
+            postList.appendChild(article);
+
+        });
+
+    }
+
+
+
+    /* ========================================
+       처음 사이트를 열었을 때
+       diary 표시
+    ======================================== */
+
+    showCategory("diary");
+
+
+</script>
+
+</body></html>
