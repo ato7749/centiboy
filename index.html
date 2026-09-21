@@ -1,1028 +1,3513 @@
-<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
 
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
 <title>CENTIBOY</title>
 
-
 <style>
 
-    /* =========================
-       기본 설정
-    ========================= */
+/* =========================
+   기본 설정
+========================= */
 
-    * {
-        box-sizing: border-box;
-    }
+* {
+    box-sizing: border-box;
+}
 
-    html {
-        scroll-behavior: smooth;
-    }
+html {
+    scroll-behavior: smooth;
+}
 
-    body {
-        margin: 0;
-        padding: 0;
+body {
+    margin: 0;
+    padding: 0;
+    background: white;
+    color: #65357d;
 
-        background: white;
-
-        color: #65357d;
-
-        font-family:
-            Georgia,
-            "Times New Roman",
-            serif;
-    }
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+}
 
 
-    /* =========================
-       전체 페이지
-    ========================= */
+/* =========================
+   전체 페이지
+========================= */
+
+.page {
+    width: 94%;
+    max-width: 720px;
+    min-height: 100vh;
+
+    margin: 0 auto;
+
+    padding:
+        65px 28px 80px 28px;
+
+    background: white;
+
+    border: 4px solid #ff1493;
+
+    box-shadow:
+        0 0 18px #ff69b4;
+}
+
+
+/* =========================
+   로고
+========================= */
+
+.logo-area {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 55px;
+}
+
+.logo {
+    display: block;
+
+    width: 300px;
+
+    max-width: 80%;
+
+    height: auto;
+}
+
+
+/* =========================
+   메뉴
+========================= */
+
+.menu {
+    width: 100%;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+    align-items: center;
+
+    gap:
+        28px 38px;
+
+    margin-bottom: 65px;
+}
+
+.menu button {
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    padding: 0;
+
+    color: #65357d;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.menu button:hover {
+    color: #e51b91;
+
+    transform: scale(1.04);
+}
+
+.menu button.active {
+    color: #e51b91;
+}
+
+
+/* =========================
+   글 목록
+========================= */
+
+#post-list {
+    width: 92%;
+
+    margin: 0 auto;
+}
+
+
+/* =========================
+   글 하나
+========================= */
+
+.post {
+    margin-bottom: 65px;
+
+    padding-bottom: 45px;
+
+    border-bottom:
+        1px solid #ddd;
+}
+
+
+/* =========================
+   카테고리
+========================= */
+
+.post-category {
+    color: #999;
+
+    font-size: 17px;
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================
+   제목
+========================= */
+
+.post-title {
+    margin: 0;
+
+    color: #65357d;
+
+    font-size: 38px;
+
+    font-weight: normal;
+
+    line-height: 1.3;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease;
+}
+
+.post-title:hover {
+    color: #e51b91;
+}
+
+
+/* =========================
+   날짜 / 사진 / 본문
+   처음에는 숨김
+========================= */
+
+.post-details {
+    display: none;
+}
+
+.post.open .post-details {
+    display: block;
+}
+
+
+/* =========================
+   날짜
+========================= */
+
+.post-date {
+    color: #777;
+
+    font-size: 23px;
+
+    margin-top: 20px;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   사진
+========================= */
+
+.post-image {
+    display: block;
+
+    width: 100%;
+
+    max-height: 500px;
+
+    object-fit: cover;
+
+    margin:
+        0 auto 25px auto;
+}
+
+
+/* =========================
+   본문
+========================= */
+
+.post-content {
+    color: #555;
+
+    font-size: 20px;
+
+    line-height: 1.9;
+
+    white-space: pre-line;
+}
+
+
+/* =========================
+   글이 없을 때
+========================= */
+
+.no-post {
+    text-align: center;
+
+    padding: 50px 10px;
+
+    color: #999;
+
+    font-size: 20px;
+}
+
+
+/* =========================
+   모바일
+========================= */
+
+@media (max-width: 600px) {
 
     .page {
-
-        width: 94%;
-
-        max-width: 720px;
-
-        min-height: 100vh;
-
-        margin: 0 auto;
+        width: 96%;
 
         padding:
-            65px 28px 80px 28px;
-
-        background: white;
-
-        border: 4px solid #ff1493;
-
-        box-shadow:
-            0 0 18px #ff69b4;
+            55px 15px 70px 15px;
     }
-
-
-    /* =========================
-       로고
-    ========================= */
-
-    .logo-area {
-
-        width: 100%;
-
-        display: flex;
-
-        justify-content: center;
-
-        align-items: center;
-
-        margin-bottom: 55px;
-    }
-
 
     .logo {
+        width: 270px;
 
-        display: block;
-
-        width: 300px;
-
-        max-width: 80%;
-
-        height: auto;
+        max-width: 82%;
     }
 
-
-    /* =========================
-       메뉴
-    ========================= */
+    .logo-area {
+        margin-bottom: 45px;
+    }
 
     .menu {
-
-        width: 100%;
-
-        display: flex;
-
-        flex-wrap: wrap;
-
-        justify-content: center;
-
-        align-items: center;
-
         gap:
-            28px 38px;
+            24px 30px;
 
-        margin-bottom: 65px;
+        margin-bottom: 60px;
     }
-
 
     .menu button {
-
-        border: none;
-
-        outline: none;
-
-        background: transparent;
-
-        padding: 0;
-
-        color: #65357d;
-
-        font-family:
-            Georgia,
-            "Times New Roman",
-            serif;
-
-        font-size: 30px;
-
-        cursor: pointer;
-
-        transition:
-            color 0.2s ease,
-            transform 0.2s ease;
+        font-size: 28px;
     }
-
-
-    .menu button:hover {
-
-        color: #e51b91;
-
-        transform: scale(1.04);
-    }
-
-
-    .menu button.active {
-
-        color: #e51b91;
-    }
-
-
-    /* =========================
-       글 목록
-    ========================= */
 
     #post-list {
-
-        width: 92%;
-
-        margin: 0 auto;
+        width: 90%;
     }
-
-
-    /* =========================
-       글 하나
-    ========================= */
-
-    .post {
-
-        margin-bottom: 65px;
-
-        padding-bottom: 45px;
-
-        border-bottom:
-            1px solid #ddd;
-    }
-
-
-    /* =========================
-       카테고리
-    ========================= */
-
-    .post-category {
-
-        color: #999;
-
-        font-size: 17px;
-
-        margin-bottom: 12px;
-    }
-
-
-    /* =========================
-       제목
-    ========================= */
 
     .post-title {
-
-        margin: 0;
-
-        color: #65357d;
-
-        font-size: 38px;
-
-        font-weight: normal;
-
-        line-height: 1.3;
-
-        cursor: pointer;
-
-        transition:
-            color 0.2s ease;
+        font-size: 32px;
     }
-
-
-    .post-title:hover {
-
-        color: #e51b91;
-    }
-
-
-    /* =========================
-       제목을 누르기 전
-       날짜 / 사진 / 본문 숨김
-    ========================= */
-
-    .post-details {
-
-        display: none;
-    }
-
-
-    /* =========================
-       제목을 눌렀을 때 표시
-    ========================= */
-
-    .post.open .post-details {
-
-        display: block;
-    }
-
-
-    /* =========================
-       날짜
-    ========================= */
 
     .post-date {
-
-        color: #777;
-
-        font-size: 23px;
-
-        margin-top: 20px;
-
-        margin-bottom: 25px;
+        font-size: 21px;
     }
-
-
-    /* =========================
-       사진
-    ========================= */
-
-    .post-image {
-
-        display: block;
-
-        width: 100%;
-
-        max-height: 500px;
-
-        object-fit: cover;
-
-        margin:
-            0 auto 25px auto;
-    }
-
-
-    /* =========================
-       본문
-    ========================= */
 
     .post-content {
+        font-size: 19px;
 
-        color: #555;
-
-        font-size: 20px;
-
-        line-height: 1.9;
-
-        white-space: pre-line;
+        line-height: 1.8;
     }
 
-
-    /* =========================
-       글이 없을 때
-    ========================= */
-
-    .no-post {
-
-        text-align: center;
-
-        padding: 50px 10px;
-
-        color: #999;
-
-        font-size: 20px;
-    }
-
-
-    /* =========================
-       모바일
-    ========================= */
-
-    @media (max-width: 600px) {
-
-        .page {
-
-            width: 96%;
-
-            padding:
-                55px 15px 70px 15px;
-        }
-
-
-        .logo {
-
-            width: 270px;
-
-            max-width: 82%;
-        }
-
-
-        .logo-area {
-
-            margin-bottom: 45px;
-        }
-
-
-        .menu {
-
-            gap:
-                24px 30px;
-
-            margin-bottom: 60px;
-        }
-
-
-        .menu button {
-
-            font-size: 28px;
-        }
-
-
-        #post-list {
-
-            width: 90%;
-        }
-
-
-        .post-title {
-
-            font-size: 32px;
-        }
-
-
-        .post-date {
-
-            font-size: 21px;
-        }
-
-
-        .post-content {
-
-            font-size: 19px;
-
-            line-height: 1.8;
-        }
-
-    }
+}
 
 </style>
 
-</head><body><div class="page">
+</head>
 
 
-    <!-- =====================================
-         로고
-         ===================================== -->
-
-    <div class="logo-area">
-
-        <img
-            src="file_000000003ad88206b1a20683e46c1497.png"
-            class="logo"
-            alt="CENTIBOY">
-
-    </div>
+<body>
 
 
-
-    <!-- =====================================
-         메뉴
-         ===================================== -->
-
-    <nav class="menu">
-
-        <button
-            id="button-diary"
-            onclick="showCategory('diary')">
-
-            diary
-
-        </button>
+<div class="page">
 
 
-        <button
-            id="button-memoir"
-            onclick="showCategory('memoir')">
+<!-- =========================
+     로고
+========================= -->
 
-            My Memoir
+<div class="logo-area">
 
-        </button>
+    <img
+        src="file_000000003ad88206b1a20683e46c1497.png"
+        class="logo"
+        alt="CENTIBOY">
 
-
-        <button
-            id="button-politics"
-            onclick="showCategory('politics')">
-
-            politics
-
-        </button>
+</div>
 
 
-        <button
-            id="button-travel"
-            onclick="showCategory('travel')">
+<!-- =========================
+     메뉴
+========================= -->
 
-            travel
+<nav class="menu">
 
-        </button>
+    <button
+        id="button-diary"
+        onclick="showCategory('diary')">
 
+        diary
 
-        <button
-            id="button-sdd"
-            onclick="showCategory('sdd')">
-
-            SDD
-
-        </button>
-
-    </nav>
+    </button>
 
 
+    <button
+        id="button-memoir"
+        onclick="showCategory('memoir')">
 
-    <!-- =====================================
-         글이 표시되는 곳
-         ===================================== -->
+        My Memoir
 
-    <main id="post-list"></main>
+    </button>
+
+
+    <button
+        id="button-politics"
+        onclick="showCategory('politics')">
+
+        politics
+
+    </button>
+
+
+    <button
+        id="button-travel"
+        onclick="showCategory('travel')">
+
+        travel
+
+    </button>
+
+
+    <button
+        id="button-sdd"
+        onclick="showCategory('sdd')">
+
+        SDD
+
+    </button>
+
+</nav>
+
+
+<!-- =========================
+     글이 표시되는 곳
+========================= -->
+
+<main id="post-list"></main>
 
 
 </div>
 
 
-
 <script>
 
 
-    /* ========================================
-       글 데이터
+/* =========================================================
+   글 데이터
 
-       각 목차마다 최대 50개까지 작성 가능
+   각 목차마다 50개의 독립적인 글 작성 공간
 
-       title  = 제목
-       date   = 날짜
-       images = 사진 여러 장
-       content = 본문
+   title  = 제목
+   date   = 날짜
+   images = 사진 파일 이름 여러 개 가능
+   content = 본문
 
-       제목이 비어 있으면
-       사이트에 표시되지 않습니다.
-    ======================================== */
+   title이 ""이면 사이트에 표시되지 않음.
+========================================================= */
 
 
-    const posts = {
+const posts = {
 
 
-        /* ====================================
-           diary
-        ==================================== */
+/* =========================================================
+   DIARY
+   1 ~ 50
+========================================================= */
 
-        diary: [
+diary: [
 
-            {
-                title: "한탄",
+/* diary 1 */
+{
+    title: "한탄",
+    date: "December 5, 2025",
 
-                date: "December 5, 2025",
+    images: [],
 
-                images: [],
+    content:
+        "지나간 일들을 떠올리며 과거에 대해 한탄하고있다. 그럴걸 이라는 생각보다 그러지 말걸 이라는 생각이 더 많다. 찬란한 과거에 비해 지금은 많이 초라하다고 생각든다. 옛날을 좀 더 즐길걸그랬다. 너무나 후회되고 억울하다. 과거로 돌아갈 수 없기에 더욱 더 힘들다."
+},
 
-                content:
-                    "지나간 일들을 떠올리며 과거에 대해 한탄하고있다.    그럴걸 이라는 생각보다 그러지 말걸 이라는 생각이 더 많다.      찬란한 과거에 비해 지금은 많이 초라하다고 생각든다.     옛날을 좀 더 즐길걸그랬다.    너무나 후회되고 억울하다.    과거로 돌아갈 수 없기에 더욱 더 힘들다."
-            },
 
+/* diary 2 */
+{
+    title: "왜곡된 증오",
+    date: "December 25, 2024",
 
-            {
-                title: "왜곡된 증오",
+    images: [],
 
-                date: "December 25, 2024",
+    content:
+        "나는 다른사람들이 남들보다 우월하고 잘났다는 식의 생각을 가지며 살아가는줄 알았다. 그렇기에 나는 모두를 이기적이고 자만심이 가득 한 혐오스런 나르시스트일줄알았다. 이제서야 깨닫는다. 내가 싫어하던 자만감 넘치는 사람은 친구도 가족도 아닌 나였다."
+},
 
-                images: [],
 
-                content:
-                    "나는 다른사람들이 남들보다 우월하고 잘났다는 식의 생각을 가지며 살아가는줄 알았다.그렇기에 나는 모두를 이기적이고 자만심이 가득 한 혐오스런 나르시스트일줄알았다. 이제서야 깨닫는다. 내가 싫어하던 자만감 넘치는 사람은 친구도 가족도 아닌 나였다."
-            },
+/* diary 3 */
+{
+    title: "",
+    date: "",
 
+    images: [],
 
-            /* -------- diary 3 -------- */
+    content: ""
+},
 
-            {
-                title: "",
-                date: "",
-                images: [],
-                content: ""
-            },
 
+/* diary 4 */
+{
+    title: "",
+    date: "",
 
-            /* -------- diary 4 -------- */
+    images: [],
 
-            {
-                title: "",
-                date: "",
-                images: [],
-                content: ""
-            },
+    content: ""
+},
 
 
-            /* -------- diary 5 -------- */
+/* diary 5 */
+{
+    title: "",
+    date: "",
 
-            {
-                title: "",
-                date: "",
-                images: [],
-                content: ""
-            },
+    images: [],
 
+    content: ""
+},
 
-            /* -------- diary 6 -------- */
 
-            {
-                title: "",
-                date: "",
-                images: [],
-                content: ""
-            },
+/* diary 6 */
+{
+    title: "",
+    date: "",
 
+    images: [],
 
-            /* -------- diary 7 -------- */
+    content: ""
+},
 
-            {
-                title: "",
-                date: "",
-                images: [],
-                content: ""
-            },
 
+/* diary 7 */
+{
+    title: "",
+    date: "",
 
-            /* -------- diary 8 -------- */
+    images: [],
 
-            {
-                title: "",
-                date: "",
-                images: [],
-                content: ""
-            },
+    content: ""
+},
 
 
-            /* -------- diary 9 -------- */
+/* diary 8 */
+{
+    title: "",
+    date: "",
 
-            {
-                title: "",
-                date: "",
-                images: [],
-                content: ""
-            },
+    images: [],
 
+    content: ""
+},
 
-            /* -------- diary 10 -------- */
 
-            {
-                title: "",
-                date: "",
-                images: [],
-                content: ""
-            },
+/* diary 9 */
+{
+    title: "",
+    date: "",
 
+    images: [],
 
-            /* -------- diary 11~50 -------- */
+    content: ""
+},
 
-            ...Array.from(
-                { length: 40 },
-                function() {
-                    return {
-                        title: "",
-                        date: "",
-                        images: [],
-                        content: ""
-                    };
-                }
-            )
 
-        ],
+/* diary 10 */
+{
+    title: "",
+    date: "",
 
+    images: [],
 
+    content: ""
+},
 
-        /* ====================================
-           My Memoir
-        ==================================== */
 
-        memoir: [
+/* diary 11 */
+{
+    title: "",
+    date: "",
 
-            {
-                title: "악행의 자서전",
+    images: [],
 
-                date: "January 10, 2022",
+    content: ""
+},
 
-                images: [],
 
-                content:
-                    "애미씨팔."
-            },
+/* diary 12 */
+{
+    title: "",
+    date: "",
 
+    images: [],
 
-            ...Array.from(
-                { length: 49 },
-                function() {
-                    return {
-                        title: "",
-                        date: "",
-                        images: [],
-                        content: ""
-                    };
-                }
-            )
+    content: ""
+},
 
-        ],
 
+/* diary 13 */
+{
+    title: "",
+    date: "",
 
+    images: [],
 
-        /* ====================================
-           politics
-        ==================================== */
+    content: ""
+},
 
-        politics: [
 
-            {
-                title: "하드위키",
+/* diary 14 */
+{
+    title: "",
+    date: "",
 
-                date: "November 11, 2025",
+    images: [],
 
-                images: [
-                    "하드위키.jpg"
-                ],
+    content: ""
+},
 
-                content:
-                    "하드위키.       사기까지 정말 많은 노력이 필요했다.         좆도 아닌 벌레새끼때문에 뭐이리 고생했었는지.             미련할때였다."
-            },
 
+/* diary 15 */
+{
+    title: "",
+    date: "",
 
-            ...Array.from(
-                { length: 49 },
-                function() {
-                    return {
-                        title: "",
-                        date: "",
-                        images: [],
-                        content: ""
-                    };
-                }
-            )
+    images: [],
 
-        ],
+    content: ""
+},
 
 
+/* diary 16 */
+{
+    title: "",
+    date: "",
 
-        /* ====================================
-           travel
-        ==================================== */
+    images: [],
 
-        travel: [
+    content: ""
+},
 
-            {
-                title: "시드니",
 
-                date: "December 20, 2024",
+/* diary 17 */
+{
+    title: "",
+    date: "",
 
-                images: [
-                    "시드니1.jpg"
-                ],
+    images: [],
 
-                content:
-                    "생일을 기념해서 놀러간 시드니."
-            },
+    content: ""
+},
 
 
-            ...Array.from(
-                { length: 49 },
-                function() {
-                    return {
-                        title: "",
-                        date: "",
-                        images: [],
-                        content: ""
-                    };
-                }
-            )
+/* diary 18 */
+{
+    title: "",
+    date: "",
 
-        ],
+    images: [],
 
+    content: ""
+},
 
 
-        /* ====================================
-           SDD
-        ==================================== */
+/* diary 19 */
+{
+    title: "",
+    date: "",
 
-        sdd: [
+    images: [],
 
-            {
-                title: "SDD",
+    content: ""
+},
 
-                date: "February 10, 2026",
 
-                images: [],
+/* diary 20 */
+{
+    title: "",
+    date: "",
 
-                content:
-                    "SDD."
-            },
+    images: [],
 
+    content: ""
+},
 
-            ...Array.from(
-                { length: 49 },
-                function() {
-                    return {
-                        title: "",
-                        date: "",
-                        images: [],
-                        content: ""
-                    };
-                }
-            )
 
-        ]
+/* diary 21 */
+{
+    title: "",
+    date: "",
 
-    };
+    images: [],
 
+    content: ""
+},
 
 
-    /* ========================================
-       카테고리 이름
-    ======================================== */
+/* diary 22 */
+{
+    title: "",
+    date: "",
 
-    const categoryNames = {
+    images: [],
 
-        diary: "diary",
+    content: ""
+},
 
-        memoir: "My Memoir",
 
-        politics: "politics",
+/* diary 23 */
+{
+    title: "",
+    date: "",
 
-        travel: "travel",
+    images: [],
 
-        sdd: "SDD"
+    content: ""
+},
 
-    };
 
+/* diary 24 */
+{
+    title: "",
+    date: "",
 
+    images: [],
 
-    /* ========================================
-       글 열기 / 닫기
-    ======================================== */
+    content: ""
+},
 
-    function togglePost(article) {
 
-        article.classList.toggle("open");
+/* diary 25 */
+{
+    title: "",
+    date: "",
 
-    }
+    images: [],
 
+    content: ""
+},
 
 
-    /* ========================================
-       카테고리 보여주기
-    ======================================== */
+/* diary 26 */
+{
+    title: "",
+    date: "",
 
-    function showCategory(category) {
+    images: [],
 
+    content: ""
+},
 
-        const postList =
-            document.getElementById("post-list");
 
+/* diary 27 */
+{
+    title: "",
+    date: "",
 
-        /* 기존 글 삭제 */
+    images: [],
 
-        postList.innerHTML = "";
+    content: ""
+},
 
 
-        /* 모든 메뉴 active 제거 */
+/* diary 28 */
+{
+    title: "",
+    date: "",
 
-        document
-            .querySelectorAll(".menu button")
-            .forEach(function(button) {
+    images: [],
 
-                button.classList.remove("active");
+    content: ""
+},
 
-            });
 
+/* diary 29 */
+{
+    title: "",
+    date: "",
 
-        /* 현재 메뉴 active */
+    images: [],
 
-        const activeButton =
-            document.getElementById(
-                "button-" + category
-            );
+    content: ""
+},
 
 
-        if (activeButton) {
+/* diary 30 */
+{
+    title: "",
+    date: "",
 
-            activeButton.classList.add("active");
+    images: [],
 
-        }
+    content: ""
+},
 
 
-        /* 해당 카테고리 글 */
+/* diary 31 */
+{
+    title: "",
+    date: "",
 
-        const categoryPosts =
-            posts[category] || [];
+    images: [],
 
+    content: ""
+},
 
-        /* ====================================
-           제목이 있는 글만 표시
-        ==================================== */
 
-        const visiblePosts =
-            categoryPosts.filter(function(post) {
+/* diary 32 */
+{
+    title: "",
+    date: "",
 
-                return post.title &&
-                       post.title.trim() !== "";
+    images: [],
 
-            });
+    content: ""
+},
 
 
-        /* 글이 없을 경우 */
+/* diary 33 */
+{
+    title: "",
+    date: "",
 
-        if (visiblePosts.length === 0) {
+    images: [],
 
-            postList.innerHTML = `
+    content: ""
+},
 
-                <div class="no-post">
 
-                    아직 등록된 글이 없습니다.
+/* diary 34 */
+{
+    title: "",
+    date: "",
 
-                </div>
+    images: [],
 
-            `;
+    content: ""
+},
 
-            return;
 
-        }
+/* diary 35 */
+{
+    title: "",
+    date: "",
 
+    images: [],
 
+    content: ""
+},
 
-        /* ====================================
-           글 하나씩 만들기
-        ==================================== */
 
-        visiblePosts.forEach(function(post) {
+/* diary 36 */
+{
+    title: "",
+    date: "",
 
+    images: [],
 
-            const article =
-                document.createElement("article");
+    content: ""
+},
 
 
-            article.className = "post";
+/* diary 37 */
+{
+    title: "",
+    date: "",
 
+    images: [],
 
+    content: ""
+},
 
-            /* =================================
-               여러 장의 사진 만들기
-            ================================= */
 
-            let imageHTML = "";
+/* diary 38 */
+{
+    title: "",
+    date: "",
 
+    images: [],
 
-            if (
-                Array.isArray(post.images) &&
-                post.images.length > 0
-            ) {
+    content: ""
+},
 
-                imageHTML =
-                    post.images.map(
-                        function(image) {
 
-                            return `
+/* diary 39 */
+{
+    title: "",
+    date: "",
 
-                                <img
-                                    src="${image}"
-                                    class="post-image"
-                                    alt="${post.title}">
+    images: [],
 
-                            `;
+    content: ""
+},
 
-                        }
-                    ).join("");
 
-            }
+/* diary 40 */
+{
+    title: "",
+    date: "",
 
+    images: [],
 
+    content: ""
+},
 
-            /* =================================
-               날짜 만들기
-            ================================= */
 
-            let dateHTML = "";
+/* diary 41 */
+{
+    title: "",
+    date: "",
 
+    images: [],
 
-            if (
-                post.date &&
-                post.date.trim() !== ""
-            ) {
+    content: ""
+},
 
-                dateHTML = `
 
-                    <div class="post-date">
+/* diary 42 */
+{
+    title: "",
+    date: "",
 
-                        ${post.date}
+    images: [],
 
-                    </div>
+    content: ""
+},
 
-                `;
 
-            }
+/* diary 43 */
+{
+    title: "",
+    date: "",
 
+    images: [],
 
+    content: ""
+},
 
-            /* =================================
-               본문 만들기
-            ================================= */
 
-            let contentHTML = "";
+/* diary 44 */
+{
+    title: "",
+    date: "",
 
+    images: [],
 
-            if (
-                post.content &&
-                post.content.trim() !== ""
-            ) {
+    content: ""
+},
 
-                contentHTML = `
 
-                    <div class="post-content">
+/* diary 45 */
+{
+    title: "",
+    date: "",
 
-                        ${post.content}
+    images: [],
 
-                    </div>
+    content: ""
+},
 
-                `;
 
-            }
+/* diary 46 */
+{
+    title: "",
+    date: "",
 
+    images: [],
 
+    content: ""
+},
 
-            /* =================================
-               최종 글 HTML
-            ================================= */
 
-            article.innerHTML = `
+/* diary 47 */
+{
+    title: "",
+    date: "",
 
-                <div class="post-category">
+    images: [],
 
-                    ${categoryNames[category]}
+    content: ""
+},
 
-                </div>
 
+/* diary 48 */
+{
+    title: "",
+    date: "",
 
-                <h2
-                    class="post-title"
-                    onclick="togglePost(this.parentElement)">
+    images: [],
 
-                    ${post.title}
+    content: ""
+},
 
-                </h2>
 
+/* diary 49 */
+{
+    title: "",
+    date: "",
 
-                <div class="post-details">
+    images: [],
 
-                    ${dateHTML}
+    content: ""
+},
 
-                    ${imageHTML}
 
-                    ${contentHTML}
+/* diary 50 */
+{
+    title: "",
+    date: "",
 
-                </div>
+    images: [],
 
-            `;
+    content: ""
+}
 
+],
 
-            postList.appendChild(article);
+
+/* =========================================================
+   MY MEMOIR
+   1 ~ 50
+========================================================= */
+
+memoir: [
+
+/* memoir 1 */
+{
+    title: "악행의 자서전",
+    date: "January 10, 2022",
+
+    images: [],
+
+    content:
+        "애미씨팔."
+},
+
+
+/* memoir 2 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 3 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 4 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 5 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 6 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 7 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 8 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 9 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 10 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 11 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 12 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 13 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 14 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 15 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 16 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 17 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 18 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 19 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 20 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 21 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 22 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 23 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 24 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 25 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 26 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 27 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 28 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 29 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 30 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 31 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 32 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 33 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 34 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 35 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 36 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 37 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 38 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 39 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 40 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 41 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 42 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 43 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 44 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 45 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 46 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 47 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 48 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 49 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* memoir 50 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+}
+
+],
+
+
+/* =========================================================
+   POLITICS
+   1 ~ 50
+========================================================= */
+
+politics: [
+
+/* politics 1 */
+{
+    title: "하드위키",
+    date: "November 11, 2025",
+
+    images: [
+        "하드위키.jpg"
+    ],
+
+    content:
+        "하드위키. 사기까지 정말 많은 노력이 필요했다. 좆도 아닌 벌레새끼때문에 뭐이리 고생했었는지. 미련할때였다."
+},
+
+
+/* politics 2 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 3 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 4 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 5 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 6 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 7 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 8 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 9 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 10 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 11 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 12 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 13 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 14 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 15 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 16 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 17 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 18 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 19 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 20 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 21 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 22 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 23 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 24 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 25 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 26 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 27 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 28 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 29 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 30 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 31 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 32 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 33 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 34 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 35 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 36 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 37 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 38 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 39 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 40 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 41 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 42 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 43 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 44 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 45 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 46 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 47 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 48 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 49 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* politics 50 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+}
+
+],
+
+
+/* =========================================================
+   TRAVEL
+   1 ~ 50
+========================================================= */
+
+travel: [
+
+/* travel 1 */
+{
+    title: "시드니",
+    date: "December 20, 2024",
+
+    images: [
+        "시드니1.jpg"
+    ],
+
+    content:
+        "생일을 기념해서 놀러간 시드니."
+},
+
+
+/* travel 2 */
+{
+    title: "서귀포시",
+    date: "December 20, 2025",
+
+    images: ["J1jpg"],
+
+    content: "서귀포시에서"
+},
+
+
+/* travel 3 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 4 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 5 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 6 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 7 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 8 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 9 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 10 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 11 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 12 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 13 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 14 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 15 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 16 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 17 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 18 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 19 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 20 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 21 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 22 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 23 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 24 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 25 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 26 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 27 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 28 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 29 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 30 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 31 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 32 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 33 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 34 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 35 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 36 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 37 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 38 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 39 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 40 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 41 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 42 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 43 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 44 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 45 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 46 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 47 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 48 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 49 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* travel 50 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+}
+
+],
+
+
+/* =========================================================
+   SDD
+   1 ~ 50
+========================================================= */
+
+sdd: [
+
+/* SDD 1 */
+{
+    title: "SDD",
+    date: "February 10, 2026",
+
+    images: [],
+
+    content:
+        "SDD."
+},
+
+
+/* SDD 2 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 3 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 4 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 5 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 6 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 7 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 8 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 9 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 10 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 11 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 12 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 13 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 14 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 15 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 16 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 17 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 18 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 19 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 20 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 21 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 22 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 23 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 24 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 25 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 26 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 27 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 28 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 29 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 30 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 31 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 32 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 33 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 34 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 35 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 36 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 37 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 38 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 39 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 40 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 41 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 42 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 43 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 44 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 45 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 46 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 47 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 48 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 49 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+},
+
+
+/* SDD 50 */
+{
+    title: "",
+    date: "",
+
+    images: [],
+
+    content: ""
+}
+
+];
+
+
+/* =========================================================
+   카테고리 이름
+========================================================= */
+
+const categoryNames = {
+
+    diary: "diary",
+
+    memoir: "My Memoir",
+
+    politics: "politics",
+
+    travel: "travel",
+
+    sdd: "SDD"
+
+};
+
+
+/* =========================================================
+   글 열기 / 닫기
+========================================================= */
+
+function togglePost(article) {
+
+    article.classList.toggle("open");
+
+}
+
+
+/* =========================================================
+   카테고리 표시
+========================================================= */
+
+function showCategory(category) {
+
+    const postList =
+        document.getElementById("post-list");
+
+
+    /* 기존 글 삭제 */
+
+    postList.innerHTML = "";
+
+
+    /* 메뉴 active 제거 */
+
+    document
+        .querySelectorAll(".menu button")
+        .forEach(function(button) {
+
+            button.classList.remove("active");
 
         });
 
+
+    /* 현재 메뉴 active */
+
+    const activeButton =
+        document.getElementById(
+            "button-" + category
+        );
+
+
+    if (activeButton) {
+
+        activeButton.classList.add("active");
+
     }
 
 
+    /* 해당 카테고리 글 */
 
-    /* ========================================
-       처음 사이트를 열었을 때
-       diary 표시
-    ======================================== */
+    const categoryPosts =
+        posts[category] || [];
 
-    showCategory("diary");
+
+    /*
+       제목이 비어 있는 글은
+       사이트에 표시하지 않음
+    */
+
+    const visiblePosts =
+        categoryPosts.filter(function(post) {
+
+            return (
+                post.title &&
+                post.title.trim() !== ""
+            );
+
+        });
+
+
+    /* 글이 하나도 없을 때 */
+
+    if (visiblePosts.length === 0) {
+
+        postList.innerHTML = `
+
+            <div class="no-post">
+
+                아직 등록된 글이 없습니다.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /* 글 하나씩 생성 */
+
+    visiblePosts.forEach(function(post) {
+
+
+        const article =
+            document.createElement("article");
+
+
+        article.className = "post";
+
+
+        /* =========================
+           날짜
+        ========================= */
+
+        let dateHTML = "";
+
+
+        if (
+            post.date &&
+            post.date.trim() !== ""
+        ) {
+
+            dateHTML = `
+
+                <div class="post-date">
+
+                    ${post.date}
+
+                </div>
+
+            `;
+
+        }
+
+
+        /* =========================
+           사진 여러 장
+        ========================= */
+
+        let imageHTML = "";
+
+
+        if (Array.isArray(post.images)) {
+
+            post.images.forEach(function(image) {
+
+                if (
+                    image &&
+                    image.trim() !== ""
+                ) {
+
+                    imageHTML += `
+
+                        <img
+                            src="${image}"
+                            class="post-image"
+                            alt="${post.title}">
+
+                    `;
+
+                }
+
+            });
+
+        }
+
+
+        /* =========================
+           본문
+        ========================= */
+
+        let contentHTML = "";
+
+
+        if (
+            post.content &&
+            post.content.trim() !== ""
+        ) {
+
+            contentHTML = `
+
+                <div class="post-content">
+
+                    ${post.content}
+
+                </div>
+
+            `;
+
+        }
+
+
+        /* =========================
+           최종 글
+        ========================= */
+
+        article.innerHTML = `
+
+            <div class="post-category">
+
+                ${categoryNames[category]}
+
+            </div>
+
+
+            <h2
+                class="post-title"
+                onclick="togglePost(this.parentElement)">
+
+                ${post.title}
+
+            </h2>
+
+
+            <div class="post-details">
+
+                ${dateHTML}
+
+                ${imageHTML}
+
+                ${contentHTML}
+
+            </div>
+
+        `;
+
+
+        postList.appendChild(article);
+
+    });
+
+}
+
+
+/* =========================================================
+   처음 사이트를 열었을 때
+========================================================= */
+
+showCategory("diary");
 
 
 </script>
 
-</body></html>
+
+</body>
+
+</html>
