@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-<html lang="ko">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>CENTIBOY</title>
+<title>CENTIBOY</title><style>
 
-<style>
-
-/* =========================
+/* =====================================================
    기본 설정
-========================= */
+===================================================== */
 
 * {
     box-sizing: border-box;
@@ -39,9 +30,9 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
    전체 페이지
-========================= */
+===================================================== */
 
 .page {
 
@@ -53,8 +44,7 @@ body {
 
     margin: 0 auto;
 
-    padding:
-        65px 28px 80px 28px;
+    padding: 65px 28px 80px 28px;
 
     background: white;
 
@@ -65,9 +55,9 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
    로고
-========================= */
+===================================================== */
 
 .logo-area {
 
@@ -94,9 +84,9 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
    메뉴
-========================= */
+===================================================== */
 
 .menu {
 
@@ -110,8 +100,7 @@ body {
 
     align-items: center;
 
-    gap:
-        28px 38px;
+    gap: 28px 38px;
 
     margin-bottom: 65px;
 }
@@ -158,9 +147,9 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
    글 목록
-========================= */
+===================================================== */
 
 #post-list {
 
@@ -170,9 +159,9 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
    글 하나
-========================= */
+===================================================== */
 
 .post {
 
@@ -185,9 +174,9 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
    카테고리
-========================= */
+===================================================== */
 
 .post-category {
 
@@ -199,9 +188,9 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
    제목
-========================= */
+===================================================== */
 
 .post-title {
 
@@ -228,9 +217,9 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
    내용 숨기기
-========================= */
+===================================================== */
 
 .post-details {
 
@@ -244,9 +233,9 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
    날짜
-========================= */
+===================================================== */
 
 .post-date {
 
@@ -260,9 +249,9 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
    사진
-========================= */
+===================================================== */
 
 .post-image {
 
@@ -274,14 +263,13 @@ body {
 
     object-fit: cover;
 
-    margin:
-        0 auto 25px auto;
+    margin: 0 auto 25px auto;
 }
 
 
-/* =========================
+/* =====================================================
    본문
-========================= */
+===================================================== */
 
 .post-content {
 
@@ -295,9 +283,9 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
    글 없음
-========================= */
+===================================================== */
 
 .no-post {
 
@@ -311,9 +299,9 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
    모바일
-========================= */
+===================================================== */
 
 @media (max-width: 600px) {
 
@@ -382,150 +370,107 @@ body {
 
 }
 
-</style>
-
-</head>
-
-
-<body>
-
-
-<div class="page">
-
-
-<!-- =========================
+</style></head><body><div class="page"><!-- =====================================================
      로고
-========================= -->
+===================================================== --><div class="logo-area"><img
+    src="file_000000003ad88206b1a20683e46c1497.png"
+    class="logo"
+    alt="CENTIBOY">
 
-<div class="logo-area">
-
-<img
-src="file_000000003ad88206b1a20683e46c1497.png"
-class="logo"
-alt="CENTIBOY">
-
-</div>
-
-
-<!-- =========================
+</div><!-- =====================================================
      메뉴
-========================= -->
-
-<nav class="menu">
-
-<button
-id="button-diary"
-onclick="showCategory('diary')">
-diary
+===================================================== --><nav class="menu"><button
+    id="button-diary"
+    onclick="showCategory('diary')">
+    diary
 </button>
 
-
 <button
-id="button-memoir"
-onclick="showCategory('memoir')">
-My Memoir
+    id="button-memoir"
+    onclick="showCategory('memoir')">
+    My Memoir
 </button>
 
-
 <button
-id="button-politics"
-onclick="showCategory('politics')">
-politics
+    id="button-politics"
+    onclick="showCategory('politics')">
+    politics
 </button>
 
-
 <button
-id="button-travel"
-onclick="showCategory('travel')">
-travel
+    id="button-travel"
+    onclick="showCategory('travel')">
+    travel
 </button>
 
-
 <button
-id="button-sdd"
-onclick="showCategory('sdd')">
-SDD
+    id="button-sdd"
+    onclick="showCategory('sdd')">
+    SDD
 </button>
 
-</nav>
-
-
-<!-- =========================
+</nav><!-- =====================================================
      글 표시
-========================= -->
-
-<main id="post-list"></main>
-
-
-</div>
-
-
-<script>
+===================================================== --><main id="post-list"></main></div><script>
 
 
 /* =====================================================
-   여기부터 글 작성하는 부분
+   =====================================================
+   글 작성 영역
+   =====================================================
+   
+   앞으로 글을 추가할 때는 각 칸의
+
+   title
+   date
+   images
+   content
+
+   만 수정하면 됩니다.
+
+   사진이 없다면:
+
+   images: []
+
+   사진이 있다면:
+
+   images: [
+       "사진1.jpg"
+   ]
+
+   사진이 여러 장이면:
+
+   images: [
+       "사진1.jpg",
+       "사진2.jpg",
+       "사진3.jpg"
+   ]
+
+   반드시 파일명은 " " 안에 넣으세요.
+   
+   =====================================================
 ===================================================== */
 
 
-/*
-=========================================================
-DIARY
-=========================================================
-*/
+/* =====================================================
+   DIARY
+===================================================== */
 
-/* diary 1 */
 const diary1 = {
-
     title: "한탄",
-
     date: "December 5, 2025",
-
     images: [],
-
     content:
     "지나간 일들을 떠올리며 과거에 대해 한탄하고있다. 그럴걸 이라는 생각보다 그러지 말걸 이라는 생각이 더 많다. 찬란한 과거에 비해 지금은 많이 초라하다고 생각든다. 옛날을 좀 더 즐길걸그랬다. 너무나 후회되고 억울하다. 과거로 돌아갈 수 없기에 더욱 더 힘들다."
-
 };
 
-
-/* diary 2 */
 const diary2 = {
-
     title: "왜곡된 증오",
-
     date: "December 25, 2024",
-
     images: [],
-
     content:
     "나는 다른사람들이 남들보다 우월하고 잘났다는 식의 생각을 가지며 살아가는줄 알았다. 그렇기에 나는 모두를 이기적이고 자만심이 가득 한 혐오스런 나르시스트일줄알았다. 이제서야 깨닫는다. 내가 싫어하던 자만감 넘치는 사람은 친구도 가족도 아닌 나였다."
-
 };
-
-
-/*
-=========================================================
-여기서부터 diary 3 ~ diary 50
-=========================================================
-
-원하는 번호를 골라서 아래처럼 작성하면 된다.
-
-예:
-
-const diary3 = {
-    title: "새로운 제목",
-    date: "September 21, 2026",
-    images: [
-        "운지1.jpg",
-        "운지523.jpg"
-    ],
-    content:
-    "여기에 글을 작성한다."
-};
-
-*/
-
 
 const diary3 = {
     title: "",
@@ -864,31 +809,24 @@ const diary50 = {
 };
 
 
-/*
-=========================================================
-MY MEMOIR
-=========================================================
-*/
+/* =====================================================
+   MY MEMOIR
+===================================================== */
 
 const memoir1 = {
-
     title: "악행의 자서전",
-
     date: "January 10, 2022",
-
     images: [],
-
     content:
- "누군가를 힘들게 했던 일. 나의 잘못으로 인해 고통받은 이들의 이야기를 적습니다."
-
+    "누군가를 힘들게 했던 일. 나의 잘못으로 인해 고통받은 이들의 이야기를 적습니다."
 };
-
 
 const memoir2 = {
     title: "에로스 신의 저주",
-    date: "September 19 2026",
+    date: "September 19, 2026",
     images: [],
-    content: "왜 자살하려는 사람에게 칼을 쥐어줍니까."
+    content:
+    "왜 자살하려는 사람에게 칼을 쥐어줍니까."
 };
 
 const memoir3 = {
@@ -1228,29 +1166,19 @@ const memoir50 = {
 };
 
 
-/*
-=========================================================
-POLITICS
-=========================================================
-*/
+/* =====================================================
+   POLITICS
+===================================================== */
 
 const politics1 = {
-
     title: "하드위키",
-
     date: "November 11, 2025",
-
     images: [
         "하드위키.jpg"
     ],
-
     content:
     "하드위키. 사기까지 정말 많은 노력이 필요했다. 좆도 아닌 벌레새끼때문에 뭐이리 고생했었는지. 미련할때였다."
-
 };
-
-
-/* politics 2 ~ 50 */
 
 const politics2={title:"",date:"",images:[],content:""};
 const politics3={title:"",date:"",images:[],content:""};
@@ -1303,31 +1231,24 @@ const politics49={title:"",date:"",images:[],content:""};
 const politics50={title:"",date:"",images:[],content:""};
 
 
-/*
-=========================================================
-TRAVEL
-=========================================================
-*/
+/* =====================================================
+   TRAVEL
+===================================================== */
 
 const travel1 = {
-
     title: "",
-
     date: "",
-
-    images: [
-        ""
-    ],
-
-    content:
-    ""
-
+    images: [],
+    content: ""
 };
 
+const travel2={
+    title:"서귀포시",
+    date:"December 20, 2025",
+    images:["J1.jpg"],
+    content:"서귀포에서"
+};
 
-/* travel 2 ~ 50 */
-
-const travel2={title:"서귀포시",date:"December 20, 2025",images:["J1.jpg"],content:"서귀포에서"};
 const travel3={title:"",date:"",images:[],content:""};
 const travel4={title:"",date:"",images:[],content:""};
 const travel5={title:"",date:"",images:[],content:""};
@@ -1375,30 +1296,26 @@ const travel46={title:"",date:"",images:[],content:""};
 const travel47={title:"",date:"",images:[],content:""};
 const travel48={title:"",date:"",images:[],content:""};
 const travel49={title:"",date:"",images:[],content:""};
-const travel50={title:"시드니",date:"December 20 2026",images:[시드니1.jpg],content:"생일을 기념해서 방문한 시드니"};
 
-
-/*
-=========================================================
-SDD
-=========================================================
-*/
-
-const sdd1 = {
-
-    title: "SDD",
-
-    date: "February 10, 2026",
-
-    images: [],
-
-    content:
-    "SDD."
-
+const travel50={
+    title:"시드니",
+    date:"December 20, 2026",
+    images:["시드니1.jpg"],
+    content:"생일을 기념해서 방문한 시드니"
 };
 
 
-/* SDD 2 ~ 50 */
+/* =====================================================
+   SDD
+===================================================== */
+
+const sdd1 = {
+    title: "SDD",
+    date: "February 10, 2026",
+    images: [],
+    content:
+    "SDD."
+};
 
 const sdd2={title:"",date:"",images:[],content:""};
 const sdd3={title:"",date:"",images:[],content:""};
@@ -1458,272 +1375,68 @@ const sdd50={title:"",date:"",images:[],content:""};
 const posts = {
 
     diary: [
-        diary1,
-        diary2,
-        diary3,
-        diary4,
-        diary5,
-        diary6,
-        diary7,
-        diary8,
-        diary9,
-        diary10,
-        diary11,
-        diary12,
-        diary13,
-        diary14,
-        diary15,
-        diary16,
-        diary17,
-        diary18,
-        diary19,
-        diary20,
-        diary21,
-        diary22,
-        diary23,
-        diary24,
-        diary25,
-        diary26,
-        diary27,
-        diary28,
-        diary29,
-        diary30,
-        diary31,
-        diary32,
-        diary33,
-        diary34,
-        diary35,
-        diary36,
-        diary37,
-        diary38,
-        diary39,
-        diary40,
-        diary41,
-        diary42,
-        diary43,
-        diary44,
-        diary45,
-        diary46,
-        diary47,
-        diary48,
-        diary49,
-        diary50
+        diary1, diary2, diary3, diary4, diary5,
+        diary6, diary7, diary8, diary9, diary10,
+        diary11, diary12, diary13, diary14, diary15,
+        diary16, diary17, diary18, diary19, diary20,
+        diary21, diary22, diary23, diary24, diary25,
+        diary26, diary27, diary28, diary29, diary30,
+        diary31, diary32, diary33, diary34, diary35,
+        diary36, diary37, diary38, diary39, diary40,
+        diary41, diary42, diary43, diary44, diary45,
+        diary46, diary47, diary48, diary49, diary50
     ],
-
 
     memoir: [
-        memoir1,
-        memoir2,
-        memoir3,
-        memoir4,
-        memoir5,
-        memoir6,
-        memoir7,
-        memoir8,
-        memoir9,
-        memoir10,
-        memoir11,
-        memoir12,
-        memoir13,
-        memoir14,
-        memoir15,
-        memoir16,
-        memoir17,
-        memoir18,
-        memoir19,
-        memoir20,
-        memoir21,
-        memoir22,
-        memoir23,
-        memoir24,
-        memoir25,
-        memoir26,
-        memoir27,
-        memoir28,
-        memoir29,
-        memoir30,
-        memoir31,
-        memoir32,
-        memoir33,
-        memoir34,
-        memoir35,
-        memoir36,
-        memoir37,
-        memoir38,
-        memoir39,
-        memoir40,
-        memoir41,
-        memoir42,
-        memoir43,
-        memoir44,
-        memoir45,
-        memoir46,
-        memoir47,
-        memoir48,
-        memoir49,
-        memoir50
+        memoir1, memoir2, memoir3, memoir4, memoir5,
+        memoir6, memoir7, memoir8, memoir9, memoir10,
+        memoir11, memoir12, memoir13, memoir14, memoir15,
+        memoir16, memoir17, memoir18, memoir19, memoir20,
+        memoir21, memoir22, memoir23, memoir24, memoir25,
+        memoir26, memoir27, memoir28, memoir29, memoir30,
+        memoir31, memoir32, memoir33, memoir34, memoir35,
+        memoir36, memoir37, memoir38, memoir39, memoir40,
+        memoir41, memoir42, memoir43, memoir44, memoir45,
+        memoir46, memoir47, memoir48, memoir49, memoir50
     ],
-
 
     politics: [
-        politics1,
-        politics2,
-        politics3,
-        politics4,
-        politics5,
-        politics6,
-        politics7,
-        politics8,
-        politics9,
-        politics10,
-        politics11,
-        politics12,
-        politics13,
-        politics14,
-        politics15,
-        politics16,
-        politics17,
-        politics18,
-        politics19,
-        politics20,
-        politics21,
-        politics22,
-        politics23,
-        politics24,
-        politics25,
-        politics26,
-        politics27,
-        politics28,
-        politics29,
-        politics30,
-        politics31,
-        politics32,
-        politics33,
-        politics34,
-        politics35,
-        politics36,
-        politics37,
-        politics38,
-        politics39,
-        politics40,
-        politics41,
-        politics42,
-        politics43,
-        politics44,
-        politics45,
-        politics46,
-        politics47,
-        politics48,
-        politics49,
-        politics50
+        politics1, politics2, politics3, politics4, politics5,
+        politics6, politics7, politics8, politics9, politics10,
+        politics11, politics12, politics13, politics14, politics15,
+        politics16, politics17, politics18, politics19, politics20,
+        politics21, politics22, politics23, politics24, politics25,
+        politics26, politics27, politics28, politics29, politics30,
+        politics31, politics32, politics33, politics34, politics35,
+        politics36, politics37, politics38, politics39, politics40,
+        politics41, politics42, politics43, politics44, politics45,
+        politics46, politics47, politics48, politics49, politics50
     ],
-
 
     travel: [
-        travel1,
-        travel2,
-        travel3,
-        travel4,
-        travel5,
-        travel6,
-        travel7,
-        travel8,
-        travel9,
-        travel10,
-        travel11,
-        travel12,
-        travel13,
-        travel14,
-        travel15,
-        travel16,
-        travel17,
-        travel18,
-        travel19,
-        travel20,
-        travel21,
-        travel22,
-        travel23,
-        travel24,
-        travel25,
-        travel26,
-        travel27,
-        travel28,
-        travel29,
-        travel30,
-        travel31,
-        travel32,
-        travel33,
-        travel34,
-        travel35,
-        travel36,
-        travel37,
-        travel38,
-        travel39,
-        travel40,
-        travel41,
-        travel42,
-        travel43,
-        travel44,
-        travel45,
-        travel46,
-        travel47,
-        travel48,
-        travel49,
-        travel50
+        travel1, travel2, travel3, travel4, travel5,
+        travel6, travel7, travel8, travel9, travel10,
+        travel11, travel12, travel13, travel14, travel15,
+        travel16, travel17, travel18, travel19, travel20,
+        travel21, travel22, travel23, travel24, travel25,
+        travel26, travel27, travel28, travel29, travel30,
+        travel31, travel32, travel33, travel34, travel35,
+        travel36, travel37, travel38, travel39, travel40,
+        travel41, travel42, travel43, travel44, travel45,
+        travel46, travel47, travel48, travel49, travel50
     ],
 
-
     sdd: [
-        sdd1,
-        sdd2,
-        sdd3,
-        sdd4,
-        sdd5,
-        sdd6,
-        sdd7,
-        sdd8,
-        sdd9,
-        sdd10,
-        sdd11,
-        sdd12,
-        sdd13,
-        sdd14,
-        sdd15,
-        sdd16,
-        sdd17,
-        sdd18,
-        sdd19,
-        sdd20,
-        sdd21,
-        sdd22,
-        sdd23,
-        sdd24,
-        sdd25,
-        sdd26,
-        sdd27,
-        sdd28,
-        sdd29,
-        sdd30,
-        sdd31,
-        sdd32,
-        sdd33,
-        sdd34,
-        sdd35,
-        sdd36,
-        sdd37,
-        sdd38,
-        sdd39,
-        sdd40,
-        sdd41,
-        sdd42,
-        sdd43,
-        sdd44,
-        sdd45,
-        sdd46,
-        sdd47,
-        sdd48,
-        sdd49,
-        sdd50
+        sdd1, sdd2, sdd3, sdd4, sdd5,
+        sdd6, sdd7, sdd8, sdd9, sdd10,
+        sdd11, sdd12, sdd13, sdd14, sdd15,
+        sdd16, sdd17, sdd18, sdd19, sdd20,
+        sdd21, sdd22, sdd23, sdd24, sdd25,
+        sdd26, sdd27, sdd28, sdd29, sdd30,
+        sdd31, sdd32, sdd33, sdd34, sdd35,
+        sdd36, sdd37, sdd38, sdd39, sdd40,
+        sdd41, sdd42, sdd43, sdd44, sdd45,
+        sdd46, sdd47, sdd48, sdd49, sdd50
     ]
 
 };
@@ -1749,7 +1462,32 @@ const categoryNames = {
 
 
 /* =====================================================
-   글 열기
+   날짜 변환
+===================================================== */
+
+function getPostDate(post) {
+
+    if (!post.date || post.date.trim() === "") {
+
+        return 0;
+
+    }
+
+    const time =
+        new Date(post.date).getTime();
+
+    if (isNaN(time)) {
+
+        return 0;
+
+    }
+
+    return time;
+}
+
+
+/* =====================================================
+   글 열기 / 닫기
 ===================================================== */
 
 function togglePost(article) {
@@ -1771,6 +1509,8 @@ function showCategory(category) {
 
     postList.innerHTML = "";
 
+
+    /* 메뉴 활성화 */
 
     document
         .querySelectorAll(".menu button")
@@ -1794,14 +1534,13 @@ function showCategory(category) {
     }
 
 
-    const categoryPosts =
+    /* 해당 카테고리 가져오기 */
+
+    let categoryPosts =
         posts[category] || [];
 
 
-    /*
-       제목이 없는 글은
-       사이트에 표시하지 않는다.
-    */
+    /* 제목이 있는 글만 표시 */
 
     const visiblePosts =
         categoryPosts.filter(function(post) {
@@ -1813,6 +1552,25 @@ function showCategory(category) {
 
         });
 
+
+    /* =================================================
+       최신 글이 위로 오도록 날짜순 정렬
+       
+       날짜가 최신일수록 앞쪽으로 이동
+    ================================================= */
+
+    visiblePosts.sort(function(a, b) {
+
+        const dateA = getPostDate(a);
+
+        const dateB = getPostDate(b);
+
+        return dateB - dateA;
+
+    });
+
+
+    /* 글이 없을 때 */
 
     if (visiblePosts.length === 0) {
 
@@ -1831,6 +1589,10 @@ function showCategory(category) {
     }
 
 
+    /* =================================================
+       글 하나씩 생성
+    ================================================= */
+
     visiblePosts.forEach(function(post) {
 
 
@@ -1841,7 +1603,9 @@ function showCategory(category) {
         article.className = "post";
 
 
-        /* 날짜 */
+        /* =================================================
+           날짜
+        ================================================= */
 
         let dateHTML = "";
 
@@ -1855,7 +1619,7 @@ function showCategory(category) {
 
                 <div class="post-date">
 
-                    ${post.date}
+                    ${escapeHTML(post.date)}
 
                 </div>
 
@@ -1864,7 +1628,9 @@ function showCategory(category) {
         }
 
 
-        /* 사진 */
+        /* =================================================
+           사진
+        ================================================= */
 
         let imageHTML = "";
 
@@ -1874,16 +1640,18 @@ function showCategory(category) {
             post.images.forEach(function(image) {
 
                 if (
-                    image &&
+                    typeof image === "string" &&
                     image.trim() !== ""
                 ) {
 
                     imageHTML += `
 
                         <img
-                            src="${image}"
+                            src="${escapeHTML(image)}"
                             class="post-image"
-                            alt="${post.title}">
+                            alt="${escapeHTML(post.title)}"
+                            loading="lazy"
+                            onerror="this.style.display='none';">
 
                     `;
 
@@ -1894,7 +1662,9 @@ function showCategory(category) {
         }
 
 
-        /* 본문 */
+        /* =================================================
+           본문
+        ================================================= */
 
         let contentHTML = "";
 
@@ -1908,7 +1678,7 @@ function showCategory(category) {
 
                 <div class="post-content">
 
-                    ${post.content}
+                    ${escapeHTML(post.content)}
 
                 </div>
 
@@ -1917,13 +1687,15 @@ function showCategory(category) {
         }
 
 
-        /* 글 생성 */
+        /* =================================================
+           글 생성
+        ================================================= */
 
         article.innerHTML = `
 
             <div class="post-category">
 
-                ${categoryNames[category]}
+                ${escapeHTML(categoryNames[category])}
 
             </div>
 
@@ -1932,7 +1704,7 @@ function showCategory(category) {
                 class="post-title"
                 onclick="togglePost(this.parentElement)">
 
-                ${post.title}
+                ${escapeHTML(post.title)}
 
             </h2>
 
@@ -1958,14 +1730,37 @@ function showCategory(category) {
 
 
 /* =====================================================
-   사이트 처음 열었을 때
+   HTML 특수문자 처리
+===================================================== */
+
+function escapeHTML(value) {
+
+    if (value === null || value === undefined) {
+
+        return "";
+
+    }
+
+    return String(value)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =====================================================
+   처음 사이트를 열었을 때
 ===================================================== */
 
 showCategory("diary");
 
 
-</script>
-
-</body>
-
-</html>
+</script></body></html>
