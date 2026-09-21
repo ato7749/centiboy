@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+content="width=device-width, initial-scale=1.0">
 
 <title>CENTIBOY</title>
 
@@ -27,7 +27,9 @@ html {
 body {
     margin: 0;
     padding: 0;
+
     background: white;
+
     color: #65357d;
 
     font-family:
@@ -42,8 +44,11 @@ body {
 ========================= */
 
 .page {
+
     width: 94%;
+
     max-width: 720px;
+
     min-height: 100vh;
 
     margin: 0 auto;
@@ -65,17 +70,20 @@ body {
 ========================= */
 
 .logo-area {
+
     width: 100%;
 
     display: flex;
 
     justify-content: center;
+
     align-items: center;
 
     margin-bottom: 55px;
 }
 
 .logo {
+
     display: block;
 
     width: 300px;
@@ -91,6 +99,7 @@ body {
 ========================= */
 
 .menu {
+
     width: 100%;
 
     display: flex;
@@ -98,6 +107,7 @@ body {
     flex-wrap: wrap;
 
     justify-content: center;
+
     align-items: center;
 
     gap:
@@ -106,7 +116,9 @@ body {
     margin-bottom: 65px;
 }
 
+
 .menu button {
+
     border: none;
 
     outline: none;
@@ -131,13 +143,17 @@ body {
         transform 0.2s ease;
 }
 
+
 .menu button:hover {
+
     color: #e51b91;
 
     transform: scale(1.04);
 }
 
+
 .menu button.active {
+
     color: #e51b91;
 }
 
@@ -147,6 +163,7 @@ body {
 ========================= */
 
 #post-list {
+
     width: 92%;
 
     margin: 0 auto;
@@ -158,6 +175,7 @@ body {
 ========================= */
 
 .post {
+
     margin-bottom: 65px;
 
     padding-bottom: 45px;
@@ -172,6 +190,7 @@ body {
 ========================= */
 
 .post-category {
+
     color: #999;
 
     font-size: 17px;
@@ -185,6 +204,7 @@ body {
 ========================= */
 
 .post-title {
+
     margin: 0;
 
     color: #65357d;
@@ -201,21 +221,25 @@ body {
         color 0.2s ease;
 }
 
+
 .post-title:hover {
+
     color: #e51b91;
 }
 
 
 /* =========================
-   날짜 / 사진 / 본문
-   처음에는 숨김
+   내용 숨기기
 ========================= */
 
 .post-details {
+
     display: none;
 }
 
+
 .post.open .post-details {
+
     display: block;
 }
 
@@ -225,6 +249,7 @@ body {
 ========================= */
 
 .post-date {
+
     color: #777;
 
     font-size: 23px;
@@ -240,6 +265,7 @@ body {
 ========================= */
 
 .post-image {
+
     display: block;
 
     width: 100%;
@@ -258,6 +284,7 @@ body {
 ========================= */
 
 .post-content {
+
     color: #555;
 
     font-size: 20px;
@@ -269,10 +296,11 @@ body {
 
 
 /* =========================
-   글이 없을 때
+   글 없음
 ========================= */
 
 .no-post {
+
     text-align: center;
 
     padding: 50px 10px;
@@ -290,46 +318,63 @@ body {
 @media (max-width: 600px) {
 
     .page {
+
         width: 96%;
 
         padding:
             55px 15px 70px 15px;
     }
 
+
     .logo {
+
         width: 270px;
 
         max-width: 82%;
     }
 
+
     .logo-area {
+
         margin-bottom: 45px;
     }
 
+
     .menu {
+
         gap:
             24px 30px;
 
         margin-bottom: 60px;
     }
 
+
     .menu button {
+
         font-size: 28px;
     }
 
+
     #post-list {
+
         width: 90%;
     }
 
+
     .post-title {
+
         font-size: 32px;
     }
 
+
     .post-date {
+
         font-size: 21px;
     }
 
+
     .post-content {
+
         font-size: 19px;
 
         line-height: 1.8;
@@ -354,10 +399,10 @@ body {
 
 <div class="logo-area">
 
-    <img
-        src="file_000000003ad88206b1a20683e46c1497.png"
-        class="logo"
-        alt="CENTIBOY">
+<img
+src="file_000000003ad88206b1a20683e46c1497.png"
+class="logo"
+alt="CENTIBOY">
 
 </div>
 
@@ -368,55 +413,45 @@ body {
 
 <nav class="menu">
 
-    <button
-        id="button-diary"
-        onclick="showCategory('diary')">
-
-        diary
-
-    </button>
+<button
+id="button-diary"
+onclick="showCategory('diary')">
+diary
+</button>
 
 
-    <button
-        id="button-memoir"
-        onclick="showCategory('memoir')">
-
-        My Memoir
-
-    </button>
+<button
+id="button-memoir"
+onclick="showCategory('memoir')">
+My Memoir
+</button>
 
 
-    <button
-        id="button-politics"
-        onclick="showCategory('politics')">
-
-        politics
-
-    </button>
+<button
+id="button-politics"
+onclick="showCategory('politics')">
+politics
+</button>
 
 
-    <button
-        id="button-travel"
-        onclick="showCategory('travel')">
-
-        travel
-
-    </button>
+<button
+id="button-travel"
+onclick="showCategory('travel')">
+travel
+</button>
 
 
-    <button
-        id="button-sdd"
-        onclick="showCategory('sdd')">
-
-        SDD
-
-    </button>
+<button
+id="button-sdd"
+onclick="showCategory('sdd')">
+SDD
+</button>
 
 </nav>
 
 
 <!-- =========================
-     글이 표시되는 곳
+     글 표시
 ========================= -->
 
 <main id="post-list"></main>
@@ -428,1154 +463,781 @@ body {
 <script>
 
 
-/* =========================================================
-   글 데이터
-
-   각 목차마다 50개의 독립적인 글 작성 공간
-
-   title  = 제목
-   date   = 날짜
-   images = 사진 파일 이름 여러 개 가능
-   content = 본문
-
-   title이 ""이면 사이트에 표시되지 않음.
-========================================================= */
+/* =====================================================
+   여기부터 글 작성하는 부분
+===================================================== */
 
 
-const posts = {
-
-
-/* =========================================================
-   DIARY
-   1 ~ 50
-========================================================= */
-
-diary: [
+/*
+=========================================================
+DIARY
+=========================================================
+*/
 
 /* diary 1 */
-{
+const diary1 = {
+
     title: "한탄",
+
     date: "December 5, 2025",
 
     images: [],
 
     content:
-        "지나간 일들을 떠올리며 과거에 대해 한탄하고있다. 그럴걸 이라는 생각보다 그러지 말걸 이라는 생각이 더 많다. 찬란한 과거에 비해 지금은 많이 초라하다고 생각든다. 옛날을 좀 더 즐길걸그랬다. 너무나 후회되고 억울하다. 과거로 돌아갈 수 없기에 더욱 더 힘들다."
-},
+    "지나간 일들을 떠올리며 과거에 대해 한탄하고있다. 그럴걸 이라는 생각보다 그러지 말걸 이라는 생각이 더 많다. 찬란한 과거에 비해 지금은 많이 초라하다고 생각든다. 옛날을 좀 더 즐길걸그랬다. 너무나 후회되고 억울하다. 과거로 돌아갈 수 없기에 더욱 더 힘들다."
+
+};
 
 
 /* diary 2 */
-{
+const diary2 = {
+
     title: "왜곡된 증오",
+
     date: "December 25, 2024",
 
     images: [],
 
     content:
-        "나는 다른사람들이 남들보다 우월하고 잘났다는 식의 생각을 가지며 살아가는줄 알았다. 그렇기에 나는 모두를 이기적이고 자만심이 가득 한 혐오스런 나르시스트일줄알았다. 이제서야 깨닫는다. 내가 싫어하던 자만감 넘치는 사람은 친구도 가족도 아닌 나였다."
-},
+    "나는 다른사람들이 남들보다 우월하고 잘났다는 식의 생각을 가지며 살아가는줄 알았다. 그렇기에 나는 모두를 이기적이고 자만심이 가득 한 혐오스런 나르시스트일줄알았다. 이제서야 깨닫는다. 내가 싫어하던 자만감 넘치는 사람은 친구도 가족도 아닌 나였다."
+
+};
 
 
-/* diary 3 */
-{
+/*
+=========================================================
+여기서부터 diary 3 ~ diary 50
+=========================================================
+
+원하는 번호를 골라서 아래처럼 작성하면 된다.
+
+예:
+
+const diary3 = {
+    title: "새로운 제목",
+    date: "September 21, 2026",
+    images: [
+        "운지1.jpg",
+        "운지523.jpg"
+    ],
+    content:
+    "여기에 글을 작성한다."
+};
+
+*/
+
+
+const diary3 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 4 */
-{
+const diary4 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 5 */
-{
+const diary5 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 6 */
-{
+const diary6 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 7 */
-{
+const diary7 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 8 */
-{
+const diary8 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 9 */
-{
+const diary9 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 10 */
-{
+const diary10 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 11 */
-{
+const diary11 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 12 */
-{
+const diary12 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 13 */
-{
+const diary13 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 14 */
-{
+const diary14 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 15 */
-{
+const diary15 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 16 */
-{
+const diary16 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 17 */
-{
+const diary17 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 18 */
-{
+const diary18 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 19 */
-{
+const diary19 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 20 */
-{
+const diary20 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 21 */
-{
+const diary21 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 22 */
-{
+const diary22 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 23 */
-{
+const diary23 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 24 */
-{
+const diary24 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 25 */
-{
+const diary25 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 26 */
-{
+const diary26 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 27 */
-{
+const diary27 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 28 */
-{
+const diary28 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 29 */
-{
+const diary29 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 30 */
-{
+const diary30 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 31 */
-{
+const diary31 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 32 */
-{
+const diary32 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 33 */
-{
+const diary33 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 34 */
-{
+const diary34 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 35 */
-{
+const diary35 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 36 */
-{
+const diary36 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 37 */
-{
+const diary37 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 38 */
-{
+const diary38 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 39 */
-{
+const diary39 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 40 */
-{
+const diary40 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 41 */
-{
+const diary41 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 42 */
-{
+const diary42 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 43 */
-{
+const diary43 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 44 */
-{
+const diary44 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 45 */
-{
+const diary45 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 46 */
-{
+const diary46 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 47 */
-{
+const diary47 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 48 */
-{
+const diary48 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 49 */
-{
+const diary49 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* diary 50 */
-{
+const diary50 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-}
-
-],
+};
 
 
-/* =========================================================
-   MY MEMOIR
-   1 ~ 50
-========================================================= */
+/*
+=========================================================
+MY MEMOIR
+=========================================================
+*/
 
-memoir: [
+const memoir1 = {
 
-/* memoir 1 */
-{
     title: "악행의 자서전",
+
     date: "January 10, 2022",
 
     images: [],
 
     content:
-        "애미씨팔."
-},
+    "애미씨팔."
+
+};
 
 
-/* memoir 2 */
-{
+const memoir2 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 3 */
-{
+const memoir3 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 4 */
-{
+const memoir4 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 5 */
-{
+const memoir5 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 6 */
-{
+const memoir6 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 7 */
-{
+const memoir7 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 8 */
-{
+const memoir8 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 9 */
-{
+const memoir9 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 10 */
-{
+const memoir10 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 11 */
-{
+const memoir11 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 12 */
-{
+const memoir12 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 13 */
-{
+const memoir13 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 14 */
-{
+const memoir14 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 15 */
-{
+const memoir15 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 16 */
-{
+const memoir16 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 17 */
-{
+const memoir17 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 18 */
-{
+const memoir18 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 19 */
-{
+const memoir19 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 20 */
-{
+const memoir20 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 21 */
-{
+const memoir21 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 22 */
-{
+const memoir22 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 23 */
-{
+const memoir23 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 24 */
-{
+const memoir24 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 25 */
-{
+const memoir25 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 26 */
-{
+const memoir26 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 27 */
-{
+const memoir27 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 28 */
-{
+const memoir28 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 29 */
-{
+const memoir29 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 30 */
-{
+const memoir30 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 31 */
-{
+const memoir31 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 32 */
-{
+const memoir32 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 33 */
-{
+const memoir33 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 34 */
-{
+const memoir34 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 35 */
-{
+const memoir35 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 36 */
-{
+const memoir36 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 37 */
-{
+const memoir37 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 38 */
-{
+const memoir38 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 39 */
-{
+const memoir39 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 40 */
-{
+const memoir40 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 41 */
-{
+const memoir41 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 42 */
-{
+const memoir42 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 43 */
-{
+const memoir43 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 44 */
-{
+const memoir44 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 45 */
-{
+const memoir45 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 46 */
-{
+const memoir46 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 47 */
-{
+const memoir47 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 48 */
-{
+const memoir48 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 49 */
-{
+const memoir49 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-},
+};
 
-
-/* memoir 50 */
-{
+const memoir50 = {
     title: "",
     date: "",
-
     images: [],
-
     content: ""
-}
-
-],
+};
 
 
-/* =========================================================
-   POLITICS
-   1 ~ 50
-========================================================= */
+/*
+=========================================================
+POLITICS
+=========================================================
+*/
 
-politics: [
+const politics1 = {
 
-/* politics 1 */
-{
     title: "하드위키",
+
     date: "November 11, 2025",
 
     images: [
@@ -1583,561 +1245,74 @@ politics: [
     ],
 
     content:
-        "하드위키. 사기까지 정말 많은 노력이 필요했다. 좆도 아닌 벌레새끼때문에 뭐이리 고생했었는지. 미련할때였다."
-},
+    "하드위키. 사기까지 정말 많은 노력이 필요했다. 좆도 아닌 벌레새끼때문에 뭐이리 고생했었는지. 미련할때였다."
+
+};
+
+
+/* politics 2 ~ 50 */
+
+const politics2={title:"",date:"",images:[],content:""};
+const politics3={title:"",date:"",images:[],content:""};
+const politics4={title:"",date:"",images:[],content:""};
+const politics5={title:"",date:"",images:[],content:""};
+const politics6={title:"",date:"",images:[],content:""};
+const politics7={title:"",date:"",images:[],content:""};
+const politics8={title:"",date:"",images:[],content:""};
+const politics9={title:"",date:"",images:[],content:""};
+const politics10={title:"",date:"",images:[],content:""};
+const politics11={title:"",date:"",images:[],content:""};
+const politics12={title:"",date:"",images:[],content:""};
+const politics13={title:"",date:"",images:[],content:""};
+const politics14={title:"",date:"",images:[],content:""};
+const politics15={title:"",date:"",images:[],content:""};
+const politics16={title:"",date:"",images:[],content:""};
+const politics17={title:"",date:"",images:[],content:""};
+const politics18={title:"",date:"",images:[],content:""};
+const politics19={title:"",date:"",images:[],content:""};
+const politics20={title:"",date:"",images:[],content:""};
+const politics21={title:"",date:"",images:[],content:""};
+const politics22={title:"",date:"",images:[],content:""};
+const politics23={title:"",date:"",images:[],content:""};
+const politics24={title:"",date:"",images:[],content:""};
+const politics25={title:"",date:"",images:[],content:""};
+const politics26={title:"",date:"",images:[],content:""};
+const politics27={title:"",date:"",images:[],content:""};
+const politics28={title:"",date:"",images:[],content:""};
+const politics29={title:"",date:"",images:[],content:""};
+const politics30={title:"",date:"",images:[],content:""};
+const politics31={title:"",date:"",images:[],content:""};
+const politics32={title:"",date:"",images:[],content:""};
+const politics33={title:"",date:"",images:[],content:""};
+const politics34={title:"",date:"",images:[],content:""};
+const politics35={title:"",date:"",images:[],content:""};
+const politics36={title:"",date:"",images:[],content:""};
+const politics37={title:"",date:"",images:[],content:""};
+const politics38={title:"",date:"",images:[],content:""};
+const politics39={title:"",date:"",images:[],content:""};
+const politics40={title:"",date:"",images:[],content:""};
+const politics41={title:"",date:"",images:[],content:""};
+const politics42={title:"",date:"",images:[],content:""};
+const politics43={title:"",date:"",images:[],content:""};
+const politics44={title:"",date:"",images:[],content:""};
+const politics45={title:"",date:"",images:[],content:""};
+const politics46={title:"",date:"",images:[],content:""};
+const politics47={title:"",date:"",images:[],content:""};
+const politics48={title:"",date:"",images:[],content:""};
+const politics49={title:"",date:"",images:[],content:""};
+const politics50={title:"",date:"",images:[],content:""};
+
+
+/*
+=========================================================
+TRAVEL
+=========================================================
+*/
+
+const travel1 = {
 
-
-/* politics 2 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 3 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 4 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 5 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 6 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 7 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 8 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 9 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 10 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 11 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 12 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 13 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 14 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 15 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 16 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 17 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 18 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 19 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 20 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 21 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 22 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 23 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 24 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 25 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 26 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 27 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 28 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 29 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 30 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 31 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 32 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 33 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 34 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 35 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 36 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 37 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 38 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 39 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 40 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 41 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 42 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 43 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 44 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 45 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 46 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 47 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 48 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 49 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* politics 50 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-}
-
-],
-
-
-/* =========================================================
-   TRAVEL
-   1 ~ 50
-========================================================= */
-
-travel: [
-
-/* travel 1 */
-{
     title: "시드니",
+
     date: "December 20, 2024",
 
     images: [
@@ -2145,1114 +1320,418 @@ travel: [
     ],
 
     content:
-        "생일을 기념해서 놀러간 시드니."
-},
+    "생일을 기념해서 놀러간 시드니."
+
+};
+
+
+/* travel 2 ~ 50 */
+
+const travel2={title:"",date:"",images:[],content:""};
+const travel3={title:"",date:"",images:[],content:""};
+const travel4={title:"",date:"",images:[],content:""};
+const travel5={title:"",date:"",images:[],content:""};
+const travel6={title:"",date:"",images:[],content:""};
+const travel7={title:"",date:"",images:[],content:""};
+const travel8={title:"",date:"",images:[],content:""};
+const travel9={title:"",date:"",images:[],content:""};
+const travel10={title:"",date:"",images:[],content:""};
+const travel11={title:"",date:"",images:[],content:""};
+const travel12={title:"",date:"",images:[],content:""};
+const travel13={title:"",date:"",images:[],content:""};
+const travel14={title:"",date:"",images:[],content:""};
+const travel15={title:"",date:"",images:[],content:""};
+const travel16={title:"",date:"",images:[],content:""};
+const travel17={title:"",date:"",images:[],content:""};
+const travel18={title:"",date:"",images:[],content:""};
+const travel19={title:"",date:"",images:[],content:""};
+const travel20={title:"",date:"",images:[],content:""};
+const travel21={title:"",date:"",images:[],content:""};
+const travel22={title:"",date:"",images:[],content:""};
+const travel23={title:"",date:"",images:[],content:""};
+const travel24={title:"",date:"",images:[],content:""};
+const travel25={title:"",date:"",images:[],content:""};
+const travel26={title:"",date:"",images:[],content:""};
+const travel27={title:"",date:"",images:[],content:""};
+const travel28={title:"",date:"",images:[],content:""};
+const travel29={title:"",date:"",images:[],content:""};
+const travel30={title:"",date:"",images:[],content:""};
+const travel31={title:"",date:"",images:[],content:""};
+const travel32={title:"",date:"",images:[],content:""};
+const travel33={title:"",date:"",images:[],content:""};
+const travel34={title:"",date:"",images:[],content:""};
+const travel35={title:"",date:"",images:[],content:""};
+const travel36={title:"",date:"",images:[],content:""};
+const travel37={title:"",date:"",images:[],content:""};
+const travel38={title:"",date:"",images:[],content:""};
+const travel39={title:"",date:"",images:[],content:""};
+const travel40={title:"",date:"",images:[],content:""};
+const travel41={title:"",date:"",images:[],content:""};
+const travel42={title:"",date:"",images:[],content:""};
+const travel43={title:"",date:"",images:[],content:""};
+const travel44={title:"",date:"",images:[],content:""};
+const travel45={title:"",date:"",images:[],content:""};
+const travel46={title:"",date:"",images:[],content:""};
+const travel47={title:"",date:"",images:[],content:""};
+const travel48={title:"",date:"",images:[],content:""};
+const travel49={title:"",date:"",images:[],content:""};
+const travel50={title:"",date:"",images:[],content:""};
+
+
+/*
+=========================================================
+SDD
+=========================================================
+*/
+
+const sdd1 = {
 
-
-/* travel 2 */
-{
-    title: "서귀포시",
-    date: "December 20, 2025",
-
-    images: ["J1jpg"],
-
-    content: "서귀포시에서"
-},
-
-
-/* travel 3 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 4 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 5 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 6 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 7 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 8 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 9 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 10 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 11 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 12 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 13 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 14 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 15 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 16 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 17 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 18 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 19 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 20 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 21 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 22 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 23 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 24 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 25 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 26 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 27 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 28 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 29 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 30 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 31 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 32 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 33 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 34 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 35 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 36 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 37 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 38 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 39 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 40 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 41 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 42 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 43 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 44 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 45 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 46 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 47 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 48 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 49 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* travel 50 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-}
-
-],
-
-
-/* =========================================================
-   SDD
-   1 ~ 50
-========================================================= */
-
-sdd: [
-
-/* SDD 1 */
-{
     title: "SDD",
+
     date: "February 10, 2026",
 
     images: [],
 
     content:
-        "SDD."
-},
-
-
-/* SDD 2 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 3 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 4 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 5 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 6 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 7 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 8 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 9 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 10 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 11 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 12 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 13 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 14 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 15 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 16 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 17 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 18 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 19 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 20 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 21 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 22 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 23 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 24 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 25 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 26 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 27 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 28 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 29 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 30 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 31 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 32 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 33 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 34 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 35 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 36 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 37 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 38 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 39 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 40 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 41 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 42 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 43 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 44 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 45 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 46 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 47 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 48 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 49 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-},
-
-
-/* SDD 50 */
-{
-    title: "",
-    date: "",
-
-    images: [],
-
-    content: ""
-}
-
-];
-
-
-/* =========================================================
+    "SDD."
+
+};
+
+
+/* SDD 2 ~ 50 */
+
+const sdd2={title:"",date:"",images:[],content:""};
+const sdd3={title:"",date:"",images:[],content:""};
+const sdd4={title:"",date:"",images:[],content:""};
+const sdd5={title:"",date:"",images:[],content:""};
+const sdd6={title:"",date:"",images:[],content:""};
+const sdd7={title:"",date:"",images:[],content:""};
+const sdd8={title:"",date:"",images:[],content:""};
+const sdd9={title:"",date:"",images:[],content:""};
+const sdd10={title:"",date:"",images:[],content:""};
+const sdd11={title:"",date:"",images:[],content:""};
+const sdd12={title:"",date:"",images:[],content:""};
+const sdd13={title:"",date:"",images:[],content:""};
+const sdd14={title:"",date:"",images:[],content:""};
+const sdd15={title:"",date:"",images:[],content:""};
+const sdd16={title:"",date:"",images:[],content:""};
+const sdd17={title:"",date:"",images:[],content:""};
+const sdd18={title:"",date:"",images:[],content:""};
+const sdd19={title:"",date:"",images:[],content:""};
+const sdd20={title:"",date:"",images:[],content:""};
+const sdd21={title:"",date:"",images:[],content:""};
+const sdd22={title:"",date:"",images:[],content:""};
+const sdd23={title:"",date:"",images:[],content:""};
+const sdd24={title:"",date:"",images:[],content:""};
+const sdd25={title:"",date:"",images:[],content:""};
+const sdd26={title:"",date:"",images:[],content:""};
+const sdd27={title:"",date:"",images:[],content:""};
+const sdd28={title:"",date:"",images:[],content:""};
+const sdd29={title:"",date:"",images:[],content:""};
+const sdd30={title:"",date:"",images:[],content:""};
+const sdd31={title:"",date:"",images:[],content:""};
+const sdd32={title:"",date:"",images:[],content:""};
+const sdd33={title:"",date:"",images:[],content:""};
+const sdd34={title:"",date:"",images:[],content:""};
+const sdd35={title:"",date:"",images:[],content:""};
+const sdd36={title:"",date:"",images:[],content:""};
+const sdd37={title:"",date:"",images:[],content:""};
+const sdd38={title:"",date:"",images:[],content:""};
+const sdd39={title:"",date:"",images:[],content:""};
+const sdd40={title:"",date:"",images:[],content:""};
+const sdd41={title:"",date:"",images:[],content:""};
+const sdd42={title:"",date:"",images:[],content:""};
+const sdd43={title:"",date:"",images:[],content:""};
+const sdd44={title:"",date:"",images:[],content:""};
+const sdd45={title:"",date:"",images:[],content:""};
+const sdd46={title:"",date:"",images:[],content:""};
+const sdd47={title:"",date:"",images:[],content:""};
+const sdd48={title:"",date:"",images:[],content:""};
+const sdd49={title:"",date:"",images:[],content:""};
+const sdd50={title:"",date:"",images:[],content:""};
+
+
+/* =====================================================
+   실제 글 목록
+===================================================== */
+
+const posts = {
+
+    diary: [
+        diary1,
+        diary2,
+        diary3,
+        diary4,
+        diary5,
+        diary6,
+        diary7,
+        diary8,
+        diary9,
+        diary10,
+        diary11,
+        diary12,
+        diary13,
+        diary14,
+        diary15,
+        diary16,
+        diary17,
+        diary18,
+        diary19,
+        diary20,
+        diary21,
+        diary22,
+        diary23,
+        diary24,
+        diary25,
+        diary26,
+        diary27,
+        diary28,
+        diary29,
+        diary30,
+        diary31,
+        diary32,
+        diary33,
+        diary34,
+        diary35,
+        diary36,
+        diary37,
+        diary38,
+        diary39,
+        diary40,
+        diary41,
+        diary42,
+        diary43,
+        diary44,
+        diary45,
+        diary46,
+        diary47,
+        diary48,
+        diary49,
+        diary50
+    ],
+
+
+    memoir: [
+        memoir1,
+        memoir2,
+        memoir3,
+        memoir4,
+        memoir5,
+        memoir6,
+        memoir7,
+        memoir8,
+        memoir9,
+        memoir10,
+        memoir11,
+        memoir12,
+        memoir13,
+        memoir14,
+        memoir15,
+        memoir16,
+        memoir17,
+        memoir18,
+        memoir19,
+        memoir20,
+        memoir21,
+        memoir22,
+        memoir23,
+        memoir24,
+        memoir25,
+        memoir26,
+        memoir27,
+        memoir28,
+        memoir29,
+        memoir30,
+        memoir31,
+        memoir32,
+        memoir33,
+        memoir34,
+        memoir35,
+        memoir36,
+        memoir37,
+        memoir38,
+        memoir39,
+        memoir40,
+        memoir41,
+        memoir42,
+        memoir43,
+        memoir44,
+        memoir45,
+        memoir46,
+        memoir47,
+        memoir48,
+        memoir49,
+        memoir50
+    ],
+
+
+    politics: [
+        politics1,
+        politics2,
+        politics3,
+        politics4,
+        politics5,
+        politics6,
+        politics7,
+        politics8,
+        politics9,
+        politics10,
+        politics11,
+        politics12,
+        politics13,
+        politics14,
+        politics15,
+        politics16,
+        politics17,
+        politics18,
+        politics19,
+        politics20,
+        politics21,
+        politics22,
+        politics23,
+        politics24,
+        politics25,
+        politics26,
+        politics27,
+        politics28,
+        politics29,
+        politics30,
+        politics31,
+        politics32,
+        politics33,
+        politics34,
+        politics35,
+        politics36,
+        politics37,
+        politics38,
+        politics39,
+        politics40,
+        politics41,
+        politics42,
+        politics43,
+        politics44,
+        politics45,
+        politics46,
+        politics47,
+        politics48,
+        politics49,
+        politics50
+    ],
+
+
+    travel: [
+        travel1,
+        travel2,
+        travel3,
+        travel4,
+        travel5,
+        travel6,
+        travel7,
+        travel8,
+        travel9,
+        travel10,
+        travel11,
+        travel12,
+        travel13,
+        travel14,
+        travel15,
+        travel16,
+        travel17,
+        travel18,
+        travel19,
+        travel20,
+        travel21,
+        travel22,
+        travel23,
+        travel24,
+        travel25,
+        travel26,
+        travel27,
+        travel28,
+        travel29,
+        travel30,
+        travel31,
+        travel32,
+        travel33,
+        travel34,
+        travel35,
+        travel36,
+        travel37,
+        travel38,
+        travel39,
+        travel40,
+        travel41,
+        travel42,
+        travel43,
+        travel44,
+        travel45,
+        travel46,
+        travel47,
+        travel48,
+        travel49,
+        travel50
+    ],
+
+
+    sdd: [
+        sdd1,
+        sdd2,
+        sdd3,
+        sdd4,
+        sdd5,
+        sdd6,
+        sdd7,
+        sdd8,
+        sdd9,
+        sdd10,
+        sdd11,
+        sdd12,
+        sdd13,
+        sdd14,
+        sdd15,
+        sdd16,
+        sdd17,
+        sdd18,
+        sdd19,
+        sdd20,
+        sdd21,
+        sdd22,
+        sdd23,
+        sdd24,
+        sdd25,
+        sdd26,
+        sdd27,
+        sdd28,
+        sdd29,
+        sdd30,
+        sdd31,
+        sdd32,
+        sdd33,
+        sdd34,
+        sdd35,
+        sdd36,
+        sdd37,
+        sdd38,
+        sdd39,
+        sdd40,
+        sdd41,
+        sdd42,
+        sdd43,
+        sdd44,
+        sdd45,
+        sdd46,
+        sdd47,
+        sdd48,
+        sdd49,
+        sdd50
+    ]
+
+};
+
+
+/* =====================================================
    카테고리 이름
-========================================================= */
+===================================================== */
 
 const categoryNames = {
 
@@ -3269,9 +1748,9 @@ const categoryNames = {
 };
 
 
-/* =========================================================
-   글 열기 / 닫기
-========================================================= */
+/* =====================================================
+   글 열기
+===================================================== */
 
 function togglePost(article) {
 
@@ -3280,9 +1759,9 @@ function togglePost(article) {
 }
 
 
-/* =========================================================
+/* =====================================================
    카테고리 표시
-========================================================= */
+===================================================== */
 
 function showCategory(category) {
 
@@ -3290,12 +1769,8 @@ function showCategory(category) {
         document.getElementById("post-list");
 
 
-    /* 기존 글 삭제 */
-
     postList.innerHTML = "";
 
-
-    /* 메뉴 active 제거 */
 
     document
         .querySelectorAll(".menu button")
@@ -3305,8 +1780,6 @@ function showCategory(category) {
 
         });
 
-
-    /* 현재 메뉴 active */
 
     const activeButton =
         document.getElementById(
@@ -3321,15 +1794,13 @@ function showCategory(category) {
     }
 
 
-    /* 해당 카테고리 글 */
-
     const categoryPosts =
         posts[category] || [];
 
 
     /*
-       제목이 비어 있는 글은
-       사이트에 표시하지 않음
+       제목이 없는 글은
+       사이트에 표시하지 않는다.
     */
 
     const visiblePosts =
@@ -3342,8 +1813,6 @@ function showCategory(category) {
 
         });
 
-
-    /* 글이 하나도 없을 때 */
 
     if (visiblePosts.length === 0) {
 
@@ -3362,8 +1831,6 @@ function showCategory(category) {
     }
 
 
-    /* 글 하나씩 생성 */
-
     visiblePosts.forEach(function(post) {
 
 
@@ -3374,9 +1841,7 @@ function showCategory(category) {
         article.className = "post";
 
 
-        /* =========================
-           날짜
-        ========================= */
+        /* 날짜 */
 
         let dateHTML = "";
 
@@ -3399,9 +1864,7 @@ function showCategory(category) {
         }
 
 
-        /* =========================
-           사진 여러 장
-        ========================= */
+        /* 사진 */
 
         let imageHTML = "";
 
@@ -3431,9 +1894,7 @@ function showCategory(category) {
         }
 
 
-        /* =========================
-           본문
-        ========================= */
+        /* 본문 */
 
         let contentHTML = "";
 
@@ -3456,9 +1917,7 @@ function showCategory(category) {
         }
 
 
-        /* =========================
-           최종 글
-        ========================= */
+        /* 글 생성 */
 
         article.innerHTML = `
 
@@ -3498,15 +1957,14 @@ function showCategory(category) {
 }
 
 
-/* =========================================================
-   처음 사이트를 열었을 때
-========================================================= */
+/* =====================================================
+   사이트 처음 열었을 때
+===================================================== */
 
 showCategory("diary");
 
 
 </script>
-
 
 </body>
 
