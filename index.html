@@ -1,7 +1,16 @@
-<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html>
+<html lang="ko">
 
-<title>CENTIBOY</title><style>
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>CENTIBOY</title>
+
+<style>
 
 /* =====================================================
    기본 설정
@@ -16,6 +25,7 @@ html {
 }
 
 body {
+
     margin: 0;
     padding: 0;
 
@@ -280,6 +290,8 @@ body {
     line-height: 1.9;
 
     white-space: pre-line;
+
+    word-break: break-word;
 }
 
 
@@ -370,75 +382,112 @@ body {
 
 }
 
-</style></head><body><div class="page"><!-- =====================================================
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+<!-- =====================================================
      로고
-===================================================== --><div class="logo-area"><img
-    src="file_000000003ad88206b1a20683e46c1497.png"
-    class="logo"
-    alt="CENTIBOY">
+===================================================== -->
 
-</div><!-- =====================================================
+<div class="logo-area">
+
+    <img
+        src="file_000000003ad88206b1a20683e46c1497.png"
+        class="logo"
+        alt="CENTIBOY">
+
+</div>
+
+
+<!-- =====================================================
      메뉴
-===================================================== --><nav class="menu"><button
-    id="button-diary"
-    onclick="showCategory('diary')">
-    diary
-</button>
+===================================================== -->
 
-<button
-    id="button-memoir"
-    onclick="showCategory('memoir')">
-    My Memoir
-</button>
+<nav class="menu">
 
-<button
-    id="button-politics"
-    onclick="showCategory('politics')">
-    politics
-</button>
+    <button
+        id="button-diary"
+        onclick="showCategory('diary')">
+        diary
+    </button>
 
-<button
-    id="button-travel"
-    onclick="showCategory('travel')">
-    travel
-</button>
+    <button
+        id="button-memoir"
+        onclick="showCategory('memoir')">
+        My Memoir
+    </button>
 
-<button
-    id="button-sdd"
-    onclick="showCategory('sdd')">
-    SDD
-</button>
+    <button
+        id="button-politics"
+        onclick="showCategory('politics')">
+        politics
+    </button>
 
-</nav><!-- =====================================================
+    <button
+        id="button-travel"
+        onclick="showCategory('travel')">
+        travel
+    </button>
+
+    <button
+        id="button-sdd"
+        onclick="showCategory('sdd')">
+        SDD
+    </button>
+
+</nav>
+
+
+<!-- =====================================================
      글 표시
-===================================================== --><main id="post-list"></main></div><script>
+===================================================== -->
+
+<main id="post-list"></main>
+
+
+</div>
+
+
+<script>
 
 
 /* =====================================================
    =====================================================
-   글 작성 영역
+   글 작성 방법
    =====================================================
-   
-   앞으로 글을 추가할 때는 각 칸의
 
-   title
-   date
-   images
-   content
+   앞으로 글을 추가할 때는 아래 4가지만 입력하면 됩니다.
 
-   만 수정하면 됩니다.
+   title  = 제목
+   date   = 날짜
+   images = 사진 파일명
+   content = 본문
 
-   사진이 없다면:
+   -----------------------------------------------------
+
+   사진이 없으면:
 
    images: []
 
-   사진이 있다면:
+   -----------------------------------------------------
+
+   사진 한 장:
 
    images: [
-       "사진1.jpg"
+       "사진.jpg"
    ]
 
-   사진이 여러 장이면:
+   -----------------------------------------------------
+
+   사진 여러 장:
 
    images: [
        "사진1.jpg",
@@ -446,30 +495,42 @@ body {
        "사진3.jpg"
    ]
 
-   반드시 파일명은 " " 안에 넣으세요.
-   
+   -----------------------------------------------------
+
+   본문에서 줄바꿈을 사용하려면 반드시
+   백틱 ` ` 을 사용합니다.
+
+   예:
+
+   content: `
+   첫 번째 문장입니다.
+
+   두 번째 문장입니다.
+
+   세 번째 문장입니다.
+   `
+
    =====================================================
 ===================================================== */
 
 
 /* =====================================================
    DIARY
+   총 50개
 ===================================================== */
 
 const diary1 = {
     title: "영주시 풍기읍",
     date: "may 12 2026",
     images: [],
-    content:
-    ""
+    content: ""
 };
 
 const diary2 = {
     title: "",
     date: "",
     images: [],
-    content:
-    "."
+    content: ""
 };
 
 const diary3 = {
@@ -811,44 +872,40 @@ const diary50 = {
 
 /* =====================================================
    MY MEMOIR
+   총 50개
 ===================================================== */
 
 const memoir1 = {
     title: "악행의 자서전",
     date: "January 10, 2022",
     images: [],
-    content:
-    "누군가를 힘들게 했던 일. 나의 잘못으로 인해 고통받은 이들의 이야기를 적습니다."
+    content: "누군가를 힘들게 했던 일. 나의 잘못으로 인해 고통받은 이들의 이야기를 적습니다."
 };
 
 const memoir2 = {
     title: "에로스 신의 저주",
     date: "September 19, 2026",
     images: [],
-    content:
-    "왜 자살하려는 사람에게 칼을 쥐어줍니까."
+    content: "왜 자살하려는 사람에게 칼을 쥐어줍니까."
 };
 
 const memoir3 = {
     title: "한탄",
     date: "November 7 2025",
     images: [],
-    content: "지나간 일들을 떠올리며 과거에 대해 한탄하고있다. 그럴걸 이라는 생각보다 그러지 말걸 이라는 생각이 더 많다. 
+    content: `
+지나간 일들을 떠올리며 과거에 대해 한탄하고있다.
 
-
-
-
-
-
-
-"
+그럴걸 이라는 생각보다 그러지 말걸 이라는 생각이 더 많다.
+`
 };
 
 const memoir4 = {
     title: "왜곡된 증오",
     date: "January 19 2025",
     images: [],
-    content: "나는 다른사람들이 남들보다 우월하고 잘났다는 식의 생각을 가지며 살아가는줄 알았다. 그렇기에 나는 모두를 이기적이고 자만심이 가득 한 혐오스런 나르시스트일줄알았 다. 이제서야 깨닫는다. 내가 싫어 하던 자만감 넘치는 사람은 친구도 가족도 아닌 나였다."};
+    content: "나는 다른사람들이 남들보다 우월하고 잘났다는 식의 생각을 가지며 살아가는줄 알았다. 그렇기에 나는 모두를 이기적이고 자만심이 가득 한 혐오스런 나르시스트일줄알았 다. 이제서야 깨닫는다. 내가 싫어 하던 자만감 넘치는 사람은 친구도 가족도 아닌 나였다."
+};
 
 const memoir5 = {
     title: "",
@@ -1175,6 +1232,7 @@ const memoir50 = {
 
 /* =====================================================
    POLITICS
+   총 50개
 ===================================================== */
 
 const politics1 = {
@@ -1183,8 +1241,7 @@ const politics1 = {
     images: [
         "하드위키.jpg"
     ],
-    content:
-    "하드위키. 사기까지 정말 많은 노력이 필요했다. 좆도 아닌 벌레새끼때문에 뭐이리 고생했었는지. 미련할때였다."
+    content: "하드위키. 사기까지 정말 많은 노력이 필요했다. 좆도 아닌 벌레새끼때문에 뭐이리 고생했었는지. 미련할때였다."
 };
 
 const politics2={title:"",date:"",images:[],content:""};
@@ -1240,6 +1297,7 @@ const politics50={title:"",date:"",images:[],content:""};
 
 /* =====================================================
    TRAVEL
+   총 50개
 ===================================================== */
 
 const travel1 = {
@@ -1249,11 +1307,11 @@ const travel1 = {
     content: ""
 };
 
-const travel2={
-    title:"서귀포시",
-    date:"December 20, 2025",
-    images:["J1.jpg"],
-    content:"서귀포에서"
+const travel2 = {
+    title: "서귀포시",
+    date: "December 20, 2025",
+    images: ["J1.jpg"],
+    content: "서귀포에서"
 };
 
 const travel3={title:"",date:"",images:[],content:""};
@@ -1304,24 +1362,24 @@ const travel47={title:"",date:"",images:[],content:""};
 const travel48={title:"",date:"",images:[],content:""};
 const travel49={title:"",date:"",images:[],content:""};
 
-const travel50={
-    title:"시드니",
-    date:"December 20, 2026",
-    images:["시드니1.jpg"],
-    content:"생일을 기념해서 방문한 시드니"
+const travel50 = {
+    title: "시드니",
+    date: "December 20, 2026",
+    images: ["시드니1.jpg"],
+    content: "생일을 기념해서 방문한 시드니"
 };
 
 
 /* =====================================================
    SDD
+   총 50개
 ===================================================== */
 
 const sdd1 = {
     title: "SDD",
     date: "February 10, 2026",
     images: [],
-    content:
-    "SDD."
+    content: "SDD."
 };
 
 const sdd2={title:"",date:"",images:[],content:""};
@@ -1474,7 +1532,11 @@ const categoryNames = {
 
 function getPostDate(post) {
 
-    if (!post.date || post.date.trim() === "") {
+    if (
+        !post.date ||
+        typeof post.date !== "string" ||
+        post.date.trim() === ""
+    ) {
 
         return 0;
 
@@ -1490,6 +1552,7 @@ function getPostDate(post) {
     }
 
     return time;
+
 }
 
 
@@ -1514,10 +1577,19 @@ function showCategory(category) {
         document.getElementById("post-list");
 
 
+    if (!postList) {
+
+        return;
+
+    }
+
+
     postList.innerHTML = "";
 
 
-    /* 메뉴 활성화 */
+    /* -------------------------------------------------
+       메뉴 활성화
+    ------------------------------------------------- */
 
     document
         .querySelectorAll(".menu button")
@@ -1541,52 +1613,57 @@ function showCategory(category) {
     }
 
 
-    /* 해당 카테고리 가져오기 */
+    /* -------------------------------------------------
+       해당 카테고리 가져오기
+    ------------------------------------------------- */
 
     let categoryPosts =
         posts[category] || [];
 
 
-    /* 제목이 있는 글만 표시 */
+    /* -------------------------------------------------
+       제목이 있는 글만 표시
+    ------------------------------------------------- */
 
     const visiblePosts =
         categoryPosts.filter(function(post) {
 
             return (
-                post.title &&
+                post &&
+                typeof post.title === "string" &&
                 post.title.trim() !== ""
             );
 
         });
 
 
-    /* =================================================
-       최신 글이 위로 오도록 날짜순 정렬
-       
-       날짜가 최신일수록 앞쪽으로 이동
-    ================================================= */
+    /* -------------------------------------------------
+       최신 글이 위로 오도록 정렬
+    ------------------------------------------------- */
 
     visiblePosts.sort(function(a, b) {
 
-        const dateA = getPostDate(a);
+        const dateA =
+            getPostDate(a);
 
-        const dateB = getPostDate(b);
+        const dateB =
+            getPostDate(b);
 
         return dateB - dateA;
 
     });
 
 
-    /* 글이 없을 때 */
+    /* -------------------------------------------------
+       글이 없을 때
+    ------------------------------------------------- */
 
     if (visiblePosts.length === 0) {
 
         postList.innerHTML = `
 
             <div class="no-post">
-
                 아직 등록된 글이 없습니다.
-
             </div>
 
         `;
@@ -1596,9 +1673,9 @@ function showCategory(category) {
     }
 
 
-    /* =================================================
-       글 하나씩 생성
-    ================================================= */
+    /* -------------------------------------------------
+       글 생성
+    ------------------------------------------------- */
 
     visiblePosts.forEach(function(post) {
 
@@ -1619,6 +1696,7 @@ function showCategory(category) {
 
         if (
             post.date &&
+            typeof post.date === "string" &&
             post.date.trim() !== ""
         ) {
 
@@ -1678,6 +1756,7 @@ function showCategory(category) {
 
         if (
             post.content &&
+            typeof post.content === "string" &&
             post.content.trim() !== ""
         ) {
 
@@ -1695,14 +1774,16 @@ function showCategory(category) {
 
 
         /* =================================================
-           글 생성
+           글 전체 생성
         ================================================= */
 
         article.innerHTML = `
 
             <div class="post-category">
 
-                ${escapeHTML(categoryNames[category])}
+                ${escapeHTML(
+                    categoryNames[category]
+                )}
 
             </div>
 
@@ -1742,11 +1823,15 @@ function showCategory(category) {
 
 function escapeHTML(value) {
 
-    if (value === null || value === undefined) {
+    if (
+        value === null ||
+        value === undefined
+    ) {
 
         return "";
 
     }
+
 
     return String(value)
 
@@ -1764,10 +1849,15 @@ function escapeHTML(value) {
 
 
 /* =====================================================
-   처음 사이트를 열었을 때
+   사이트 처음 실행
 ===================================================== */
 
 showCategory("diary");
 
 
-</script></body></html>
+</script>
+
+
+</body>
+
+</html>
