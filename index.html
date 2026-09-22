@@ -25,7 +25,6 @@ html {
 }
 
 body {
-
     margin: 0;
     padding: 0;
 
@@ -45,11 +44,8 @@ body {
 ===================================================== */
 
 .page {
-
     width: 94%;
-
     max-width: 720px;
-
     min-height: 100vh;
 
     margin: 0 auto;
@@ -70,24 +66,20 @@ body {
 ===================================================== */
 
 .logo-area {
-
     width: 100%;
 
     display: flex;
 
     justify-content: center;
-
     align-items: center;
 
     margin-bottom: 55px;
 }
 
 .logo {
-
     display: block;
 
     width: 300px;
-
     max-width: 80%;
 
     height: auto;
@@ -99,7 +91,6 @@ body {
 ===================================================== */
 
 .menu {
-
     width: 100%;
 
     display: flex;
@@ -107,7 +98,6 @@ body {
     flex-wrap: wrap;
 
     justify-content: center;
-
     align-items: center;
 
     gap: 28px 38px;
@@ -115,11 +105,8 @@ body {
     margin-bottom: 65px;
 }
 
-
 .menu button {
-
     border: none;
-
     outline: none;
 
     background: transparent;
@@ -142,17 +129,13 @@ body {
         transform 0.2s ease;
 }
 
-
 .menu button:hover {
-
     color: #e51b91;
 
     transform: scale(1.04);
 }
 
-
 .menu button.active {
-
     color: #e51b91;
 }
 
@@ -162,7 +145,6 @@ body {
 ===================================================== */
 
 #post-list {
-
     width: 92%;
 
     margin: 0 auto;
@@ -174,7 +156,6 @@ body {
 ===================================================== */
 
 .post {
-
     margin-bottom: 65px;
 
     padding-bottom: 45px;
@@ -189,7 +170,6 @@ body {
 ===================================================== */
 
 .post-category {
-
     color: #999;
 
     font-size: 17px;
@@ -203,7 +183,6 @@ body {
 ===================================================== */
 
 .post-title {
-
     margin: 0;
 
     color: #65357d;
@@ -220,9 +199,7 @@ body {
         color 0.2s ease;
 }
 
-
 .post-title:hover {
-
     color: #e51b91;
 }
 
@@ -232,13 +209,10 @@ body {
 ===================================================== */
 
 .post-details {
-
     display: none;
 }
 
-
 .post.open .post-details {
-
     display: block;
 }
 
@@ -248,7 +222,6 @@ body {
 ===================================================== */
 
 .post-date {
-
     color: #777;
 
     font-size: 23px;
@@ -264,7 +237,6 @@ body {
 ===================================================== */
 
 .post-image {
-
     display: block;
 
     width: 100%;
@@ -282,7 +254,6 @@ body {
 ===================================================== */
 
 .post-content {
-
     color: #555;
 
     font-size: 20px;
@@ -300,7 +271,6 @@ body {
 ===================================================== */
 
 .no-post {
-
     text-align: center;
 
     padding: 50px 10px;
@@ -318,63 +288,46 @@ body {
 @media (max-width: 600px) {
 
     .page {
-
         width: 96%;
 
         padding:
             55px 15px 70px 15px;
     }
 
-
     .logo {
-
         width: 270px;
 
         max-width: 82%;
     }
 
-
     .logo-area {
-
         margin-bottom: 45px;
     }
 
-
     .menu {
-
         gap:
             24px 30px;
 
         margin-bottom: 60px;
     }
 
-
     .menu button {
-
         font-size: 28px;
     }
 
-
     #post-list {
-
         width: 90%;
     }
 
-
     .post-title {
-
         font-size: 32px;
     }
 
-
     .post-date {
-
         font-size: 21px;
     }
 
-
     .post-content {
-
         font-size: 19px;
 
         line-height: 1.8;
@@ -458,74 +411,89 @@ body {
 
 <script>
 
-
 /* =====================================================
-   =====================================================
    글 작성 방법
-   =====================================================
+=====================================================
 
-   앞으로 글을 추가할 때는 아래 4가지만 입력하면 됩니다.
+각 글은 아래 4가지만 수정하면 됩니다.
 
-   title  = 제목
-   date   = 날짜
-   images = 사진 파일명
-   content = 본문
+title
+date
+images
+content
 
-   -----------------------------------------------------
 
-   사진이 없으면:
+---------------------------------------------------------
+제목
+---------------------------------------------------------
 
-   images: []
+title: "제목"
 
-   -----------------------------------------------------
 
-   사진 한 장:
+---------------------------------------------------------
+날짜
+---------------------------------------------------------
 
-   images: [
-       "사진.jpg"
-   ]
+date: "September 22 2026"
 
-   -----------------------------------------------------
 
-   사진 여러 장:
+---------------------------------------------------------
+사진 없음
+---------------------------------------------------------
 
-   images: [
-       "사진1.jpg",
-       "사진2.jpg",
-       "사진3.jpg"
-   ]
+images: []
 
-   -----------------------------------------------------
 
-   본문에서 줄바꿈을 사용하려면 반드시
-   백틱 ` ` 을 사용합니다.
+---------------------------------------------------------
+사진 한 장
+---------------------------------------------------------
 
-   예:
+images: [
+    "사진.jpg"
+]
 
-   content: `
-   첫 번째 문장입니다.
 
-   두 번째 문장입니다.
+---------------------------------------------------------
+사진 여러 장
+---------------------------------------------------------
 
-   세 번째 문장입니다.
-   `
+images: [
+    "사진1.jpg",
+    "사진2.jpg",
+    "사진3.jpg"
+]
 
-   =====================================================
+
+---------------------------------------------------------
+본문
+---------------------------------------------------------
+
+content: `
+첫 번째 문장입니다.
+
+두 번째 문장입니다.
+
+세 번째 문장입니다.
+`
+
+
 ===================================================== */
 
 
 /* =====================================================
    DIARY
-   총 50개
+   50개
 ===================================================== */
 
 const diary1 = {
     title: "영주시 풍기읍",
-    date: "may 12 2026",
-    images: ["풍기1.jpg",
-          "풍기2.jpg",
-            "풍기3.jpg",
-            "풍기4.jpg"],
+    date: "May 12 2026",
+    images: [
+        "풍기1.jpg",
+        "풍기2.jpg",
+        "풍기3.jpg",
+        "풍기4.jpg"
+    ],
     content: ""
 };
 
@@ -875,21 +843,26 @@ const diary50 = {
 
 /* =====================================================
    MY MEMOIR
-   총 50개
+   50개
 ===================================================== */
 
 const memoir1 = {
     title: "악행의 자서전",
-    date: "January 10, 2022",
+    date: "January 10 2022",
     images: [],
-    content: "누군가를 힘들게 했던 일. 나의 잘못으로 인해 고통받은 이들의 이야기를 적습니다."
+    content: `
+누군가를 힘들게 했던 일.
+나의 잘못으로 인해 고통받은 이들의 이야기를 적습니다.
+`
 };
 
 const memoir2 = {
     title: "에로스 신의 저주",
-    date: "September 19, 2026",
+    date: "September 18 2026",
     images: [],
-    content: "왜 자살하려는 사람에게 칼을 쥐어줍니까."
+    content: `
+왜 자살하려는 사람에게 칼을 쥐어줍니까.
+`
 };
 
 const memoir3 = {
@@ -897,9 +870,10 @@ const memoir3 = {
     date: "November 7 2025",
     images: [],
     content: `
-지나간 일들을 떠올리며 과거에 대해 한탄하고있다.
+지나간 일들을 떠올리며 과거에 대해 한탄하고 있다.
 
-그럴걸 이라는 생각보다 그러지 말걸 이라는 생각이 더 많다.
+그럴걸 이라는 생각보다
+그러지 말걸 이라는 생각이 더 많다.
 `
 };
 
@@ -907,15 +881,45 @@ const memoir4 = {
     title: "왜곡된 증오",
     date: "January 19 2025",
     images: [],
-    content: "나는 다른사람들이 남들보다 우월하고 잘났다는 식의 생각을 가지며 살아가는줄 알았다. 그렇기에 나는 모두를 이기적이고 자만심이 가득 한 혐오스런 나르시스트일줄알았 다. 이제서야 깨닫는다. 내가 싫어 하던 자만감 넘치는 사람은 친구도 가족도 아닌 나였다."
+    content: `
+나는 다른 사람들이 남들보다 우월하고 잘났다는 식의 생각을 가지며 살아가는 줄 알았다.
+
+그렇기에 나는 모두를 이기적이고 자만심이 가득한
+혐오스런 나르시시스트일 줄 알았다.
+
+이제서야 깨닫는다.
+
+내가 싫어하던 자만감 넘치는 사람은
+친구도 가족도 아닌 나였다.
+`
 };
 
 const memoir5 = {
-    title:"착각과 집착",
+    title: "착각과 집착",
     date: "September 19 2026",
     images: [],
-    content: "내가 살아가는 이유가 뭘까.고통받고 절망적이여도 계속 살아가는 이유가 뭘까.나에게도 살아가는 동기가 있으면 좋겠다. 나는 자식을 가지고싶다 만약 나에게 자녀가 있다면 이렇게 하루하루 하염없이 고통스럽게 살지 않을것이다. 내가 열심히 살아야 자녀의 유년기가 보장되기 때문에. 그치만 지금은 뭘 위해서 왜 살아가야할까 살아갈 이유도 목적도 의욕도 없다.  죽는건 싫다  살기도 싫다
-          "
+    content: `
+내가 살아가는 이유가 뭘까.
+
+고통받고 절망적이어도 계속 살아가는 이유가 뭘까.
+
+나에게도 살아가는 동기가 있으면 좋겠다.
+
+나는 자식을 가지고 싶다.
+
+만약 나에게 자녀가 있다면
+이렇게 하루하루 하염없이 고통스럽게 살지 않을 것이다.
+
+내가 열심히 살아야 자녀의 유년기가 보장되기 때문에.
+
+그렇지만 지금은 뭘 위해서 왜 살아가야 할까.
+
+살아갈 이유도 목적도 의욕도 없다.
+
+죽는 건 싫다.
+
+살기도 싫다.
+`
 };
 
 const memoir6 = {
@@ -1236,16 +1240,25 @@ const memoir50 = {
 
 /* =====================================================
    POLITICS
-   총 50개
+   50개
 ===================================================== */
 
 const politics1 = {
     title: "하드위키",
-    date: "November 11, 2025",
+    date: "November 11 2025",
     images: [
         "하드위키.jpg"
     ],
-    content: "하드위키. 사기까지 정말 많은 노력이 필요했다. 좆도 아닌 벌레새끼때문에 뭐이리 고생했었는지. 미련할때였다."
+    content: `
+하드위키.
+
+사기까지 정말 많은 노력이 필요했다.
+
+좆도 아닌 벌레새끼때문에
+뭐이리 고생했었는지.
+
+미련할때였다.
+`
 };
 
 const politics2={title:"",date:"",images:[],content:""};
@@ -1301,7 +1314,7 @@ const politics50={title:"",date:"",images:[],content:""};
 
 /* =====================================================
    TRAVEL
-   총 50개
+   50개
 ===================================================== */
 
 const travel1 = {
@@ -1313,9 +1326,13 @@ const travel1 = {
 
 const travel2 = {
     title: "서귀포시",
-    date: "December 20, 2025",
-    images: ["J1.jpg"],
-    content: "서귀포에서"
+    date: "December 20 2025",
+    images: [
+        "J1.jpg"
+    ],
+    content: `
+서귀포에서
+`
 };
 
 const travel3={title:"",date:"",images:[],content:""};
@@ -1368,22 +1385,28 @@ const travel49={title:"",date:"",images:[],content:""};
 
 const travel50 = {
     title: "시드니",
-    date: "December 20, 2026",
-    images: ["시드니1.jpg"],
-    content: "생일을 기념해서 방문한 시드니"
+    date: "December 20 2026",
+    images: [
+        "시드니1.jpg"
+    ],
+    content: `
+생일을 기념해서 방문한 시드니
+`
 };
 
 
 /* =====================================================
    SDD
-   총 50개
+   50개
 ===================================================== */
 
 const sdd1 = {
     title: "SDD",
-    date: "February 10, 2026",
+    date: "February 10 2026",
     images: [],
-    content: "SDD."
+    content: `
+SDD.
+`
 };
 
 const sdd2={title:"",date:"",images:[],content:""};
@@ -1438,7 +1461,7 @@ const sdd50={title:"",date:"",images:[],content:""};
 
 
 /* =====================================================
-   실제 글 목록
+   모든 글 연결
 ===================================================== */
 
 const posts = {
@@ -1541,22 +1564,17 @@ function getPostDate(post) {
         typeof post.date !== "string" ||
         post.date.trim() === ""
     ) {
-
         return 0;
-
     }
 
     const time =
         new Date(post.date).getTime();
 
     if (isNaN(time)) {
-
         return 0;
-
     }
 
     return time;
-
 }
 
 
@@ -1580,13 +1598,9 @@ function showCategory(category) {
     const postList =
         document.getElementById("post-list");
 
-
     if (!postList) {
-
         return;
-
     }
-
 
     postList.innerHTML = "";
 
@@ -1609,16 +1623,13 @@ function showCategory(category) {
             "button-" + category
         );
 
-
     if (activeButton) {
-
         activeButton.classList.add("active");
-
     }
 
 
     /* -------------------------------------------------
-       해당 카테고리 가져오기
+       글 가져오기
     ------------------------------------------------- */
 
     let categoryPosts =
@@ -1642,7 +1653,7 @@ function showCategory(category) {
 
 
     /* -------------------------------------------------
-       최신 글이 위로 오도록 정렬
+       최신 글이 위로
     ------------------------------------------------- */
 
     visiblePosts.sort(function(a, b) {
@@ -1659,7 +1670,7 @@ function showCategory(category) {
 
 
     /* -------------------------------------------------
-       글이 없을 때
+       글이 없을 경우
     ------------------------------------------------- */
 
     if (visiblePosts.length === 0) {
@@ -1673,7 +1684,6 @@ function showCategory(category) {
         `;
 
         return;
-
     }
 
 
@@ -1683,10 +1693,8 @@ function showCategory(category) {
 
     visiblePosts.forEach(function(post) {
 
-
         const article =
             document.createElement("article");
-
 
         article.className = "post";
 
@@ -1697,7 +1705,6 @@ function showCategory(category) {
 
         let dateHTML = "";
 
-
         if (
             post.date &&
             typeof post.date === "string" &&
@@ -1707,9 +1714,7 @@ function showCategory(category) {
             dateHTML = `
 
                 <div class="post-date">
-
                     ${escapeHTML(post.date)}
-
                 </div>
 
             `;
@@ -1722,7 +1727,6 @@ function showCategory(category) {
         ================================================= */
 
         let imageHTML = "";
-
 
         if (Array.isArray(post.images)) {
 
@@ -1757,7 +1761,6 @@ function showCategory(category) {
 
         let contentHTML = "";
 
-
         if (
             post.content &&
             typeof post.content === "string" &&
@@ -1767,9 +1770,7 @@ function showCategory(category) {
             contentHTML = `
 
                 <div class="post-content">
-
                     ${escapeHTML(post.content)}
-
                 </div>
 
             `;
@@ -1778,19 +1779,14 @@ function showCategory(category) {
 
 
         /* =================================================
-           글 전체 생성
+           글 전체
         ================================================= */
 
         article.innerHTML = `
 
             <div class="post-category">
-
-                ${escapeHTML(
-                    categoryNames[category]
-                )}
-
+                ${escapeHTML(categoryNames[category])}
             </div>
-
 
             <h2
                 class="post-title"
@@ -1799,7 +1795,6 @@ function showCategory(category) {
                 ${escapeHTML(post.title)}
 
             </h2>
-
 
             <div class="post-details">
 
@@ -1831,11 +1826,8 @@ function escapeHTML(value) {
         value === null ||
         value === undefined
     ) {
-
         return "";
-
     }
-
 
     return String(value)
 
@@ -1848,12 +1840,11 @@ function escapeHTML(value) {
         .replace(/"/g, "&quot;")
 
         .replace(/'/g, "&#039;");
-
 }
 
 
 /* =====================================================
-   사이트 처음 실행
+   사이트 시작
 ===================================================== */
 
 showCategory("diary");
