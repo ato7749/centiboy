@@ -5,36 +5,85 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CENTIBOY 관리자</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{box-sizing:border-box}
-body{margin:0;padding:20px;background:#fff;color:#65357d;font-family:Georgia,serif}
-main{max-width:650px;margin:auto;border:3px solid #ff1493;padding:22px;box-shadow:0 0 14px #ff69b4}
-h1{text-align:center}
-input,textarea,select,button{width:100%;padding:13px;margin:8px 0;font-size:16px}
-textarea{min-height:160px}
-button{background:#65357d;color:white;border:0;border-radius:5px}
-.post{border-top:1px solid #ddd;padding:12px 0}
-.small{width:auto;padding:9px 15px;margin-right:5px}
-#app{display:none}
+body{margin:0;background:#faf8fb;color:#65357d;font-family:Arial,sans-serif}
+.wrap{max-width:760px;margin:22px auto;padding:16px}
+.panel{background:#fff;border:2px solid #ff1493;box-shadow:0 0 12px #ffb2dc;padding:22px;border-radius:4px}
+h1{text-align:center;margin:4px 0 22px;font-family:Georgia,serif}
+label{display:block;font-weight:bold;margin:16px 0 7px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #cdb8d4;border-radius:5px;font-size:16px;color:#333;background:#fff}
+button{border:0;border-radius:5px;padding:11px 14px;background:#65357d;color:#fff;font-size:15px;cursor:pointer}
+button:disabled{opacity:.55;cursor:wait}
+button.secondary{background:#888}
+button.danger{background:#b43b58}
+button.light{background:#eadcf0;color:#65357d}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+#editor,#dashboard{display:none}
+.hint{font-size:13px;color:#88728e;line-height:1.5}
+#status{margin:12px 0;color:#a12b77;white-space:pre-line}
+.postrow{border-bottom:1px solid #ead8ed;padding:12px 0;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.postrow span{overflow-wrap:anywhere}
+.small{padding:8px 10px;font-size:14px}
+a{color:#65357d}
+.block-list{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+.block{border:1px solid #e5cce6;border-radius:8px;padding:12px;background:#fff}
+.block-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.block-head strong{font-size:14px}
+.block textarea{min-height:120px;resize:vertical;line-height:1.65}
+.block img{display:block;max-width:100%;max-height:360px;object-fit:contain;margin:8px auto;border-radius:4px}
+.block-tools{display:flex;gap:6px;flex-wrap:wrap}
+.block-tools button{padding:7px 10px;font-size:13px}
+.block input[type=file]{padding:8px}
+.add-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;padding:12px;background:#faf6fb;border-radius:8px}
+@media(max-width:520px){
+.wrap{padding:10px}
+.panel{padding:15px}
+.postrow{align-items:flex-start}
+.postrow>span:last-child{display:flex;flex-direction:column}
+}
 </style>
 </head>
 <body>
-<main>
-<h1>CENTIBOY 관리자</h1>
 
-<section id="login">
-<h3>관리자 로그인</h3>
-<input id="email" type="email" placeholder="관리자 이메일">
-<input id="password" type="password" placeholder="비밀번호">
-<button onclick="login()">로그인</button>
-<p id="loginMessage"></p>
-</section>
+<div class="wrap">
+<div class="panel">
 
-<section id="app">
-<button onclick="logout()">로그아웃</button>
-<h2 id="formTitle">새 글 작성</h2>
+<h1>CENTIBOY ADMIN</h1>
 
+<div id="login">
+<p>관리자 계정으로 로그인하세요.</p>
+
+<label>이메일</label>
+<input id="email" type="email" autocomplete="username">
+
+<label>비밀번호</label>
+<input id="password" type="password" autocomplete="current-password">
+
+<div class="actions">
+<button id="loginBtn">로그인</button>
+<a href="index.html" style="align-self:center">사이트로 돌아가기</a>
+</div>
+</div>
+
+<div id="dashboard">
+<p>로그인되었습니다. 게시글을 관리할 수 있습니다.</p>
+
+<div class="actions">
+<button id="newBtn">새 글 작성</button>
+<button class="secondary" id="logoutBtn">로그아웃</button>
+<a href="index.html" style="align-self:center">사이트 보기</a>
+</div>
+
+<h3>게시글 목록</h3>
+<div id="postRows"></div>
+</div>
+
+<div id="editor">
+<hr>
+<h2 id="formHeading">새 글 작성</h2>
+
+<label>목차 / 카테고리</label>
 <select id="category">
 <option value="diary">diary</option>
 <option value="memoir">My Memoir</option>
@@ -43,150 +92,442 @@ button{background:#65357d;color:white;border:0;border-radius:5px}
 <option value="sdd">SDD</option>
 </select>
 
-<input id="title" placeholder="글 제목">
-<input id="date" type="text" placeholder="날짜 예: November 16, 2026">
-<input id="photos" type="file" accept="image/*" multiple>
-<textarea id="content" placeholder="본문을 입력하세요"></textarea>
+<label>제목</label>
+<input id="title" maxlength="200" placeholder="글 제목">
 
-<button onclick="savePost()">글 등록 / 수정</button>
-<button onclick="resetForm()" style="background:#777">새 글 작성으로 초기화</button>
+<label>날짜</label>
+<input id="postDate" placeholder="예: November 16, 2026">
 
-<h2>등록된 글</h2>
-<div id="posts">불러오는 중...</div>
-</section>
-</main>
+<label>본문 구성</label>
+<p class="hint">
+글과 사진을 원하는 순서대로 추가하세요.
+추가한 순서대로 게시글에 표시됩니다.
+각 블록의 위/아래 버튼으로 순서를 바꿀 수 있습니다.
+</p>
+
+<div id="blockList" class="block-list"></div>
+
+<div class="add-tools">
+<button type="button" id="addTextBtn">＋ 글 추가</button>
+<button type="button" id="addImageBtn">＋ 사진 추가</button>
+</div>
+
+<div class="actions">
+<button id="publishBtn">발행</button>
+<button class="secondary" id="cancelBtn">취소</button>
+</div>
+</div>
+
+<div id="status" role="status"></div>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 const SUPABASE_URL = "https://edwffngdcuvtuwyafbfc.supabase.co";
-const SUPABASE_KEY = "sb_publishable_KPsopKCE3KEi83KCsWyDtA_ZA3wsRDH";
-const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const SUPABASE_ANON_KEY = "sb_publishable_KPsopKCE3KEi83KCsWyDtA_ZA3wsRDH";
+
+const db = window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_ANON_KEY
+);
 
 let editingId = null;
+let blocks = [];
 
-async function login(){
-  const {error} = await db.auth.signInWithPassword({
-    email:document.getElementById("email").value.trim(),
-    password:document.getElementById("password").value
-  });
-  document.getElementById("loginMessage").textContent =
-    error ? "로그인 실패: "+error.message : "";
-  if(!error) showApp();
+const $ = id => document.getElementById(id);
+
+function status(message){
+$("status").textContent = message;
 }
 
-async function logout(){
-  await db.auth.signOut();
-  location.reload();
+function esc(s){
+return String(s ?? "").replace(/[&<>"']/g,c=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
+}[c]));
 }
 
-async function showApp(){
-  document.getElementById("login").style.display="none";
-  document.getElementById("app").style.display="block";
-  await loadPosts();
+function showLogin(){
+$("login").style.display="block";
+$("dashboard").style.display="none";
+$("editor").style.display="none";
+}
+
+function showDashboard(){
+$("login").style.display="none";
+$("dashboard").style.display="block";
+$("editor").style.display="none";
+loadPosts();
+}
+
+function showEditor(){
+$("editor").style.display="block";
 }
 
 async function loadPosts(){
-  const area=document.getElementById("posts");
-  const {data,error}=await db.from("posts")
-    .select("*").order("created_at",{ascending:false});
-  if(error){area.textContent="글을 불러오지 못했습니다: "+error.message;return;}
-  area.innerHTML="";
-  if(!data.length){area.textContent="등록된 글이 없습니다.";return;}
+const {data,error}=await db
+.from("posts")
+.select("id,title,category,post_date")
+.order("created_at",{ascending:false});
 
-  data.forEach(p=>{
-    const div=document.createElement("div");
-    div.className="post";
-    const heading=document.createElement("strong");
-    heading.textContent="["+p.category+"] "+p.title;
-    const date=document.createElement("p");
-    date.textContent=p.post_date||"";
-    const edit=document.createElement("button");
-    edit.className="small";
-    edit.textContent="수정";
-    edit.onclick=()=>editPost(p);
-    const del=document.createElement("button");
-    del.className="small";
-    del.style.background="#b33";
-    del.textContent="삭제";
-    del.onclick=()=>deletePost(p.id);
-    div.append(heading,date,edit,del);
-    area.appendChild(div);
-  });
+if(error){
+status("목록을 불러오지 못했습니다: "+error.message);
+return;
 }
 
-async function savePost(){
-  const category=document.getElementById("category").value;
-  const title=document.getElementById("title").value.trim();
-  const post_date=document.getElementById("date").value.trim();
-  const content=document.getElementById("content").value;
-  const files=[...document.getElementById("photos").files];
-
-  if(!title){alert("제목을 입력해 주세요.");return;}
-
-  const {data:{session}}=await db.auth.getSession();
-  if(!session){alert("먼저 로그인해 주세요.");return;}
-
-  let images=[];
-  if(editingId){
-    const {data:old}=await db.from("posts").select("images")
-      .eq("id",editingId).single();
-    images=old?.images||[];
-  }
-
-  for(const file of files){
-    const safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
-    const path=Date.now()+"_"+Math.random().toString(36).slice(2)+"_"+safeName;
-    const {error:uploadError}=await db.storage.from("post-images")
-      .upload(path,file);
-    if(uploadError){alert("사진 업로드 실패: "+uploadError.message);return;}
-    const {data:urlData}=db.storage.from("post-images").getPublicUrl(path);
-    images.push(urlData.publicUrl);
-  }
-
-  const post={category,title,post_date,content,images};
-  let result;
-  if(editingId){
-    result=await db.from("posts").update(post).eq("id",editingId);
-  }else{
-    result=await db.from("posts").insert(post);
-  }
-
-  if(result.error){alert("저장 실패: "+result.error.message);return;}
-  alert("글이 저장됐습니다.");
-  resetForm();
-  await loadPosts();
-}
-
-function editPost(p){
-  editingId=p.id;
-  document.getElementById("formTitle").textContent="글 수정";
-  document.getElementById("category").value=p.category;
-  document.getElementById("title").value=p.title||"";
-  document.getElementById("date").value=p.post_date||"";
-  document.getElementById("content").value=p.content||"";
-  document.getElementById("photos").value="";
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-async function deletePost(id){
-  if(!confirm("이 글을 삭제할까요?"))return;
-  const {error}=await db.from("posts").delete().eq("id",id);
-  if(error){alert("삭제 실패: "+error.message);return;}
-  await loadPosts();
+$("postRows").innerHTML=(data||[]).map(p=>`
+<div class="postrow">
+<span>
+<b>${esc(p.title)}</b><br>
+<small>${esc(p.category)} · ${esc(p.post_date||"")}</small>
+</span>
+<span>
+<button class="small" onclick="editPost('${p.id}')">수정</button>
+<button class="small danger" onclick="deletePost('${p.id}')">삭제</button>
+</span>
+</div>
+`).join("") || "<p>등록된 글이 없습니다.</p>";
 }
 
 function resetForm(){
-  editingId=null;
-  document.getElementById("formTitle").textContent="새 글 작성";
-  document.getElementById("category").value="diary";
-  document.getElementById("title").value="";
-  document.getElementById("date").value="";
-  document.getElementById("content").value="";
-  document.getElementById("photos").value="";
+editingId=null;
+blocks=[];
+
+$("formHeading").textContent="새 글 작성";
+$("category").value="diary";
+$("title").value="";
+$("postDate").value="";
+$("publishBtn").textContent="발행";
+
+renderBlocks();
 }
 
-db.auth.getSession().then(({data})=>{
-  if(data.session)showApp();
+function addText(value=""){
+blocks.push({type:"text",text:value});
+renderBlocks();
+}
+
+function addImage(url="",file=null){
+blocks.push({type:"image",url,file});
+renderBlocks();
+}
+
+function renderBlocks(){
+const host=$("blockList");
+
+if(!blocks.length){
+host.innerHTML='<p class="hint">아직 추가된 글이나 사진이 없습니다.</p>';
+return;
+}
+
+host.innerHTML=blocks.map((b,i)=>{
+const controls=`
+<div class="block-tools">
+<button type="button" class="light"
+onclick="moveBlock(${i},-1)"
+${i===0?"disabled":""}>↑ 위</button>
+
+<button type="button" class="light"
+onclick="moveBlock(${i},1)"
+${i===blocks.length-1?"disabled":""}>↓ 아래</button>
+
+<button type="button" class="danger"
+onclick="removeBlock(${i})">삭제</button>
+</div>`;
+
+if(b.type==="text"){
+return `
+<section class="block">
+<div class="block-head">
+<strong>글 블록 ${i+1}</strong>
+${controls}
+</div>
+<textarea data-text-index="${i}"
+placeholder="여기에 글을 입력하세요."></textarea>
+</section>`;
+}
+
+const preview=b.file
+? URL.createObjectURL(b.file)
+: b.url;
+
+return `
+<section class="block">
+<div class="block-head">
+<strong>사진 블록 ${i+1}</strong>
+${controls}
+</div>
+
+${preview
+? `<img src="${esc(preview)}" alt="첨부 사진 미리보기">`
+: ""}
+
+<input type="file" accept="image/*"
+onchange="replaceImage(${i},this.files[0])">
+
+<p class="hint">
+${b.file
+? esc(b.file.name)
+: (b.url?"기존 사진":"사진을 선택하세요.")}
+</p>
+</section>`;
+}).join("");
+
+host.querySelectorAll("textarea[data-text-index]").forEach(el=>{
+const i=Number(el.dataset.textIndex);
+el.value=blocks[i].text||"";
+
+el.addEventListener("input",()=>{
+blocks[i].text=el.value;
 });
+});
+}
+
+window.moveBlock=(i,delta)=>{
+const j=i+delta;
+
+if(j<0||j>=blocks.length)return;
+
+[blocks[i],blocks[j]]=[blocks[j],blocks[i]];
+
+renderBlocks();
+};
+
+window.removeBlock=i=>{
+blocks.splice(i,1);
+renderBlocks();
+};
+
+window.replaceImage=(i,file)=>{
+if(file){
+blocks[i].file=file;
+blocks[i].url="";
+renderBlocks();
+}
+};
+
+$("addTextBtn").onclick=()=>addText();
+$("addImageBtn").onclick=()=>addImage();
+
+$("loginBtn").onclick=async()=>{
+status("로그인 중...");
+
+const {error}=await db.auth.signInWithPassword({
+email:$("email").value.trim(),
+password:$("password").value
+});
+
+if(error){
+status("로그인 실패: "+error.message);
+return;
+}
+
+status("");
+showDashboard();
+};
+
+$("logoutBtn").onclick=async()=>{
+await db.auth.signOut();
+status("로그아웃했습니다.");
+showLogin();
+};
+
+$("newBtn").onclick=()=>{
+resetForm();
+showEditor();
+};
+
+$("cancelBtn").onclick=()=>{
+showDashboard();
+};
+
+window.editPost=async id=>{
+status("글을 불러오는 중...");
+
+const {data,error}=await db
+.from("posts")
+.select("*")
+.eq("id",id)
+.single();
+
+if(error){
+status("글을 불러오지 못했습니다: "+error.message);
+return;
+}
+
+editingId=id;
+
+$("formHeading").textContent="게시글 수정";
+$("publishBtn").textContent="수정 저장";
+
+$("category").value=data.category;
+$("title").value=data.title;
+$("postDate").value=data.post_date||"";
+
+if(Array.isArray(data.blocks)&&data.blocks.length){
+
+blocks=data.blocks.map(b=>
+b.type==="image"
+? {type:"image",url:b.url||"",file:null}
+: {type:"text",text:b.text||""}
+);
+
+}else{
+
+blocks=[];
+
+(Array.isArray(data.images)?data.images:[])
+.forEach(url=>{
+blocks.push({type:"image",url,file:null});
+});
+
+if(data.content){
+blocks.push({type:"text",text:data.content});
+}
+}
+
+renderBlocks();
+showEditor();
+status("");
+};
+
+window.deletePost=async id=>{
+if(!confirm("이 게시글을 삭제할까요?"))return;
+
+const {error}=await db
+.from("posts")
+.delete()
+.eq("id",id);
+
+if(error){
+status("삭제 실패: "+error.message);
+return;
+}
+
+status("게시글을 삭제했습니다.");
+loadPosts();
+};
+
+$("publishBtn").onclick=async()=>{
+const title=$("title").value.trim();
+
+if(!title){
+status("제목을 입력하세요.");
+return;
+}
+
+$("publishBtn").disabled=true;
+status("저장 중...");
+
+try{
+
+const savedBlocks=[];
+
+for(let i=0;i<blocks.length;i++){
+
+const b=blocks[i];
+
+if(b.type==="text"){
+
+if((b.text||"").trim()){
+savedBlocks.push({
+type:"text",
+text:b.text
+});
+}
+
+}else if(b.type==="image"){
+
+let url=b.url||"";
+
+if(b.file){
+
+const safeName=b.file.name.replace(
+/[^a-zA-Z0-9._-]/g,
+"_"
+);
+
+const path=`${crypto.randomUUID()}-${safeName}`;
+
+const {error:uploadError}=await db
+.storage
+.from("post-images")
+.upload(path,b.file,{
+cacheControl:"3600",
+upsert:false
+});
+
+if(uploadError)throw uploadError;
+
+url=db.storage
+.from("post-images")
+.getPublicUrl(path).data.publicUrl;
+}
+
+if(url){
+savedBlocks.push({
+type:"image",
+url
+});
+}
+}
+}
+
+const allImages=savedBlocks
+.filter(b=>b.type==="image")
+.map(b=>b.url);
+
+const allText=savedBlocks
+.filter(b=>b.type==="text")
+.map(b=>b.text)
+.join("\n\n");
+
+const payload={
+category:$("category").value,
+title,
+post_date:$("postDate").value.trim(),
+blocks:savedBlocks,
+images:allImages,
+content:allText
+};
+
+const result=editingId
+? await db.from("posts").update(payload).eq("id",editingId)
+: await db.from("posts").insert(payload);
+
+if(result.error)throw result.error;
+
+resetForm();
+status("저장했습니다. 일반 사이트에 반영됩니다.");
+showDashboard();
+
+}catch(e){
+
+status("저장 실패: "+(e.message||String(e)));
+
+}finally{
+
+$("publishBtn").disabled=false;
+
+}
+};
+
+(async()=>{
+const {data:{session}}=await db.auth.getSession();
+
+if(session){
+showDashboard();
+}else{
+showLogin();
+}
+})();
 </script>
+
 </body>
 </html>
