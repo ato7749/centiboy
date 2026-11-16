@@ -3,423 +3,469 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CENTIBOY</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>simdodam.com</title>
 
 <style>
+/* Badaboom BB: 로고에만 적용 */
+@font-face {
+  font-family: "Badaboom BB";
+  src: url("./BADABB__.TTF") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+}
+
+:root {
+  --purple: #65357d;
+  --pink: #ff1493;
+  --hot-pink: #e51b91;
+}
+
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    padding: 25px 10px;
-    background: #ffffff;
-    color: #65357d;
-    font-family: Georgia, "Times New Roman", serif;
+  margin: 0;
+  background: #fff;
+  color: var(--purple);
+  font-family: Georgia, "Times New Roman", serif;
 }
 
-.container {
-    width: 94%;
-    max-width: 720px;
-    min-height: 90vh;
-    margin: 0 auto;
-    padding: 40px 20px 60px;
-    border: 4px solid #ff1493;
-    box-shadow:
-        0 0 8px #ff1493,
-        0 0 18px #ff69b4,
-        0 0 30px rgba(255, 20, 147, 0.25);
+.page {
+  width: 94%;
+  max-width: 720px;
+  min-height: 85vh;
+  margin: 24px auto;
+  padding: 26px 20px 42px;
+  border: 4px solid var(--pink);
+  box-shadow: 0 0 18px #ff69b4;
+  overflow: hidden;
 }
 
-/* CENTIBOY 네온 로고 */
+header {
+  text-align: center;
+}
+
+/* 로고 */
 .logo {
-    display: block;
-    width: 100%;
-    margin: 0 auto 50px;
-    padding: 8px 0;
-    text-align: center;
-
-    color: #9b35e8;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 56px;
-    font-weight: 1000;
-    letter-spacing: 3px;
-    line-height: 1.2;
-
-    cursor: pointer;
-
-    text-shadow:
-        0 0 2px #ffffff,
-        0 0 5px #e7c4ff,
-        0 0 10px #c77dff,
-        0 0 20px #a020f0,
-        0 0 35px #8a00ff,
-        0 0 55px #7200d9;
-
-    filter: drop-shadow(0 0 8px #a020f0);
+  display: block;
+  width: 100%;
+  margin: 0 auto 22px;
+  color: #713b91;
+  font-family: "Badaboom BB", Impact, sans-serif;
+  font-size: clamp(22px, 7.5vw, 52px);
+  font-weight: normal;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-align: center;
+  white-space: nowrap;
+  text-shadow:
+    0 0 2px #c8a8e4,
+    0 0 6px #a45bd1,
+    0 0 12px #8b35c2,
+    0 0 20px #713b91;
 }
 
-/* 목차 */
-nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 17px;
-    margin-bottom: 55px;
-    text-align: center;
+/* 카테고리 메뉴 */
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px 22px;
+  margin: 10px auto 32px;
 }
 
-nav button {
-    border: none;
-    background: none;
-    padding: 5px;
-    color: #65357d;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 25px;
-    font-weight: bold;
-    cursor: pointer;
+.menu button {
+  border: 0;
+  padding: 6px 2px;
+  background: none;
+  color: var(--purple);
+  font: bold 28px Georgia, "Times New Roman", serif;
+  cursor: pointer;
 }
 
-nav button:hover,
-nav button.active {
-    color: #e51b91;
-}
-
-/* 카테고리 제목 */
-.category-heading {
-    margin: 0 0 30px;
-    text-align: center;
-    color: #65357d;
-    font-size: 27px;
-    font-weight: bold;
+.menu button:hover,
+.menu button.active {
+  color: var(--hot-pink);
+  text-decoration: underline;
+  text-underline-offset: 7px;
 }
 
 /* 게시글 목록 */
 #post-list {
-    width: 94%;
-    margin: 0 auto;
+  width: 92%;
+  margin: auto;
 }
 
 .post {
-    margin-bottom: 24px;
-    border-bottom: 1px solid #e8c7df;
-    padding-bottom: 18px;
+  padding: 18px 0;
+  border-bottom: 1px solid #e8cce2;
 }
 
-/* 게시글 제목 */
 .post-title {
-    display: block;
-    width: 100%;
-    padding: 8px 0;
-    border: none;
-    background: none;
-    color: #65357d;
-    text-align: left;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 19px;
-    font-weight: bold;
-    cursor: pointer;
-    overflow-wrap: anywhere;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--purple);
+  font: bold 30px Georgia, "Times New Roman", serif;
+  text-align: left;
+  cursor: pointer;
+  overflow-wrap: anywhere;
 }
 
 .post-title:hover {
-    color: #e51b91;
+  color: var(--hot-pink);
 }
 
-/* 게시글 상세 내용 */
+/* 제목을 눌러야 상세 내용 표시 */
 .post-details {
-    display: none;
-    padding: 12px 2px 5px;
+  display: none;
+  padding-top: 14px;
 }
 
 .post.open .post-details {
-    display: block;
+  display: block;
 }
 
 .post-date {
-    margin-bottom: 18px;
-    color: #8b6597;
-    font-size: 16px;
+  margin: 0 0 16px;
+  color: #9567a4;
+  font: 20px Georgia, "Times New Roman", serif;
 }
 
-.post-images {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 20px;
+/* 글 본문 */
+.post-block {
+  margin: 14px 0;
+  color: var(--purple);
+  font: 18px/1.8 Georgia, "Times New Roman", serif;
+  overflow-wrap: anywhere;
 }
 
-.post-images img {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-height: 600px;
-    object-fit: contain;
+.post-block.text {
+  white-space: pre-wrap;
 }
 
-.post-content {
-    color: #65357d;
-    font-size: 17px;
-    line-height: 1.9;
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
+/* 게시글 사진 */
+.post-block.image {
+  margin: 18px 0;
 }
 
-/* 게시글이 없을 때 */
-.empty-message {
-    padding: 30px 0;
-    text-align: center;
-    color: #a18aa8;
-    font-size: 16px;
+.post-block.image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 620px;
+  object-fit: contain;
 }
 
-.loading {
-    text-align: center;
-    padding: 30px 0;
+/* 안내 문구 */
+.empty {
+  padding: 40px 8px;
+  color: #9a789f;
+  text-align: center;
+  font: 18px Georgia, "Times New Roman", serif;
 }
 
-/* 관리자 */
+/* 관리자 페이지 링크 */
 .admin-link {
-    display: block;
-    margin-top: 60px;
-    text-align: center;
-    color: #a18aa8;
-    font-size: 13px;
-    text-decoration: none;
+  margin-top: 35px;
+  text-align: center;
+  font: 14px Arial, sans-serif;
 }
 
-.admin-link:hover {
-    color: #e51b91;
+.admin-link a {
+  color: #a98bb1;
+  text-decoration: none;
 }
 
-/* 모바일 */
-@media (max-width: 600px) {
-    body {
-        padding: 12px 5px;
-    }
+.admin-link a:hover {
+  color: var(--hot-pink);
+}
 
-    .container {
-        width: 98%;
-        padding: 30px 12px 45px;
-    }
+/* 모바일 화면 */
+@media (max-width: 520px) {
+  .page {
+    width: 94%;
+    margin: 12px auto;
+    padding: 20px 12px;
+  }
 
-    .logo {
-        font-size: 43px;
-        margin-bottom: 38px;
-    }
+  .logo {
+    font-size: clamp(22px, 7.5vw, 38px);
+    margin-bottom: 18px;
+  }
 
-    nav {
-        gap: 12px;
-        margin-bottom: 40px;
-    }
+  .menu {
+    gap: 8px 15px;
+  }
 
-    nav button {
-        font-size: 20px;
-    }
+  .menu button {
+    font-size: 23px;
+  }
 
-    .category-heading {
-        font-size: 24px;
-    }
+  #post-list {
+    width: 96%;
+  }
 
-    .post-title {
-        font-size: 18px;
-    }
+  .post-title {
+    font-size: 26px;
+  }
 
-    .post-content {
-        font-size: 16px;
-    }
+  .post-block {
+    font-size: 17px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="page">
 
-    <h1 class="logo" onclick="showCategory('diary')">
-        CENTIBOY
-    </h1>
+  <header>
+    <div class="logo">simdodam.com</div>
 
-    <nav>
-        <button class="active" data-category="diary"
-        onclick="showCategory('diary')">diary</button>
-
-        <button data-category="memoir"
-        onclick="showCategory('memoir')">My Memoir</button>
-
-        <button data-category="politics"
-        onclick="showCategory('politics')">politics</button>
-
-        <button data-category="travel"
-        onclick="showCategory('travel')">travel</button>
-
-        <button data-category="sdd"
-        onclick="showCategory('sdd')">SDD</button>
+    <nav class="menu" id="menu">
+      <button type="button" data-category="diary">diary</button>
+      <button type="button" data-category="memoir">My Memoir</button>
+      <button type="button" data-category="politics">politics</button>
+      <button type="button" data-category="travel">travel</button>
+      <button type="button" data-category="sdd">SDD</button>
     </nav>
+  </header>
 
-    <h2 class="category-heading" id="category-heading">
-        diary
-    </h2>
+  <main id="post-list">
+    <p class="empty">게시글을 불러오는 중입니다.</p>
+  </main>
 
-    <div id="post-list">
-        <p class="loading">게시글을 불러오는 중입니다.</p>
-    </div>
-
-    <a class="admin-link"
-       href="https://ato7749.github.io/centiboy/admin.html">
-       ADMIN
-    </a>
+  <div class="admin-link">
+    <a href="admin.html">ADMIN</a>
+  </div>
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
 const SUPABASE_URL =
-"https://edwffngdcuvtuwyafbfc.supabase.co";
+  "https://edwffngdcuvtuwyafbfc.supabase.co";
 
-const SUPABASE_KEY =
-"sb_publishable_KPsopKCE3KEi83KCsWyDtA_ZA3wsRDH";
+const SUPABASE_ANON_KEY =
+  "sb_publishable_KPsopKCE3KEi83KCsWyDtA_ZA3wsRDH";
 
 const db = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
 );
 
-let allPosts = [];
 let currentCategory = "diary";
 
-const categoryNames = {
-    diary: "diary",
-    memoir: "My Memoir",
-    politics: "politics",
-    travel: "travel",
-    sdd: "SDD"
-};
 
+/* HTML 문자 안전 처리 */
 function escapeHTML(value) {
-    return String(value ?? "").replace(/[&<>"']/g, function(char) {
-        return {
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            '"': "&quot;",
-            "'": "&#39;"
-        }[char];
-    });
+  return String(value ?? "").replace(/[&<>"']/g, ch => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[ch]));
 }
 
-function showCategory(category) {
-    currentCategory = category;
 
-    document.getElementById("category-heading").textContent =
-        categoryNames[category] || category;
+/* 게시글 열기 및 닫기 */
+function togglePost(id) {
+  const post = document.getElementById("post-" + id);
 
-    document.querySelectorAll("nav button").forEach(button => {
-        button.classList.toggle(
-            "active",
-            button.dataset.category === category
-        );
-    });
-
-    renderPosts();
+  if (post) {
+    post.classList.toggle("open");
+  }
 }
 
-function renderPosts() {
-    const list = document.getElementById("post-list");
 
-    const posts = allPosts.filter(post => {
-        return post.category === currentCategory &&
-               String(post.title || "").trim() !== "";
-    });
+/* 글과 사진을 관리자에서 정한 순서대로 표시 */
+function renderBlocks(post) {
 
-    if (posts.length === 0) {
-        list.innerHTML =
-        '<div class="empty-message">아직 게시글이 없습니다.</div>';
-        return;
-    }
+  if (
+    Array.isArray(post.blocks) &&
+    post.blocks.length > 0
+  ) {
 
-    list.innerHTML = posts.map((post, index) => {
-        const images = Array.isArray(post.images)
-            ? post.images
-            : [];
+    return post.blocks.map(block => {
 
-        const imageHTML = images
-            .filter(src => typeof src === "string" && src.trim() !== "")
-            .map(src => `
-                <img
-                    src="${escapeHTML(src)}"
-                    alt=""
-                    loading="lazy"
-                    onerror="this.style.display='none'"
-                >
-            `).join("");
+      if (block.type === "image" && block.url) {
 
         return `
-            <article class="post" id="post-${index}">
-
-                <button
-                    class="post-title"
-                    onclick="togglePost(${index})"
-                    aria-expanded="false"
-                    aria-controls="details-${index}">
-                    ${escapeHTML(post.title)}
-                </button>
-
-                <div class="post-details" id="details-${index}">
-
-                    <div class="post-date">
-                        ${escapeHTML(post.post_date || "")}
-                    </div>
-
-                    <div class="post-images">
-                        ${imageHTML}
-                    </div>
-
-                    <div class="post-content">${escapeHTML(post.content || "")}</div>
-
-                </div>
-            </article>
+          <div class="post-block image">
+            <img
+              src="${escapeHTML(block.url)}"
+              alt=""
+              loading="lazy"
+            >
+          </div>
         `;
+      }
+
+      if (block.type === "text" && block.text) {
+
+        return `
+          <div class="post-block text">${escapeHTML(block.text)}</div>
+        `;
+      }
+
+      return "";
+
     }).join("");
+  }
+
+
+  /* 기존 게시글 표시 방식도 유지 */
+  const images = Array.isArray(post.images)
+    ? post.images
+    : [];
+
+  const imageHTML = images.map(url => `
+    <div class="post-block image">
+      <img
+        src="${escapeHTML(url)}"
+        alt=""
+        loading="lazy"
+      >
+    </div>
+  `).join("");
+
+  const textHTML = post.content
+    ? `
+      <div class="post-block text">
+        ${escapeHTML(post.content)}
+      </div>
+    `
+    : "";
+
+  return imageHTML + textHTML;
 }
 
-function togglePost(index) {
-    const post = document.getElementById("post-" + index);
 
-    if (!post) return;
+/* 카테고리별 게시글 불러오기 */
+async function showCategory(category) {
 
-    const button = post.querySelector(".post-title");
-    const isOpen = post.classList.toggle("open");
+  currentCategory = category;
 
-    button.setAttribute("aria-expanded", String(isOpen));
+  document
+    .querySelectorAll("#menu button")
+    .forEach(button => {
+
+      button.classList.toggle(
+        "active",
+        button.dataset.category === category
+      );
+
+    });
+
+  const list = document.getElementById("post-list");
+
+  list.innerHTML =
+    '<p class="empty">게시글을 불러오는 중입니다.</p>';
+
+
+  const { data, error } = await db
+    .from("posts")
+    .select("*")
+    .eq("category", category)
+    .order("created_at", { ascending: false });
+
+
+  if (error) {
+
+    console.error("게시글 불러오기 오류:", error);
+
+    list.innerHTML =
+      '<p class="empty">게시글을 불러오지 못했습니다. 잠시 후 다시 접속해 주세요.</p>';
+
+    return;
+  }
+
+
+  if (!data || data.length === 0) {
+
+    list.innerHTML =
+      '<p class="empty">아직 게시글이 없습니다.</p>';
+
+    return;
+  }
+
+
+  list.innerHTML = data.map(post => `
+
+    <article
+      class="post"
+      id="post-${escapeHTML(post.id)}"
+    >
+
+      <h2>
+        <button
+          type="button"
+          class="post-title"
+          data-post-id="${escapeHTML(post.id)}"
+        >
+          ${escapeHTML(post.title)}
+        </button>
+      </h2>
+
+      <div class="post-details">
+
+        ${
+          post.post_date
+            ? `<p class="post-date">${escapeHTML(post.post_date)}</p>`
+            : ""
+        }
+
+        ${renderBlocks(post)}
+
+      </div>
+
+    </article>
+
+  `).join("");
+
 }
 
-async function loadPosts() {
-    const list = document.getElementById("post-list");
 
-    const { data, error } = await db
-        .from("posts")
-        .select("id,category,title,post_date,content,images,created_at")
-        .order("created_at", { ascending: false });
+/* 제목 클릭 이벤트 */
+document
+  .getElementById("post-list")
+  .addEventListener("click", event => {
 
-    if (error) {
-        console.error(error);
+    const button = event.target.closest(".post-title");
 
-        list.innerHTML =
-        '<div class="empty-message">게시글을 불러오지 못했습니다.</div>';
+    if (!button) return;
 
-        return;
-    }
+    togglePost(button.dataset.postId);
 
-    allPosts = data || [];
+  });
 
-    showCategory(currentCategory);
-}
 
-loadPosts();
+/* 카테고리 클릭 이벤트 */
+document
+  .querySelectorAll("#menu button")
+  .forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      showCategory(button.dataset.category);
+
+    });
+
+  });
+
+
+/* 처음 접속하면 diary 표시 */
+showCategory(currentCategory);
+
 </script>
 
 </body>
