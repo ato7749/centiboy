@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CENTIBOY 관리자</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:20px;background:#fff;color:#65357d;font-family:Georgia,serif}
+main{max-width:650px;margin:auto;border:3px solid #ff1493;padding:22px;box-shadow:0 0 14px #ff69b4}
+h1{text-align:center}
+input,textarea,select,button{width:100%;padding:13px;margin:8px 0;font-size:16px}
+textarea{min-height:160px}
+button{background:#65357d;color:white;border:0;border-radius:5px}
+.post{border-top:1px solid #ddd;padding:12px 0}
+.small{width:auto;padding:9px 15px;margin-right:5px}
+#app{display:none}
+</style>
+</head>
+<body>
+<main>
+<h1>CENTIBOY 관리자</h1>
+
+<section id="login">
+<h3>관리자 로그인</h3>
+<input id="email" type="email" placeholder="관리자 이메일">
+<input id="password" type="password" placeholder="비밀번호">
+<button onclick="login()">로그인</button>
+<p id="loginMessage"></p>
+</section>
+
+<section id="app">
+<button onclick="logout()">로그아웃</button>
+<h2 id="formTitle">새 글 작성</h2>
+
+<select id="category">
+<option value="diary">diary</option>
+<option value="memoir">My Memoir</option>
+<option value="politics">politics</option>
+<option value="travel">travel</option>
+<option value="sdd">SDD</option>
+</select>
+
+<input id="title" placeholder="글 제목">
+<input id="date" type="text" placeholder="날짜 예: November 16, 2026">
+<input id="photos" type="file" accept="image/*" multiple>
+<textarea id="content" placeholder="본문을 입력하세요"></textarea>
+
+<button onclick="savePost()">글 등록 / 수정</button>
+<button onclick="resetForm()" style="background:#777">새 글 작성으로 초기화</button>
+
+<h2>등록된 글</h2>
+<div id="posts">불러오는 중...</div>
+</section>
+</main>
+
+<script>
+const SUPABASE_URL = "https://edwffngdcuvtuwyafbfc.supabase.co";
+const SUPABASE_KEY = "sb_publishable_KPsopKCE3KEi83KCsWyDtA_ZA3wsRDH";
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let editingId = null;
+
+async function login(){
+  const {error} = await db.auth.signInWithPassword({
+    email:document.getElementById("email").value.trim(),
+    password:document.getElementById("password").value
+  });
+  document.getElementById("loginMessage").textContent =
+    error ? "로그인 실패: "+error.message : "";
+  if(!error) showApp();
+}
+
+async function logout(){
+  await db.auth.signOut();
+  location.reload();
+}
+
+async function showApp(){
+  document.getElementById("login").style.display="none";
+  document.getElementById("app").style.display="block";
+  await loadPosts();
+}
+
+async function loadPosts(){
+  const area=document.getElementById("posts");
+  const {data,error}=await db.from("posts")
+    .select("*").order("created_at",{ascending:false});
+  if(error){area.textContent="글을 불러오지 못했습니다: "+error.message;return;}
+  area.innerHTML="";
+  if(!data.length){area.textContent="등록된 글이 없습니다.";return;}
+
+  data.forEach(p=>{
+    const div=document.createElement("div");
+    div.className="post";
+    const heading=document.createElement("strong");
+    heading.textContent="["+p.category+"] "+p.title;
+    const date=document.createElement("p");
+    date.textContent=p.post_date||"";
+    const edit=document.createElement("button");
+    edit.className="small";
+    edit.textContent="수정";
+    edit.onclick=()=>editPost(p);
+    const del=document.createElement("button");
+    del.className="small";
+    del.style.background="#b33";
+    del.textContent="삭제";
+    del.onclick=()=>deletePost(p.id);
+    div.append(heading,date,edit,del);
+    area.appendChild(div);
+  });
+}
+
+async function savePost(){
+  const category=document.getElementById("category").value;
+  const title=document.getElementById("title").value.trim();
+  const post_date=document.getElementById("date").value.trim();
+  const content=document.getElementById("content").value;
+  const files=[...document.getElementById("photos").files];
+
+  if(!title){alert("제목을 입력해 주세요.");return;}
+
+  const {data:{session}}=await db.auth.getSession();
+  if(!session){alert("먼저 로그인해 주세요.");return;}
+
+  let images=[];
+  if(editingId){
+    const {data:old}=await db.from("posts").select("images")
+      .eq("id",editingId).single();
+    images=old?.images||[];
+  }
+
+  for(const file of files){
+    const safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
+    const path=Date.now()+"_"+Math.random().toString(36).slice(2)+"_"+safeName;
+    const {error:uploadError}=await db.storage.from("post-images")
+      .upload(path,file);
+    if(uploadError){alert("사진 업로드 실패: "+uploadError.message);return;}
+    const {data:urlData}=db.storage.from("post-images").getPublicUrl(path);
+    images.push(urlData.publicUrl);
+  }
+
+  const post={category,title,post_date,content,images};
+  let result;
+  if(editingId){
+    result=await db.from("posts").update(post).eq("id",editingId);
+  }else{
+    result=await db.from("posts").insert(post);
+  }
+
+  if(result.error){alert("저장 실패: "+result.error.message);return;}
+  alert("글이 저장됐습니다.");
+  resetForm();
+  await loadPosts();
+}
+
+function editPost(p){
+  editingId=p.id;
+  document.getElementById("formTitle").textContent="글 수정";
+  document.getElementById("category").value=p.category;
+  document.getElementById("title").value=p.title||"";
+  document.getElementById("date").value=p.post_date||"";
+  document.getElementById("content").value=p.content||"";
+  document.getElementById("photos").value="";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+async function deletePost(id){
+  if(!confirm("이 글을 삭제할까요?"))return;
+  const {error}=await db.from("posts").delete().eq("id",id);
+  if(error){alert("삭제 실패: "+error.message);return;}
+  await loadPosts();
+}
+
+function resetForm(){
+  editingId=null;
+  document.getElementById("formTitle").textContent="새 글 작성";
+  document.getElementById("category").value="diary";
+  document.getElementById("title").value="";
+  document.getElementById("date").value="";
+  document.getElementById("content").value="";
+  document.getElementById("photos").value="";
+}
+
+db.auth.getSession().then(({data})=>{
+  if(data.session)showApp();
+});
+</script>
+</body>
+</html>
