@@ -1,1858 +1,255 @@
+
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CENTIBOY</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-
-/* =====================================================
-   기본 설정
-===================================================== */
-
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;background:white;color:#7020a0;
+ font-family:Georgia,"Times New Roman",serif;
 }
-
-html {
-    scroll-behavior: smooth;
+body::before{
+ content:"";position:fixed;inset:8px;
+ border:2px solid #ff1493;
+ box-shadow:0 0 6px #ff1493,0 0 18px #ff1493,
+ 0 0 35px rgba(255,20,147,.45);
+ pointer-events:none;z-index:999;
 }
-
-body {
-    margin: 0;
-    padding: 0;
-
-    background: white;
-
-    color: #65357d;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+.container{
+ width:90%;max-width:1100px;
+ margin:auto;padding:55px 0 100px;
 }
-
-
-/* =====================================================
-   전체 페이지
-===================================================== */
-
-.page {
-    width: 94%;
-    max-width: 720px;
-    min-height: 100vh;
-
-    margin: 0 auto;
-
-    padding: 65px 28px 80px 28px;
-
-    background: white;
-
-    border: 4px solid #ff1493;
-
-    box-shadow:
-        0 0 18px #ff69b4;
+.home-logo{
+ display:block;width:min(520px,85%);
+ margin:0 auto 45px;cursor:pointer;
 }
-
-
-/* =====================================================
-   로고
-===================================================== */
-
-.logo-area {
-    width: 100%;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    margin-bottom: 55px;
+nav{
+ display:flex;justify-content:center;align-items:center;
+ flex-wrap:wrap;gap:12px 30px;margin-bottom:75px;
 }
-
-.logo {
-    display: block;
-
-    width: 300px;
-    max-width: 80%;
-
-    height: auto;
+nav a{
+ color:#7020a0;text-decoration:none;font-size:16px;
+ transition:.25s;
 }
-
-
-/* =====================================================
-   메뉴
-===================================================== */
-
-.menu {
-    width: 100%;
-
-    display: flex;
-
-    flex-wrap: wrap;
-
-    justify-content: center;
-    align-items: center;
-
-    gap: 28px 38px;
-
-    margin-bottom: 65px;
+nav a:hover,nav a.selected{
+ color:#ff1493;text-shadow:0 0 8px #ff1493;
 }
-
-.menu button {
-    border: none;
-    outline: none;
-
-    background: transparent;
-
-    padding: 0;
-
-    color: #65357d;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size: 30px;
-
-    cursor: pointer;
-
-    transition:
-        color 0.2s ease,
-        transform 0.2s ease;
+.page{display:none}
+.page.active{display:block}
+.page-title{font-size:25px;margin-bottom:25px}
+.page-text{font-size:15px;line-height:2}
+.post-list{width:100%;max-width:850px}
+.post{
+ border-bottom:1px solid #e8dce9;
+ padding:22px 0;
 }
-
-.menu button:hover {
-    color: #e51b91;
-
-    transform: scale(1.04);
+.post-title{
+ font-size:25px;color:#7020a0;
+ cursor:pointer;line-height:1.5;
 }
-
-.menu button.active {
-    color: #e51b91;
+.post-title:hover{color:#ff1493}
+.post-date{
+ color:#9875a5;font-size:14px;margin-top:7px;
 }
-
-
-/* =====================================================
-   글 목록
-===================================================== */
-
-#post-list {
-    width: 92%;
-
-    margin: 0 auto;
+.post-details{display:none;padding-top:22px}
+.post.open .post-details{display:block}
+.post-content{
+ white-space:pre-wrap;word-break:break-word;
+ font-size:16px;line-height:2;margin-top:20px;
 }
-
-
-/* =====================================================
-   글 하나
-===================================================== */
-
-.post {
-    margin-bottom: 65px;
-
-    padding-bottom: 45px;
-
-    border-bottom:
-        1px solid #ddd;
+.post-images{
+ display:flex;flex-direction:column;
+ gap:18px;margin-top:20px;
 }
-
-
-/* =====================================================
-   카테고리
-===================================================== */
-
-.post-category {
-    color: #999;
-
-    font-size: 17px;
-
-    margin-bottom: 12px;
+.post-images img{
+ display:block;width:auto;max-width:100%;
+ max-height:650px;object-fit:contain;
+ margin:0 auto;
 }
-
-
-/* =====================================================
-   제목
-===================================================== */
-
-.post-title {
-    margin: 0;
-
-    color: #65357d;
-
-    font-size: 38px;
-
-    font-weight: normal;
-
-    line-height: 1.3;
-
-    cursor: pointer;
-
-    transition:
-        color 0.2s ease;
+.message{font-size:15px;color:#9875a5;padding:15px 0}
+@media(max-width:600px){
+ body::before{inset:6px}
+ .container{width:86%;padding-top:45px}
+ .home-logo{width:92%;margin-bottom:35px}
+ nav{gap:12px 18px;margin-bottom:60px}
+ nav a{font-size:14px}
+ .page-title{font-size:21px}
+ .post-title{font-size:21px}
+ .post-content{font-size:15px}
 }
-
-.post-title:hover {
-    color: #e51b91;
-}
-
-
-/* =====================================================
-   내용 숨기기
-===================================================== */
-
-.post-details {
-    display: none;
-}
-
-.post.open .post-details {
-    display: block;
-}
-
-
-/* =====================================================
-   날짜
-===================================================== */
-
-.post-date {
-    color: #777;
-
-    font-size: 23px;
-
-    margin-top: 20px;
-
-    margin-bottom: 25px;
-}
-
-
-/* =====================================================
-   사진
-===================================================== */
-
-.post-image {
-    display: block;
-
-    width: 100%;
-
-    max-height: 500px;
-
-    object-fit: cover;
-
-    margin: 0 auto 25px auto;
-}
-
-
-/* =====================================================
-   본문
-===================================================== */
-
-.post-content {
-    color: #555;
-
-    font-size: 20px;
-
-    line-height: 1.9;
-
-    white-space: pre-line;
-
-    word-break: break-word;
-}
-
-
-/* =====================================================
-   글 없음
-===================================================== */
-
-.no-post {
-    text-align: center;
-
-    padding: 50px 10px;
-
-    color: #999;
-
-    font-size: 20px;
-}
-
-
-/* =====================================================
-   모바일
-===================================================== */
-
-@media (max-width: 600px) {
-
-    .page {
-        width: 96%;
-
-        padding:
-            55px 15px 70px 15px;
-    }
-
-    .logo {
-        width: 270px;
-
-        max-width: 82%;
-    }
-
-    .logo-area {
-        margin-bottom: 45px;
-    }
-
-    .menu {
-        gap:
-            24px 30px;
-
-        margin-bottom: 60px;
-    }
-
-    .menu button {
-        font-size: 28px;
-    }
-
-    #post-list {
-        width: 90%;
-    }
-
-    .post-title {
-        font-size: 32px;
-    }
-
-    .post-date {
-        font-size: 21px;
-    }
-
-    .post-content {
-        font-size: 19px;
-
-        line-height: 1.8;
-    }
-
-}
-
 </style>
-
 </head>
 
-
 <body>
+<div class="container">
 
+<a href="#" onclick="showPage('home');return false;">
+<img src="centiboy.png" alt="CENTIBOY" class="home-logo">
+</a>
 
-<div class="page">
-
-
-<!-- =====================================================
-     로고
-===================================================== -->
-
-<div class="logo-area">
-
-    <img
-        src="file_000000003ad88206b1a20683e46c1497.png"
-        class="logo"
-        alt="CENTIBOY">
-
-</div>
-
-
-<!-- =====================================================
-     메뉴
-===================================================== -->
-
-<nav class="menu">
-
-    <button
-        id="button-diary"
-        onclick="showCategory('diary')">
-        diary
-    </button>
-
-    <button
-        id="button-memoir"
-        onclick="showCategory('memoir')">
-        My Memoir
-    </button>
-
-    <button
-        id="button-politics"
-        onclick="showCategory('politics')">
-        politics
-    </button>
-
-    <button
-        id="button-travel"
-        onclick="showCategory('travel')">
-        travel
-    </button>
-
-    <button
-        id="button-sdd"
-        onclick="showCategory('sdd')">
-        SDD
-    </button>
-
+<nav>
+<a href="#" data-page="diary" onclick="showPage('diary');return false;">diary</a>
+<a href="#" data-page="memoir" onclick="showPage('memoir');return false;">My Memoir</a>
+<a href="#" data-page="politics" onclick="showPage('politics');return false;">politics</a>
+<a href="#" data-page="travel" onclick="showPage('travel');return false;">travel</a>
+<a href="#" data-page="sdd" onclick="showPage('sdd');return false;">SDD</a>
 </nav>
 
+<main>
+<section id="home" class="page active"></section>
 
-<!-- =====================================================
-     글 표시
-===================================================== -->
+<section id="diary" class="page">
+<div class="page-title">diary</div>
+<div class="page-text">My daily records.</div>
+<div class="post-list" id="list-diary"></div>
+</section>
 
-<main id="post-list"></main>
+<section id="memoir" class="page">
+<div class="page-title">My Memoir</div>
+<div class="page-text">Personal memories and stories.</div>
+<div class="post-list" id="list-memoir"></div>
+</section>
 
+<section id="politics" class="page">
+<div class="page-title">politics</div>
+<div class="page-text">Political thoughts and records.</div>
+<div class="post-list" id="list-politics"></div>
+</section>
 
+<section id="travel" class="page">
+<div class="page-title">travel</div>
+<div class="page-text">Travel records and photographs.</div>
+<div class="post-list" id="list-travel"></div>
+</section>
+
+<section id="sdd" class="page">
+<div class="page-title">SDD</div>
+<div class="page-text">SDD archive.</div>
+<div class="post-list" id="list-sdd"></div>
+</section>
+</main>
 </div>
 
-
 <script>
+const SUPABASE_URL =
+"https://edwffngdcuvtuwyafbfc.supabase.co";
 
-/* =====================================================
-   글 작성 방법
-=====================================================
+const SUPABASE_KEY =
+"sb_publishable_KPsopKCE3KEi83KCsWyDtA_ZA3wsRDH";
 
-각 글은 아래 4가지만 수정하면 됩니다.
+const db=window.supabase.createClient(
+ SUPABASE_URL,SUPABASE_KEY
+);
 
-title
-date
-images
-content
+const categories=["diary","memoir","politics","travel","sdd"];
 
+function showPage(pageId){
+ document.querySelectorAll(".page").forEach(p=>{
+  p.classList.remove("active");
+ });
+ document.getElementById(pageId).classList.add("active");
 
----------------------------------------------------------
-제목
----------------------------------------------------------
+ document.querySelectorAll("nav a").forEach(a=>{
+  a.classList.toggle("selected",a.dataset.page===pageId);
+ });
 
-title: "제목"
-
-
----------------------------------------------------------
-날짜
----------------------------------------------------------
-
-date: "September 22 2026"
-
-
----------------------------------------------------------
-사진 없음
----------------------------------------------------------
-
-images: []
-
-
----------------------------------------------------------
-사진 한 장
----------------------------------------------------------
-
-images: [
-    "사진.jpg"
-]
-
-
----------------------------------------------------------
-사진 여러 장
----------------------------------------------------------
-
-images: [
-    "사진1.jpg",
-    "사진2.jpg",
-    "사진3.jpg"
-]
-
-
----------------------------------------------------------
-본문
----------------------------------------------------------
-
-content: `
-첫 번째 문장입니다.
-
-두 번째 문장입니다.
-
-세 번째 문장입니다.
-`
-
-
-===================================================== */
-
-
-/* =====================================================
-   DIARY
-   50개
-===================================================== */
-
-const diary1 = {
-    title: "영주시 풍기읍",
-    date: "May 12 2026",
-    images: [
-        "풍기1.jpg",
-        "풍기2.jpg",
-        "풍기3.jpg",
-        "풍기4.jpg"
-    ],
-    content: ""
-};
-
-const diary2 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary3 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary4 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary5 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary6 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary7 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary8 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary9 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary10 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary11 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary12 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary13 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary14 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary15 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary16 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary17 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary18 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary19 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary20 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary21 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary22 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary23 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary24 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary25 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary26 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary27 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary28 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary29 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary30 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary31 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary32 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary33 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary34 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary35 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary36 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary37 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary38 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary39 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary40 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary41 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary42 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary43 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary44 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary45 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary46 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary47 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary48 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary49 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const diary50 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-
-/* =====================================================
-   MY MEMOIR
-   50개
-===================================================== */
-
-const memoir1 = {
-    title: "악행의 자서전",
-    date: "January 10 2022",
-    images: [],
-    content: `
-누군가를 힘들게 했던 일.
-나의 잘못으로 인해 고통받은 이들의 이야기를 적습니다.
-`
-};
-
-const memoir2 = {
-    title: "에로스 신의 저주",
-    date: "September 18 2026",
-    images: [],
-    content: `
-왜 자살하려는 사람에게 칼을 쥐어줍니까.
-`
-};
-
-const memoir3 = {
-    title: "한탄",
-    date: "November 7 2025",
-    images: [],
-    content: `
-지나간 일들을 떠올리며 과거에 대해 한탄하고 있다.
-
-그럴걸 이라는 생각보다
-그러지 말걸 이라는 생각이 더 많다.
-`
-};
-
-const memoir4 = {
-    title: "왜곡된 증오",
-    date: "January 19 2025",
-    images: [],
-    content: `
-나는 다른 사람들이 남들보다 우월하고 잘났다는 식의 생각을 가지며 살아가는 줄 알았다.
-
-그렇기에 나는 모두를 이기적이고 자만심이 가득한
-혐오스런 나르시시스트일 줄 알았다.
-
-이제서야 깨닫는다.
-
-내가 싫어하던 자만감 넘치는 사람은
-친구도 가족도 아닌 나였다.
-`
-};
-
-const memoir5 = {
-    title: "착각과 집착",
-    date: "September 19 2026",
-    images: [],
-    content: `
-내가 살아가는 이유가 뭘까.
-
-고통받고 절망적이어도 계속 살아가는 이유가 뭘까.
-
-나에게도 살아가는 동기가 있으면 좋겠다.
-
-나는 자식을 가지고 싶다.
-
-만약 나에게 자녀가 있다면
-이렇게 하루하루 하염없이 고통스럽게 살지 않을 것이다.
-
-내가 열심히 살아야 자녀의 유년기가 보장되기 때문에.
-
-그렇지만 지금은 뭘 위해서 왜 살아가야 할까.
-
-살아갈 이유도 목적도 의욕도 없다.
-
-죽는 건 싫다.
-
-살기도 싫다.
-`
-};
-
-const memoir6 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir7 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir8 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir9 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir10 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir11 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir12 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir13 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir14 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir15 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir16 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir17 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir18 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir19 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir20 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir21 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir22 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir23 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir24 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir25 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir26 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir27 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir28 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir29 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir30 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir31 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir32 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir33 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir34 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir35 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir36 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir37 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir38 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir39 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir40 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir41 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir42 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir43 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir44 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir45 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir46 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir47 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir48 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir49 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const memoir50 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-
-/* =====================================================
-   POLITICS
-   50개
-===================================================== */
-
-const politics1 = {
-    title: "하드위키",
-    date: "November 11 2025",
-    images: [
-        "하드위키.jpg"
-    ],
-    content: `
-하드위키.
-
-사기까지 정말 많은 노력이 필요했다.
-
-좆도 아닌 벌레새끼때문에
-뭐이리 고생했었는지.
-
-미련할때였다.
-`
-};
-
-const politics2={title:"독 도마뱀 물림사고",date:"April 14 2026",images:[],content:"욕심의 한계였다. 너무나도 후회되고 짜증났다.그깟 돈 몇푼때문에 손가락이 이지랄이나다니. 충격과 한탄의 하루였다."};
-const politics3={title:"",date:"",images:[],content:""};
-const politics4={title:"",date:"",images:[],content:""};
-const politics5={title:"",date:"",images:[],content:""};
-const politics6={title:"",date:"",images:[],content:""};
-const politics7={title:"",date:"",images:[],content:""};
-const politics8={title:"",date:"",images:[],content:""};
-const politics9={title:"",date:"",images:[],content:""};
-const politics10={title:"",date:"",images:[],content:""};
-const politics11={title:"",date:"",images:[],content:""};
-const politics12={title:"",date:"",images:[],content:""};
-const politics13={title:"",date:"",images:[],content:""};
-const politics14={title:"",date:"",images:[],content:""};
-const politics15={title:"",date:"",images:[],content:""};
-const politics16={title:"",date:"",images:[],content:""};
-const politics17={title:"",date:"",images:[],content:""};
-const politics18={title:"",date:"",images:[],content:""};
-const politics19={title:"",date:"",images:[],content:""};
-const politics20={title:"",date:"",images:[],content:""};
-const politics21={title:"",date:"",images:[],content:""};
-const politics22={title:"",date:"",images:[],content:""};
-const politics23={title:"",date:"",images:[],content:""};
-const politics24={title:"",date:"",images:[],content:""};
-const politics25={title:"",date:"",images:[],content:""};
-const politics26={title:"",date:"",images:[],content:""};
-const politics27={title:"",date:"",images:[],content:""};
-const politics28={title:"",date:"",images:[],content:""};
-const politics29={title:"",date:"",images:[],content:""};
-const politics30={title:"",date:"",images:[],content:""};
-const politics31={title:"",date:"",images:[],content:""};
-const politics32={title:"",date:"",images:[],content:""};
-const politics33={title:"",date:"",images:[],content:""};
-const politics34={title:"",date:"",images:[],content:""};
-const politics35={title:"",date:"",images:[],content:""};
-const politics36={title:"",date:"",images:[],content:""};
-const politics37={title:"",date:"",images:[],content:""};
-const politics38={title:"",date:"",images:[],content:""};
-const politics39={title:"",date:"",images:[],content:""};
-const politics40={title:"",date:"",images:[],content:""};
-const politics41={title:"",date:"",images:[],content:""};
-const politics42={title:"",date:"",images:[],content:""};
-const politics43={title:"",date:"",images:[],content:""};
-const politics44={title:"",date:"",images:[],content:""};
-const politics45={title:"",date:"",images:[],content:""};
-const politics46={title:"",date:"",images:[],content:""};
-const politics47={title:"",date:"",images:[],content:""};
-const politics48={title:"",date:"",images:[],content:""};
-const politics49={title:"",date:"",images:[],content:""};
-const politics50={title:"",date:"",images:[],content:""};
-
-
-/* =====================================================
-   TRAVEL
-   50개
-===================================================== */
-
-const travel1 = {
-    title: "",
-    date: "",
-    images: [],
-    content: ""
-};
-
-const travel2 = {
-    title: "서귀포시",
-    date: "December 20 2025",
-    images: [
-        "J1.jpg"
-    ],
-    content: `
-서귀포에서
-`
-};
-
-const travel3={title:"",date:"",images:[],content:""};
-const travel4={title:"",date:"",images:[],content:""};
-const travel5={title:"",date:"",images:[],content:""};
-const travel6={title:"",date:"",images:[],content:""};
-const travel7={title:"",date:"",images:[],content:""};
-const travel8={title:"",date:"",images:[],content:""};
-const travel9={title:"",date:"",images:[],content:""};
-const travel10={title:"",date:"",images:[],content:""};
-const travel11={title:"",date:"",images:[],content:""};
-const travel12={title:"",date:"",images:[],content:""};
-const travel13={title:"",date:"",images:[],content:""};
-const travel14={title:"",date:"",images:[],content:""};
-const travel15={title:"",date:"",images:[],content:""};
-const travel16={title:"",date:"",images:[],content:""};
-const travel17={title:"",date:"",images:[],content:""};
-const travel18={title:"",date:"",images:[],content:""};
-const travel19={title:"",date:"",images:[],content:""};
-const travel20={title:"",date:"",images:[],content:""};
-const travel21={title:"",date:"",images:[],content:""};
-const travel22={title:"",date:"",images:[],content:""};
-const travel23={title:"",date:"",images:[],content:""};
-const travel24={title:"",date:"",images:[],content:""};
-const travel25={title:"",date:"",images:[],content:""};
-const travel26={title:"",date:"",images:[],content:""};
-const travel27={title:"",date:"",images:[],content:""};
-const travel28={title:"",date:"",images:[],content:""};
-const travel29={title:"",date:"",images:[],content:""};
-const travel30={title:"",date:"",images:[],content:""};
-const travel31={title:"",date:"",images:[],content:""};
-const travel32={title:"",date:"",images:[],content:""};
-const travel33={title:"",date:"",images:[],content:""};
-const travel34={title:"",date:"",images:[],content:""};
-const travel35={title:"",date:"",images:[],content:""};
-const travel36={title:"",date:"",images:[],content:""};
-const travel37={title:"",date:"",images:[],content:""};
-const travel38={title:"",date:"",images:[],content:""};
-const travel39={title:"",date:"",images:[],content:""};
-const travel40={title:"",date:"",images:[],content:""};
-const travel41={title:"",date:"",images:[],content:""};
-const travel42={title:"",date:"",images:[],content:""};
-const travel43={title:"",date:"",images:[],content:""};
-const travel44={title:"",date:"",images:[],content:""};
-const travel45={title:"",date:"",images:[],content:""};
-const travel46={title:"",date:"",images:[],content:""};
-const travel47={title:"",date:"",images:[],content:""};
-const travel48={title:"",date:"",images:[],content:""};
-const travel49={title:"",date:"",images:[],content:""};
-
-const travel50 = {
-    title: "시드니",
-    date: "December 20 2024",
-    images: [
-        "시드니1.jpg"
-    ],
-    content: `
-생일을 기념해서 방문한 시드니
-`
-};
-
-
-/* =====================================================
-   SDD
-   50개
-===================================================== */
-
-const sdd1 = {
-    title: "SDD",
-    date: "February 10 2026",
-    images: [],
-    content: `
-SDD.
-`
-};
-
-const sdd2={title:"",date:"",images:[],content:""};
-const sdd3={title:"",date:"",images:[],content:""};
-const sdd4={title:"",date:"",images:[],content:""};
-const sdd5={title:"",date:"",images:[],content:""};
-const sdd6={title:"",date:"",images:[],content:""};
-const sdd7={title:"",date:"",images:[],content:""};
-const sdd8={title:"",date:"",images:[],content:""};
-const sdd9={title:"",date:"",images:[],content:""};
-const sdd10={title:"",date:"",images:[],content:""};
-const sdd11={title:"",date:"",images:[],content:""};
-const sdd12={title:"",date:"",images:[],content:""};
-const sdd13={title:"",date:"",images:[],content:""};
-const sdd14={title:"",date:"",images:[],content:""};
-const sdd15={title:"",date:"",images:[],content:""};
-const sdd16={title:"",date:"",images:[],content:""};
-const sdd17={title:"",date:"",images:[],content:""};
-const sdd18={title:"",date:"",images:[],content:""};
-const sdd19={title:"",date:"",images:[],content:""};
-const sdd20={title:"",date:"",images:[],content:""};
-const sdd21={title:"",date:"",images:[],content:""};
-const sdd22={title:"",date:"",images:[],content:""};
-const sdd23={title:"",date:"",images:[],content:""};
-const sdd24={title:"",date:"",images:[],content:""};
-const sdd25={title:"",date:"",images:[],content:""};
-const sdd26={title:"",date:"",images:[],content:""};
-const sdd27={title:"",date:"",images:[],content:""};
-const sdd28={title:"",date:"",images:[],content:""};
-const sdd29={title:"",date:"",images:[],content:""};
-const sdd30={title:"",date:"",images:[],content:""};
-const sdd31={title:"",date:"",images:[],content:""};
-const sdd32={title:"",date:"",images:[],content:""};
-const sdd33={title:"",date:"",images:[],content:""};
-const sdd34={title:"",date:"",images:[],content:""};
-const sdd35={title:"",date:"",images:[],content:""};
-const sdd36={title:"",date:"",images:[],content:""};
-const sdd37={title:"",date:"",images:[],content:""};
-const sdd38={title:"",date:"",images:[],content:""};
-const sdd39={title:"",date:"",images:[],content:""};
-const sdd40={title:"",date:"",images:[],content:""};
-const sdd41={title:"",date:"",images:[],content:""};
-const sdd42={title:"",date:"",images:[],content:""};
-const sdd43={title:"",date:"",images:[],content:""};
-const sdd44={title:"",date:"",images:[],content:""};
-const sdd45={title:"",date:"",images:[],content:""};
-const sdd46={title:"",date:"",images:[],content:""};
-const sdd47={title:"",date:"",images:[],content:""};
-const sdd48={title:"",date:"",images:[],content:""};
-const sdd49={title:"",date:"",images:[],content:""};
-const sdd50={title:"",date:"",images:[],content:""};
-
-
-/* =====================================================
-   모든 글 연결
-===================================================== */
-
-const posts = {
-
-    diary: [
-        diary1, diary2, diary3, diary4, diary5,
-        diary6, diary7, diary8, diary9, diary10,
-        diary11, diary12, diary13, diary14, diary15,
-        diary16, diary17, diary18, diary19, diary20,
-        diary21, diary22, diary23, diary24, diary25,
-        diary26, diary27, diary28, diary29, diary30,
-        diary31, diary32, diary33, diary34, diary35,
-        diary36, diary37, diary38, diary39, diary40,
-        diary41, diary42, diary43, diary44, diary45,
-        diary46, diary47, diary48, diary49, diary50
-    ],
-
-    memoir: [
-        memoir1, memoir2, memoir3, memoir4, memoir5,
-        memoir6, memoir7, memoir8, memoir9, memoir10,
-        memoir11, memoir12, memoir13, memoir14, memoir15,
-        memoir16, memoir17, memoir18, memoir19, memoir20,
-        memoir21, memoir22, memoir23, memoir24, memoir25,
-        memoir26, memoir27, memoir28, memoir29, memoir30,
-        memoir31, memoir32, memoir33, memoir34, memoir35,
-        memoir36, memoir37, memoir38, memoir39, memoir40,
-        memoir41, memoir42, memoir43, memoir44, memoir45,
-        memoir46, memoir47, memoir48, memoir49, memoir50
-    ],
-
-    politics: [
-        politics1, politics2, politics3, politics4, politics5,
-        politics6, politics7, politics8, politics9, politics10,
-        politics11, politics12, politics13, politics14, politics15,
-        politics16, politics17, politics18, politics19, politics20,
-        politics21, politics22, politics23, politics24, politics25,
-        politics26, politics27, politics28, politics29, politics30,
-        politics31, politics32, politics33, politics34, politics35,
-        politics36, politics37, politics38, politics39, politics40,
-        politics41, politics42, politics43, politics44, politics45,
-        politics46, politics47, politics48, politics49, politics50
-    ],
-
-    travel: [
-        travel1, travel2, travel3, travel4, travel5,
-        travel6, travel7, travel8, travel9, travel10,
-        travel11, travel12, travel13, travel14, travel15,
-        travel16, travel17, travel18, travel19, travel20,
-        travel21, travel22, travel23, travel24, travel25,
-        travel26, travel27, travel28, travel29, travel30,
-        travel31, travel32, travel33, travel34, travel35,
-        travel36, travel37, travel38, travel39, travel40,
-        travel41, travel42, travel43, travel44, travel45,
-        travel46, travel47, travel48, travel49, travel50
-    ],
-
-    sdd: [
-        sdd1, sdd2, sdd3, sdd4, sdd5,
-        sdd6, sdd7, sdd8, sdd9, sdd10,
-        sdd11, sdd12, sdd13, sdd14, sdd15,
-        sdd16, sdd17, sdd18, sdd19, sdd20,
-        sdd21, sdd22, sdd23, sdd24, sdd25,
-        sdd26, sdd27, sdd28, sdd29, sdd30,
-        sdd31, sdd32, sdd33, sdd34, sdd35,
-        sdd36, sdd37, sdd38, sdd39, sdd40,
-        sdd41, sdd42, sdd43, sdd44, sdd45,
-        sdd46, sdd47, sdd48, sdd49, sdd50
-    ]
-
-};
-
-
-/* =====================================================
-   카테고리 이름
-===================================================== */
-
-const categoryNames = {
-
-    diary: "diary",
-
-    memoir: "My Memoir",
-
-    politics: "politics",
-
-    travel: "travel",
-
-    sdd: "SDD"
-
-};
-
-
-/* =====================================================
-   날짜 변환
-===================================================== */
-
-function getPostDate(post) {
-
-    if (
-        !post.date ||
-        typeof post.date !== "string" ||
-        post.date.trim() === ""
-    ) {
-        return 0;
-    }
-
-    const time =
-        new Date(post.date).getTime();
-
-    if (isNaN(time)) {
-        return 0;
-    }
-
-    return time;
+ window.scrollTo({top:0,behavior:"smooth"});
 }
 
-
-/* =====================================================
-   글 열기 / 닫기
-===================================================== */
-
-function togglePost(article) {
-
-    article.classList.toggle("open");
-
+function addText(parent,tag,className,value){
+ const el=document.createElement(tag);
+ el.className=className;
+ el.textContent=value||"";
+ parent.appendChild(el);
+ return el;
 }
 
-
-/* =====================================================
-   카테고리 표시
-===================================================== */
-
-function showCategory(category) {
-
-    const postList =
-        document.getElementById("post-list");
-
-    if (!postList) {
-        return;
-    }
-
-    postList.innerHTML = "";
-
-
-    /* -------------------------------------------------
-       메뉴 활성화
-    ------------------------------------------------- */
-
-    document
-        .querySelectorAll(".menu button")
-        .forEach(function(button) {
-
-            button.classList.remove("active");
-
-        });
-
-
-    const activeButton =
-        document.getElementById(
-            "button-" + category
-        );
-
-    if (activeButton) {
-        activeButton.classList.add("active");
-    }
-
-
-    /* -------------------------------------------------
-       글 가져오기
-    ------------------------------------------------- */
-
-    let categoryPosts =
-        posts[category] || [];
-
-
-    /* -------------------------------------------------
-       제목이 있는 글만 표시
-    ------------------------------------------------- */
-
-    const visiblePosts =
-        categoryPosts.filter(function(post) {
-
-            return (
-                post &&
-                typeof post.title === "string" &&
-                post.title.trim() !== ""
-            );
-
-        });
-
-
-    /* -------------------------------------------------
-       최신 글이 위로
-    ------------------------------------------------- */
-
-    visiblePosts.sort(function(a, b) {
-
-        const dateA =
-            getPostDate(a);
-
-        const dateB =
-            getPostDate(b);
-
-        return dateB - dateA;
-
-    });
-
-
-    /* -------------------------------------------------
-       글이 없을 경우
-    ------------------------------------------------- */
-
-    if (visiblePosts.length === 0) {
-
-        postList.innerHTML = `
-
-            <div class="no-post">
-                아직 등록된 글이 없습니다.
-            </div>
-
-        `;
-
-        return;
-    }
-
-
-    /* -------------------------------------------------
-       글 생성
-    ------------------------------------------------- */
-
-    visiblePosts.forEach(function(post) {
-
-        const article =
-            document.createElement("article");
-
-        article.className = "post";
-
-
-        /* =================================================
-           날짜
-        ================================================= */
-
-        let dateHTML = "";
-
-        if (
-            post.date &&
-            typeof post.date === "string" &&
-            post.date.trim() !== ""
-        ) {
-
-            dateHTML = `
-
-                <div class="post-date">
-                    ${escapeHTML(post.date)}
-                </div>
-
-            `;
-
-        }
-
-
-        /* =================================================
-           사진
-        ================================================= */
-
-        let imageHTML = "";
-
-        if (Array.isArray(post.images)) {
-
-            post.images.forEach(function(image) {
-
-                if (
-                    typeof image === "string" &&
-                    image.trim() !== ""
-                ) {
-
-                    imageHTML += `
-
-                        <img
-                            src="${escapeHTML(image)}"
-                            class="post-image"
-                            alt="${escapeHTML(post.title)}"
-                            loading="lazy"
-                            onerror="this.style.display='none';">
-
-                    `;
-
-                }
-
-            });
-
-        }
-
-
-        /* =================================================
-           본문
-        ================================================= */
-
-        let contentHTML = "";
-
-        if (
-            post.content &&
-            typeof post.content === "string" &&
-            post.content.trim() !== ""
-        ) {
-
-            contentHTML = `
-
-                <div class="post-content">
-                    ${escapeHTML(post.content)}
-                </div>
-
-            `;
-
-        }
-
-
-        /* =================================================
-           글 전체
-        ================================================= */
-
-        article.innerHTML = `
-
-            <div class="post-category">
-                ${escapeHTML(categoryNames[category])}
-            </div>
-
-            <h2
-                class="post-title"
-                onclick="togglePost(this.parentElement)">
-
-                ${escapeHTML(post.title)}
-
-            </h2>
-
-            <div class="post-details">
-
-                ${dateHTML}
-
-                ${imageHTML}
-
-                ${contentHTML}
-
-            </div>
-
-        `;
-
-
-        postList.appendChild(article);
-
-    });
-
+function renderPost(p){
+ const article=document.createElement("article");
+ article.className="post";
+
+ const title=addText(article,"div","post-title",p.title);
+ title.onclick=()=>article.classList.toggle("open");
+
+ addText(article,"div","post-date",p.post_date||"");
+
+ const details=document.createElement("div");
+ details.className="post-details";
+
+ let images=p.images||[];
+ if(typeof images==="string"){
+  try{images=JSON.parse(images)}catch(e){images=[]}
+ }
+ if(!Array.isArray(images))images=[];
+
+ if(images.length){
+  const imageArea=document.createElement("div");
+  imageArea.className="post-images";
+
+  images.forEach(url=>{
+   if(typeof url!=="string" ||
+      !/^https?:\/\//i.test(url))return;
+
+   const img=document.createElement("img");
+   img.src=url;
+   img.alt=p.title||"CENTIBOY photograph";
+   img.loading="lazy";
+   imageArea.appendChild(img);
+  });
+
+  details.appendChild(imageArea);
+ }
+
+ if(p.content){
+  addText(details,"div","post-content",p.content);
+ }
+
+ article.appendChild(details);
+ return article;
 }
 
+async function loadPosts(){
+ categories.forEach(category=>{
+  const list=document.getElementById("list-"+category);
+  list.innerHTML='<div class="message">불러오는 중...</div>';
+ });
 
-/* =====================================================
-   HTML 특수문자 처리
-===================================================== */
+ const {data,error}=await db
+  .from("posts")
+  .select("id,category,title,post_date,content,images,created_at")
+  .order("created_at",{ascending:false});
 
-function escapeHTML(value) {
+ if(error){
+  categories.forEach(category=>{
+   document.getElementById("list-"+category).textContent=
+    "게시글을 불러오지 못했습니다. 잠시 후 다시 접속해 주세요.";
+  });
+  console.error(error);
+  return;
+ }
 
-    if (
-        value === null ||
-        value === undefined
-    ) {
-        return "";
-    }
+ categories.forEach(category=>{
+  const list=document.getElementById("list-"+category);
+  list.innerHTML="";
 
-    return String(value)
+  const posts=data.filter(p=>p.category===category);
 
-        .replace(/&/g, "&amp;")
+  if(posts.length===0){
+   list.innerHTML='<div class="message">아직 등록된 게시글이 없습니다.</div>';
+   return;
+  }
 
-        .replace(/</g, "&lt;")
-
-        .replace(/>/g, "&gt;")
-
-        .replace(/"/g, "&quot;")
-
-        .replace(/'/g, "&#039;");
+  posts.forEach(p=>list.appendChild(renderPost(p)));
+ });
 }
 
-
-/* =====================================================
-   사이트 시작
-===================================================== */
-
-showCategory("diary");
-
-
+loadPosts();
 </script>
-
-
 </body>
-
 </html>
