@@ -7,12 +7,9 @@
 <title>simdodam.com</title>
 
 <style>
-/* Badaboom BB: 로고에만 적용 */
 @font-face {
   font-family: "Badaboom BB";
   src: url("./BADABB__.TTF") format("truetype");
-  font-style: normal;
-  font-weight: normal;
   font-display: swap;
 }
 
@@ -20,6 +17,7 @@
   --purple: #65357d;
   --pink: #ff1493;
   --hot-pink: #e51b91;
+  --date-color: #b49bbd;
 }
 
 * {
@@ -58,7 +56,6 @@ header {
   font-size: clamp(22px, 7.5vw, 52px);
   font-weight: normal;
   line-height: 1.2;
-  letter-spacing: 0;
   text-align: center;
   white-space: nowrap;
   text-shadow:
@@ -68,7 +65,7 @@ header {
     0 0 20px #713b91;
 }
 
-/* 카테고리 메뉴 */
+/* 카테고리 */
 .menu {
   display: flex;
   justify-content: center;
@@ -105,39 +102,52 @@ header {
   border-bottom: 1px solid #e8cce2;
 }
 
-.post-title {
-  margin: 0;
+/* 제목과 날짜를 함께 누를 수 있는 영역 */
+.post-heading {
+  display: block;
+  width: 100%;
   padding: 0;
   border: 0;
   background: none;
-  color: var(--purple);
-  font: bold 30px Georgia, "Times New Roman", serif;
   text-align: left;
   cursor: pointer;
-  overflow-wrap: anywhere;
 }
 
-.post-title:hover {
+/* 게시글 제목 */
+.post-title {
+  display: block;
+  margin: 0;
+  padding: 0;
+  color: var(--purple);
+  font: bold 30px Georgia, "Times New Roman", serif;
+  overflow-wrap: anywhere;
+  transition: color 0.2s;
+}
+
+.post-heading:hover .post-title {
   color: var(--hot-pink);
 }
 
-/* 제목을 눌러야 상세 내용 표시 */
+/* 제목 바로 밑 날짜 */
+.post-date {
+  display: block;
+  margin-top: 5px;
+  color: var(--date-color);
+  font: 13px Georgia, "Times New Roman", serif;
+  letter-spacing: 0.2px;
+}
+
+/* 게시글 상세 내용 */
 .post-details {
   display: none;
-  padding-top: 14px;
+  padding-top: 16px;
 }
 
 .post.open .post-details {
   display: block;
 }
 
-.post-date {
-  margin: 0 0 16px;
-  color: #9567a4;
-  font: 20px Georgia, "Times New Roman", serif;
-}
-
-/* 글 본문 */
+/* 본문 */
 .post-block {
   margin: 14px 0;
   color: var(--purple);
@@ -149,7 +159,7 @@ header {
   white-space: pre-wrap;
 }
 
-/* 게시글 사진 */
+/* 사진 */
 .post-block.image {
   margin: 18px 0;
 }
@@ -162,7 +172,7 @@ header {
   object-fit: contain;
 }
 
-/* 안내 문구 */
+/* 빈 목록 */
 .empty {
   padding: 40px 8px;
   color: #9a789f;
@@ -170,7 +180,7 @@ header {
   font: 18px Georgia, "Times New Roman", serif;
 }
 
-/* 관리자 페이지 링크 */
+/* 관리자 링크 */
 .admin-link {
   margin-top: 35px;
   text-align: center;
@@ -186,7 +196,7 @@ header {
   color: var(--hot-pink);
 }
 
-/* 모바일 화면 */
+/* 모바일 */
 @media (max-width: 520px) {
   .page {
     width: 94%;
@@ -213,6 +223,10 @@ header {
 
   .post-title {
     font-size: 26px;
+  }
+
+  .post-date {
+    font-size: 12px;
   }
 
   .post-block {
@@ -265,7 +279,7 @@ const db = window.supabase.createClient(
 let currentCategory = "diary";
 
 
-/* HTML 문자 안전 처리 */
+/* HTML 안전 처리 */
 function escapeHTML(value) {
   return String(value ?? "").replace(/[&<>"']/g, ch => ({
     "&": "&amp;",
@@ -287,7 +301,7 @@ function togglePost(id) {
 }
 
 
-/* 글과 사진을 관리자에서 정한 순서대로 표시 */
+/* 글과 사진 표시 */
 function renderBlocks(post) {
 
   if (
@@ -298,7 +312,6 @@ function renderBlocks(post) {
     return post.blocks.map(block => {
 
       if (block.type === "image" && block.url) {
-
         return `
           <div class="post-block image">
             <img
@@ -311,7 +324,6 @@ function renderBlocks(post) {
       }
 
       if (block.type === "text" && block.text) {
-
         return `
           <div class="post-block text">${escapeHTML(block.text)}</div>
         `;
@@ -322,8 +334,7 @@ function renderBlocks(post) {
     }).join("");
   }
 
-
-  /* 기존 게시글 표시 방식도 유지 */
+  /* 기존 게시글 호환 */
   const images = Array.isArray(post.images)
     ? post.images
     : [];
@@ -350,20 +361,30 @@ function renderBlocks(post) {
 }
 
 
+/* 날짜를 정렬 가능한 값으로 변환 */
+function getDateValue(date) {
+
+  if (!date) return 0;
+
+  const value = String(date).trim();
+
+  const timestamp = Date.parse(value);
+
+  return Number.isNaN(timestamp) ? 0 : timestamp;
+}
+
+
 /* 카테고리별 게시글 불러오기 */
 async function showCategory(category) {
 
   currentCategory = category;
 
-  document
-    .querySelectorAll("#menu button")
+  document.querySelectorAll("#menu button")
     .forEach(button => {
-
       button.classList.toggle(
         "active",
         button.dataset.category === category
       );
-
     });
 
   const list = document.getElementById("post-list");
@@ -371,13 +392,10 @@ async function showCategory(category) {
   list.innerHTML =
     '<p class="empty">게시글을 불러오는 중입니다.</p>';
 
-
   const { data, error } = await db
     .from("posts")
     .select("*")
-    .eq("category", category)
-    .order("created_at", { ascending: false });
-
+    .eq("category", category);
 
   if (error) {
 
@@ -389,7 +407,6 @@ async function showCategory(category) {
     return;
   }
 
-
   if (!data || data.length === 0) {
 
     list.innerHTML =
@@ -398,7 +415,21 @@ async function showCategory(category) {
     return;
   }
 
+  /* 게시 날짜 기준 최신순 정렬 */
+  data.sort((a, b) => {
 
+    const dateA = getDateValue(a.post_date);
+    const dateB = getDateValue(b.post_date);
+
+    if (dateA !== dateB) {
+      return dateB - dateA;
+    }
+
+    return new Date(b.created_at || 0) -
+           new Date(a.created_at || 0);
+  });
+
+  /* 게시글 출력 */
   list.innerHTML = data.map(post => `
 
     <article
@@ -406,26 +437,27 @@ async function showCategory(category) {
       id="post-${escapeHTML(post.id)}"
     >
 
-      <h2>
-        <button
-          type="button"
-          class="post-title"
-          data-post-id="${escapeHTML(post.id)}"
-        >
-          ${escapeHTML(post.title)}
-        </button>
-      </h2>
+      <button
+        type="button"
+        class="post-heading"
+        data-post-id="${escapeHTML(post.id)}"
+        aria-expanded="false"
+      >
 
-      <div class="post-details">
+        <span class="post-title">
+          ${escapeHTML(post.title)}
+        </span>
 
         ${
           post.post_date
-            ? `<p class="post-date">${escapeHTML(post.post_date)}</p>`
+            ? `<span class="post-date">${escapeHTML(post.post_date)}</span>`
             : ""
         }
 
-        ${renderBlocks(post)}
+      </button>
 
+      <div class="post-details">
+        ${renderBlocks(post)}
       </div>
 
     </article>
@@ -435,29 +467,37 @@ async function showCategory(category) {
 }
 
 
-/* 제목 클릭 이벤트 */
+/* 제목 또는 날짜 클릭 */
 document
   .getElementById("post-list")
   .addEventListener("click", event => {
 
-    const button = event.target.closest(".post-title");
+    const button = event.target.closest(".post-heading");
 
     if (!button) return;
 
-    togglePost(button.dataset.postId);
+    const id = button.dataset.postId;
+    const post = document.getElementById("post-" + id);
+
+    if (!post) return;
+
+    post.classList.toggle("open");
+
+    button.setAttribute(
+      "aria-expanded",
+      post.classList.contains("open") ? "true" : "false"
+    );
 
   });
 
 
-/* 카테고리 클릭 이벤트 */
+/* 카테고리 클릭 */
 document
   .querySelectorAll("#menu button")
   .forEach(button => {
 
     button.addEventListener("click", () => {
-
       showCategory(button.dataset.category);
-
     });
 
   });
